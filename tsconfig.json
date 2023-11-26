@@ -23,5 +23,5 @@
     }
   },
   "include": ["src", "reset.d.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules"]
 }
