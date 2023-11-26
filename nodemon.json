@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/nodemon.json",
+  "execMap": {
+    "ts": "tsx"
+  },
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
