@@ -32,7 +32,9 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
       for (const file of commandFiles) {
         const command = await import(
           convertToUrl(join("../commands", dir, file))
-        );
+        )
+          .then((x) => x?.default)
+          .catch(() => null);
         if (!command || !command.name || !command.run) continue;
 
         this.commands.set(command.name, command);
@@ -43,7 +45,9 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
     fs.readdirSync(join("../events"))
       .filter((file) => file.endsWith("js") || file.endsWith("ts"))
       .forEach(async (file) => {
-        const event = await import(convertToUrl(join("../events", file)));
+        const event = await import(convertToUrl(join("../events", file)))
+          .then((x) => x?.default)
+          .catch(() => null);
         if (!event || !event.name || !event.run) return;
 
         this.on(event.name, event.run.bind(null, this));
