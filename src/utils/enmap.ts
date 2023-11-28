@@ -1,11 +1,12 @@
+import { Guild } from "@/types/guild.js";
 import DefaultEnmap from "enmap";
 
 export class Enmap<
   K extends string = string,
-  V = any,
+  V = object,
   SV = unknown
 > extends DefaultEnmap<K, V, SV> {
-  public get<P extends Paths<V>, D = GetFieldType<V, P>>(
+  public get<P extends Path<V>, D = GetFieldType<V, P>>(
     key: K,
     path: P | null = null
   ): D {
@@ -13,10 +14,10 @@ export class Enmap<
     else return super.get(key, path) as D;
   }
 
-  public set<P extends Paths<V>, D = GetFieldType<V, P>>(
+  public set<P extends Path<V>, D = GetFieldType<V, P>>(
     key: K,
     val: D,
-    path: P | null = null
+    path?: P
   ): this {
     if (!path) return super.set(key, val as any);
     else return super.set(key, val, path);
@@ -24,11 +25,30 @@ export class Enmap<
 }
 
 // type helpers
-type Paths<T> = T extends object
-  ? {
-      [K in keyof T]: `${Exclude<K, symbol>}${"" | `.${Paths<T[K]>}`}`;
-    }[keyof T]
-  : never;
+type Primitive = null | undefined | string | number | boolean | symbol | bigint;
+
+type IsTuple<T extends ReadonlyArray<any>> = number extends T["length"]
+  ? false
+  : true;
+type TupleKey<T extends ReadonlyArray<any>> = Exclude<keyof T, keyof any[]>;
+type ArrayKey = number;
+
+type PathImpl<K extends string | number, V> = V extends Primitive
+  ? `${K}`
+  : `${K}` | `${K}.${Path<V>}`;
+
+type Path<T> = T extends ReadonlyArray<infer V>
+  ? IsTuple<T> extends true
+    ? {
+        [K in TupleKey<T>]-?: PathImpl<K & string, T[K]>;
+      }[TupleKey<T>]
+    : PathImpl<ArrayKey, V>
+  : {
+      [K in keyof T]-?: PathImpl<K & string, T[K]>;
+    }[keyof T];
+
+type Test = Path<Guild>;
+//   ^?
 
 type GetIndexedField<T, K> = K extends keyof T
   ? T[K]
