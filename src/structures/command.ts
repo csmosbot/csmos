@@ -1,4 +1,11 @@
-import { Message, PermissionResolvable } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  GuildMember,
+  Message,
+  PermissionResolvable,
+  SlashCommandBuilder,
+  SlashCommandSubcommandsOnlyBuilder,
+} from "discord.js";
 import { BotClient } from "./client.js";
 
 export interface CommandOptions {
@@ -19,6 +26,31 @@ export interface CommandOptions {
 
 export class Command {
   constructor(options: CommandOptions) {
+    Object.assign(this, options);
+  }
+}
+
+export interface ExtendedInteraction
+  extends ChatInputCommandInteraction<"cached"> {
+  member: GuildMember;
+}
+
+export interface SlashCommandOptions {
+  data:
+    | SlashCommandBuilder
+    | SlashCommandSubcommandsOnlyBuilder
+    | Omit<this, "addSubcommand" | "addSubcommandGroup">;
+  run: ({
+    client,
+    interaction,
+  }: {
+    client: BotClient<true>;
+    interaction: ExtendedInteraction;
+  }) => any;
+}
+
+export class SlashCommand {
+  constructor(options: SlashCommandOptions) {
     Object.assign(this, options);
   }
 }
