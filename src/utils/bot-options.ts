@@ -1,4 +1,4 @@
-import { ClientOptions, GatewayIntentBits } from "discord.js";
+import { ActivityType, ClientOptions, GatewayIntentBits } from "discord.js";
 
 export const botOptions: ClientOptions = {
   intents: [
@@ -6,4 +6,12 @@ export const botOptions: ClientOptions = {
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
   ],
+  presence: {
+    activities: [
+      {
+        name: "the solar system",
+        type: ActivityType.Watching,
+      },
+    ],
+  },
 };
