@@ -1,5 +1,7 @@
+import { Guild } from "@/types/guild.js";
 import { botOptions } from "@/utils/bot-options.js";
 import { config } from "@/utils/config.js";
+import { Enmap } from "@/utils/enmap.js";
 import { env } from "@/utils/env.js";
 import {
   ApplicationCommandDataResolvable,
@@ -16,6 +18,12 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   commands = new Collection<string, CommandOptions>();
   slashCommands = new Collection<string, SlashCommandOptions>();
+  db = {
+    guilds: new Enmap<string, Guild>({
+      name: "db",
+      dataDir: "./db",
+    }),
+  };
 
   constructor() {
     super(botOptions);

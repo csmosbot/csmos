@@ -15,8 +15,12 @@ export default new Event({
   run: async (client, message) => {
     if (!message.inGuild() || message.author.bot) return;
 
-    // TODO: update this to db
-    const prefix = config.prefix;
+    client.db.guilds.ensure(message.guild.id, {
+      prefix: config.prefix,
+    });
+
+    const prefix =
+      client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix;
     const prefixRegex = new RegExp(
       `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
     );

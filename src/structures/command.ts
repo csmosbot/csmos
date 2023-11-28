@@ -19,7 +19,7 @@ export interface CommandOptions {
     args,
   }: {
     client: BotClient<true>;
-    message: Message;
+    message: Message<true>;
     args: string[];
   }) => any;
 }
