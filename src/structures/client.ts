@@ -59,7 +59,7 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
     const commands: ApplicationCommandDataResolvable[] = [];
     fs.readdirSync(join("../slashCommands")).forEach(async (dir) => {
       const commandFiles = fs
-        .readdirSync(join("../slashCOmmands", dir))
+        .readdirSync(join("../slashCommands", dir))
         .filter((file) => file.endsWith("js") || file.endsWith("ts"));
 
       for (const file of commandFiles) {
