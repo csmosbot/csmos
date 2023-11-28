@@ -5,6 +5,7 @@ import { EmbedBuilder } from "discord.js";
 export default new Command({
   name: "prefix",
   description: "Update the prefix for this server.",
+  userPermissions: ["ManageGuild"],
   run: ({ client, message, args }) => {
     const prefix = args[0];
     if (!prefix)

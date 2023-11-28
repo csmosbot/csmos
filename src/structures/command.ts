@@ -39,7 +39,7 @@ export interface SlashCommandOptions {
   data:
     | SlashCommandBuilder
     | SlashCommandSubcommandsOnlyBuilder
-    | Omit<this, "addSubcommand" | "addSubcommandGroup">;
+    | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
   run: ({
     client,
     interaction,
