@@ -11,6 +11,9 @@
   },
   "keywords": [],
   "author": "Cosmotic Labs",
+  "contributors": [
+    "ToastedToast <realtcatech@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "discord.js": "^14.14.1",
