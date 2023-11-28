@@ -1,5 +1,6 @@
 import { Event } from "@/structures/event.js";
 import { config } from "@/utils/config.js";
+import { EmbedBuilder } from "discord.js";
 
 function escapeRegex(str: string) {
   try {
@@ -27,7 +28,15 @@ export default new Event({
       .trim()
       .split(/ +/);
 
-    // TODO: handle mention
+    if (cmd.length === 0 && mPrefix.includes(client.user.id))
+      return message.channel.send({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("👋 Hey there!")
+            .setDescription(`My prefix in this server is \`${prefix}\`.`)
+            .setColor(config.colors.primary),
+        ],
+      });
 
     const command =
       client.commands.get(cmd.toLowerCase()) ||
@@ -36,7 +45,17 @@ export default new Event({
     if (!command) return;
 
     try {
-      // TODO: handle perms
+      if (
+        command.userPermissions &&
+        !message.member!.permissions.has(command.userPermissions)
+      )
+        return message.channel.send({
+          embeds: [
+            new EmbedBuilder()
+              .setDescription("You do not have permission to use this command.")
+              .setColor(config.colors.primary),
+          ],
+        });
 
       await command.run({ client, message, args });
     } catch (err) {
