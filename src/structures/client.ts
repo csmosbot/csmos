@@ -1,4 +1,5 @@
 import { Guild } from "@/types/guild.js";
+import { User } from "@/types/user.js";
 import { botOptions } from "@/utils/bot-options.js";
 import { config } from "@/utils/config.js";
 import { Enmap } from "@/utils/enmap.js";
@@ -20,8 +21,12 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   slashCommands = new Collection<string, SlashCommandOptions>();
   db = {
     guilds: new Enmap<string, Guild>({
-      name: "db",
-      dataDir: "./db",
+      name: "Guild",
+      dataDir: "./db/guilds",
+    }),
+    users: new Enmap<string, User>({
+      name: "User",
+      dataDir: "./db/users",
     }),
   };
 
@@ -99,6 +104,16 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
         if (!event || !event.name || !event.run) return;
 
         this.on(event.name, event.run.bind(null, this));
+      });
+
+    fs.readdirSync(join("../features"))
+      .filter((file) => file.endsWith("js") || file.endsWith("ts"))
+      .forEach(async (file) => {
+        const feature = await import(convertToUrl(join("../features", file)))
+          .then((x) => x?.default)
+          .catch(() => null);
+        if (!feature) return;
+        feature(this);
       });
   }
 }
