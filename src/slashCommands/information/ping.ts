@@ -1,6 +1,7 @@
 import { SlashCommand } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { Embed } from "@/utils/embed.js";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
   data: new SlashCommandBuilder()
@@ -15,7 +16,7 @@ export default new SlashCommand({
 
     interaction.editReply({
       embeds: [
-        new EmbedBuilder()
+        new Embed()
           .setTitle("Pong! 🏓")
           .setFields(
             {

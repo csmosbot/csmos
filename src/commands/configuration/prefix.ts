@@ -1,6 +1,5 @@
 import { Command } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
-import { EmbedBuilder } from "discord.js";
+import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
 
 export default new Command({
   name: "prefix",
@@ -11,17 +10,15 @@ export default new Command({
     if (!prefix)
       return message.channel.send({
         embeds: [
-          new EmbedBuilder()
-            .setDescription("New prefix must be specified.")
-            .setColor(config.colors.danger),
+          new DangerEmbed().setDescription("New prefix must be specified."),
         ],
       });
     if (prefix.length > 5)
       return message.channel.send({
         embeds: [
-          new EmbedBuilder()
-            .setDescription("Prefix must be less than 5 characters.")
-            .setColor(config.colors.danger),
+          new DangerEmbed().setDescription(
+            "Prefix must be less than 5 characters."
+          ),
         ],
       });
 
@@ -29,9 +26,9 @@ export default new Command({
 
     message.channel.send({
       embeds: [
-        new EmbedBuilder()
-          .setDescription(`My prefix in this server is now \`${prefix}\`!`)
-          .setColor(config.colors.success),
+        new SuccessEmbed().setDescription(
+          `My prefix in this server is now \`${prefix}\`.`
+        ),
       ],
     });
   },

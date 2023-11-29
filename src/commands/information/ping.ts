@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
-import { EmbedBuilder } from "discord.js";
+import { Embed } from "@/utils/embed.js";
 
 export default new Command({
   name: "ping",
@@ -8,7 +8,7 @@ export default new Command({
   run: async ({ client, message }) => {
     const res = await message.channel.send({
       embeds: [
-        new EmbedBuilder()
+        new Embed()
           .setDescription("Pinging...")
           .setColor(config.colors.primary),
       ],
@@ -18,7 +18,7 @@ export default new Command({
 
     res.edit({
       embeds: [
-        new EmbedBuilder()
+        new Embed()
           .setTitle("Pong! 🏓")
           .setFields(
             {

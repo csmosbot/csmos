@@ -1,6 +1,7 @@
 import { SlashCommand } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
   data: new SlashCommandBuilder()
@@ -17,7 +18,7 @@ export default new SlashCommand({
     if (prefix.length > 5)
       return interaction.reply({
         embeds: [
-          new EmbedBuilder()
+          new DangerEmbed()
             .setDescription("Prefix must be less than 5 characters.")
             .setColor(config.colors.danger),
         ],
@@ -28,7 +29,7 @@ export default new SlashCommand({
 
     interaction.reply({
       embeds: [
-        new EmbedBuilder()
+        new SuccessEmbed()
           .setDescription(`My prefix in this server is now \`${prefix}\`!`)
           .setColor(config.colors.success),
       ],
