@@ -1,19 +1,23 @@
-import { Guild } from "@/types/guild.js";
-import DefaultEnmap from "enmap";
+import DefaultEnmap, { MathOps } from "enmap";
 
 export class Enmap<
   K extends string = string,
   V = object,
   SV = unknown
 > extends DefaultEnmap<K, V, SV> {
-  public get<P extends Path<V>, D = GetFieldType<V, P>>(
-    key: K,
-    path: P | null = null
-  ): D {
+  public get(key: K): V;
+  public get<P extends Path<V>, D = GetFieldType<V, P>>(key: K, path: P): D;
+  public get<P extends Path<V>, D = GetFieldType<V, P>>(key: K, path?: P): D {
     if (!path) return super.get(key) as D;
     else return super.get(key, path) as D;
   }
 
+  public set(key: K, val: V): this;
+  public set<P extends Path<V>, D = GetFieldType<V, P>>(
+    key: K,
+    val: D,
+    path: P
+  ): this;
   public set<P extends Path<V>, D = GetFieldType<V, P>>(
     key: K,
     val: D,
@@ -21,6 +25,23 @@ export class Enmap<
   ): this {
     if (!path) return super.set(key, val as any);
     else return super.set(key, val, path);
+  }
+
+  public math(key: K, operation: MathOps, operand: number): this;
+  public math<P extends Path<Matching<V, number>>>(
+    key: K,
+    operation: MathOps,
+    operand: number,
+    path: P
+  ): this;
+  public math<P extends Path<Matching<V, number>>>(
+    key: K,
+    operation: MathOps,
+    operand: number,
+    path?: P
+  ): this {
+    if (!path) return super.math(key, operation, operand);
+    else return super.math(key, operation, operand, path as any);
   }
 }
 
@@ -47,7 +68,6 @@ type Path<T> = T extends ReadonlyArray<infer V>
       [K in keyof T]-?: PathImpl<K & string, T[K]>;
     }[keyof T];
 
-type Test = Path<Guild>;
 //   ^?
 
 type GetIndexedField<T, K> = K extends keyof T
@@ -86,3 +106,7 @@ export type GetFieldType<T, P> = P extends `${infer Left}.${infer Right}`
     ? IndexedFieldWithPossiblyUndefined<T[FieldKey], IndexKey>
     : undefined
   : undefined;
+
+type Matching<T, V> = {
+  [K in keyof T]-?: T[K] extends V ? K : never;
+};
