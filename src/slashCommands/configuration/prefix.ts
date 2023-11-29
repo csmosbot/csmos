@@ -11,19 +11,11 @@ export default new SlashCommand({
       option
         .setName("prefix")
         .setDescription("The new prefix for this server.")
+        .setMaxLength(5)
         .setRequired(true)
     ),
   run: ({ client, interaction }) => {
     const prefix = interaction.options.getString("prefix", true);
-    if (prefix.length > 5)
-      return interaction.reply({
-        embeds: [
-          new DangerEmbed()
-            .setDescription("Prefix must be less than 5 characters.")
-            .setColor(config.colors.danger),
-        ],
-        ephemeral: true,
-      });
 
     client.db.guilds.set(interaction.guild.id, prefix, "prefix");
 
