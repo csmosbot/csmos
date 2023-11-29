@@ -1,3 +1,4 @@
+import { ExtendedMessage } from "@/structures/command.js";
 import { Event } from "@/structures/event.js";
 import { config } from "@/utils/config.js";
 import { EmbedBuilder } from "discord.js";
@@ -61,7 +62,7 @@ export default new Event({
           ],
         });
 
-      await command.run({ client, message, args });
+      await command.run({ client, message: message as ExtendedMessage, args });
     } catch (err) {
       console.error(err);
     }

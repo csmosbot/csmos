@@ -8,6 +8,10 @@ import {
 } from "discord.js";
 import { BotClient } from "./client.js";
 
+export interface ExtendedMessage extends Message<true> {
+  member: GuildMember;
+}
+
 export interface CommandOptions {
   name: string;
   description?: string;
@@ -19,7 +23,7 @@ export interface CommandOptions {
     args,
   }: {
     client: BotClient<true>;
-    message: Message<true>;
+    message: ExtendedMessage;
     args: string[];
   }) => any;
 }
