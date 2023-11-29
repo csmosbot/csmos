@@ -1,9 +1,9 @@
 import { BotClient } from "@/structures/client.js";
 import { config } from "@/utils/config.js";
+import { calculateLevelXp } from "@/utils/leveling.js";
 import { EmbedBuilder } from "discord.js";
 
 const xpCooldowns = new Set<string>();
-const calculateLevelXp = (level: number) => 100 * level || 100;
 const random = (min: number, max: number) =>
   Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + min;
 
