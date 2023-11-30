@@ -28,6 +28,7 @@ export default new SlashCommand({
     client.db.users.ensure(member.id, {
       xp: 0,
       level: 0,
+      warnings: [],
     });
 
     const data = client.db.users.get(member.id);
