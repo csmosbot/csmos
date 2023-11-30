@@ -17,7 +17,7 @@ export default new Command({
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
-            "You do not have permission to use this command."
+            "You do not have permission to view other users' warnings."
           ),
         ],
       });

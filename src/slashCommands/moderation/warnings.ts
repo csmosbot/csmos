@@ -18,7 +18,7 @@ export default new SlashCommand({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            "You do not have permission to use this command."
+            "You do not have permission to view other users' warnings."
           ),
         ],
         ephemeral: true,
