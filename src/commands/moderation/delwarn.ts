@@ -4,6 +4,7 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
 export default new Command({
   name: "delwarn",
   description: "Delete a warn from a user.",
+  aliases: ["deletewarn", "delete-warn", "removewarn", "remove-warn", "rmwarn"],
   userPermissions: ["ModerateMembers"],
   run: ({ client, message, args }) => {
     const id = args[0];

@@ -5,6 +5,7 @@ import ms from "ms";
 export default new Command({
   name: "mute",
   description: "Mute a user from this server.",
+  aliases: ["timeout"],
   userPermissions: ["ModerateMembers"],
   run: ({ message, args }) => {
     const member =

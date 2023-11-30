@@ -5,6 +5,7 @@ import { time } from "discord.js";
 export default new Command({
   name: "warnings",
   description: "View all warnings of a user.",
+  aliases: ["warns"],
   run: ({ client, message, args }) => {
     const member =
       message.mentions.members.first() ||

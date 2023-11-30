@@ -4,6 +4,7 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
 export default new Command({
   name: "unmute",
   description: "Unmute a user from this server.",
+  aliases: ["untimeout", "removetimeout", "remove-timeout", "rmtimeout"],
   userPermissions: ["ModerateMembers"],
   run: ({ message, args }) => {
     const member =
