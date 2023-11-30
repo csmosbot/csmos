@@ -1,6 +1,7 @@
 import {
   ChatInputCommandInteraction,
   GuildMember,
+  GuildTextBasedChannel,
   Message,
   PermissionResolvable,
   SlashCommandBuilder,
@@ -37,6 +38,7 @@ export class Command {
 export interface ExtendedInteraction
   extends ChatInputCommandInteraction<"cached"> {
   member: GuildMember;
+  channel: GuildTextBasedChannel;
 }
 
 export interface SlashCommandOptions {
