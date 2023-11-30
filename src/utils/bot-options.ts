@@ -6,6 +6,7 @@ export const botOptions: ClientOptions = {
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildModeration,
   ],
   presence: {
     activities: [
