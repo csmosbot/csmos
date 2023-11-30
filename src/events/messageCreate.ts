@@ -1,11 +1,11 @@
-import { ExtendedMessage } from "@/structures/command.js";
+import type { ExtendedMessage } from "@/structures/command.js";
 import { Event } from "@/structures/event.js";
 import { config } from "@/utils/config.js";
 import { EmbedBuilder } from "discord.js";
 
 function escapeRegex(str: string) {
   try {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`);
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   } catch (e) {
     console.log(e);
   }

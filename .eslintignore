@@ -1,0 +1,10 @@
+# project-specific
+/dist
+/db
+.env*
+
+# node-specific
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

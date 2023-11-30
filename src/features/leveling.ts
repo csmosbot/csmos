@@ -1,4 +1,4 @@
-import { BotClient } from "@/structures/client.js";
+import type { BotClient } from "@/structures/client.js";
 import { config } from "@/utils/config.js";
 import { calculateLevelXp } from "@/utils/leveling.js";
 import { EmbedBuilder } from "discord.js";

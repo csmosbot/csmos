@@ -1,4 +1,5 @@
-import { APIEmbed, EmbedBuilder } from "discord.js";
+import type { APIEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { config } from "./config.js";
 
 export class Embed extends EmbedBuilder {

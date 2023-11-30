@@ -1,4 +1,4 @@
-import { ExtendedInteraction } from "@/structures/command.js";
+import type { ExtendedInteraction } from "@/structures/command.js";
 import { Event } from "@/structures/event.js";
 import { config } from "@/utils/config.js";
 import { EmbedBuilder } from "discord.js";
