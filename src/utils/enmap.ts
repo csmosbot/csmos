@@ -27,6 +27,21 @@ export class Enmap<
     else return super.set(key, val, path);
   }
 
+  public push(key: K, val: V): this;
+  public push<
+    P extends Path<Matching<V, any[]>>,
+    // @ts-expect-error typescript I know what I'm doing thank you
+    D = GetFieldType<V, P>[number]
+  >(key: K, val: D, path: P): this;
+  public push<P extends Path<Matching<V, any[]>>, D = GetFieldType<V, P>>(
+    key: K,
+    val: D,
+    path?: P
+  ): this {
+    if (!path) return super.push(key, val as any);
+    else return super.push(key, val, path);
+  }
+
   public math(key: K, operation: MathOps, operand: number): this;
   public math<P extends Path<Matching<V, number>>>(
     key: K,
