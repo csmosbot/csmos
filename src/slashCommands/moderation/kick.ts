@@ -1,4 +1,4 @@
-import { Command, SlashCommand } from "@/structures/command.js";
+import { SlashCommand } from "@/structures/command.js";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 

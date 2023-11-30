@@ -1,4 +1,5 @@
-import { ActivityType, ClientOptions, GatewayIntentBits } from "discord.js";
+import type { ClientOptions } from "discord.js";
+import { ActivityType, GatewayIntentBits } from "discord.js";
 
 export const botOptions: ClientOptions = {
   intents: [

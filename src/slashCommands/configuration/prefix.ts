@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
-import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { SuccessEmbed } from "@/utils/embed.js";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({

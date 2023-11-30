@@ -1,18 +1,15 @@
-import { Guild } from "@/types/guild.js";
-import { User } from "@/types/user.js";
+import type { Guild } from "@/types/guild.js";
+import type { User } from "@/types/user.js";
 import { botOptions } from "@/utils/bot-options.js";
 import { config } from "@/utils/config.js";
 import { Enmap } from "@/utils/enmap.js";
 import { env } from "@/utils/env.js";
-import {
-  ApplicationCommandDataResolvable,
-  Client,
-  Collection,
-} from "discord.js";
+import type { ApplicationCommandDataResolvable } from "discord.js";
+import { Client, Collection } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
-import { CommandOptions, SlashCommandOptions } from "./command.js";
+import type { CommandOptions, SlashCommandOptions } from "./command.js";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

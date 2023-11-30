@@ -1,4 +1,4 @@
-import {
+import type {
   ChatInputCommandInteraction,
   GuildMember,
   GuildTextBasedChannel,
@@ -7,7 +7,7 @@ import {
   SlashCommandBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from "discord.js";
-import { BotClient } from "./client.js";
+import type { BotClient } from "./client.js";
 
 export interface ExtendedMessage extends Message<true> {
   member: GuildMember;
