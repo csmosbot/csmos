@@ -38,8 +38,8 @@ export class Enmap<
     val: D,
     path?: P
   ): this {
-    if (!path) return super.set(key, val as any);
-    else return super.set(key, val, path);
+    if (!path) return super.push(key, val as any);
+    else return super.push(key, val, path);
   }
 
   public math(key: K, operation: MathOps, operand: number): this;
