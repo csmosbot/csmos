@@ -19,7 +19,6 @@ export default (client: BotClient<true>) => {
     client.db.users.ensure(message.author.id, {
       xp: 0,
       level: 0,
-      warnings: [],
     });
 
     const xpToGive = random(5, 15);

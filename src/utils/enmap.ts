@@ -6,6 +6,10 @@ export class Enmap<
   V = object,
   SV = unknown,
 > extends DefaultEnmap<K, V, SV> {
+  public ensure(key: K, defaultValue: Partial<V>): V {
+    return super.ensure(key, defaultValue as V);
+  }
+
   public get(key: K): V;
   public get<P extends Path<V>, D = GetFieldType<V, P>>(key: K, path: P): D;
   public get<P extends Path<V>, D = GetFieldType<V, P>>(key: K, path?: P): D {

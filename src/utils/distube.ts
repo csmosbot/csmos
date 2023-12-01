@@ -26,5 +26,21 @@ export function createDistube(client: BotClient) {
     },
   });
 
+  distube.on("initQueue", (queue) => {
+    client.db.guilds.ensure(queue.id, {
+      defaultVolume: 50,
+    });
+
+    const data = client.db.guilds.get(queue.id);
+    queue.setVolume(data.defaultVolume);
+  });
+
+  distube.on("playSong", (queue, track) => {
+    if (!client.guilds.cache.get(queue.id)!.members.me!.voice.deaf)
+      client.guilds.cache.get(queue.id)!.members.me!.voice.setDeaf(true);
+
+    // TODO: now playing message
+  });
+
   return distube;
 }
