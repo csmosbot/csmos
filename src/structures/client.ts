@@ -2,6 +2,7 @@ import type { Guild } from "@/types/guild.js";
 import type { User } from "@/types/user.js";
 import { botOptions } from "@/utils/bot-options.js";
 import { config } from "@/utils/config.js";
+import { createDistube } from "@/utils/distube.js";
 import { Enmap } from "@/utils/enmap.js";
 import { env } from "@/utils/env.js";
 import type { ApplicationCommandDataResolvable } from "discord.js";
@@ -26,6 +27,7 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
       dataDir: "./db/users",
     }),
   };
+  distube = createDistube(this);
 
   constructor() {
     super(botOptions);
