@@ -27,6 +27,7 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
       dataDir: "./db/users",
     }),
   };
+  maps = new Map();
   player = createPlayer(this);
 
   constructor() {

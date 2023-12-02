@@ -21,9 +21,7 @@ export default new Command({
     if (me.voice.channel && me.voice.channel.id !== channel.id)
       return message.channel.send({
         embeds: [
-          new DangerEmbed().setDescription(
-            "I am already in another voice channel."
-          ),
+          new DangerEmbed().setDescription("I am in another voice channel."),
         ],
         components: [
           new ActionRowBuilder<ButtonBuilder>().addComponents(

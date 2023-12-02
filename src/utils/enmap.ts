@@ -63,6 +63,13 @@ export class Enmap<
     if (!path) return super.math(key, operation, operand);
     else return super.math(key, operation, operand, path as any);
   }
+
+  public delete(key: K): this;
+  public delete<P extends Path<V>>(key: K, path: P): this;
+  public delete<P extends Path<V>>(key: K, path?: P): this {
+    if (!path) return super.delete(key);
+    else return super.delete(key, path);
+  }
 }
 
 // type helpers
