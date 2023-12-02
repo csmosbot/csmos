@@ -1,10 +1,11 @@
 import { Command } from "@/structures/command.js";
-import { DangerEmbed } from "@/utils/embed.js";
-import type { PlayOptions } from "distube";
+import { DangerEmbed, Embed, SuccessEmbed } from "@/utils/embed.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
   name: "play",
   description: "Play a song in your voice channel.",
+  aliases: ["p"],
   run: async ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;
@@ -22,6 +23,16 @@ export default new Command({
         embeds: [
           new DangerEmbed().setDescription(
             "I am already in another voice channel."
+          ),
+        ],
+        components: [
+          new ActionRowBuilder<ButtonBuilder>().addComponents(
+            new ButtonBuilder()
+              .setStyle(ButtonStyle.Link)
+              .setLabel("Show me!")
+              .setURL(
+                `https://discord.com/channels/${message.guild.id}/${me.voice.channel.id}`
+              )
           ),
         ],
       });
@@ -58,9 +69,27 @@ export default new Command({
 
     const queue = client.player.getQueue(message.guild.id);
 
-    const options: PlayOptions = { member: message.member };
-    if (!queue) options.textChannel = message.channel;
+    const msg = await message.channel.send({
+      embeds: [
+        new Embed()
+          .setTitle("🔍 Searching...")
+          .setDescription(`\`\`\`${query}\`\`\``),
+      ],
+    });
 
-    await client.player.play(channel, query, options);
+    await client.player.play(channel, query, {
+      member: message.member,
+      textChannel: message.channel,
+    });
+
+    msg.edit({
+      embeds: [
+        new SuccessEmbed()
+          .setTitle(
+            (queue?.songs?.length ?? 0) > 0 ? "➕ Added" : "🎶 Now playing"
+          )
+          .setDescription(`\`\`\`${query}\`\`\``),
+      ],
+    });
   },
 });
