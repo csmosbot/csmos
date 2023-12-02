@@ -31,6 +31,21 @@ export function formatRepeatMode(repeatMode: RepeatMode) {
   }
 }
 
+export function createBar(duration: number, position: number) {
+  try {
+    const full = "▰";
+    const empty = "▱";
+    const size = "▰▰▰▰▰▱▱▱▱▱▱▱▱▱▱▱▱▱".length;
+    const percent = duration == 0 ? 0 : Math.floor((position / duration) * 100);
+    const fullBars = Math.round(size * (percent / 100));
+    const emptyBars = size - fullBars;
+    return `**${full.repeat(fullBars)}${empty.repeat(emptyBars)}**`;
+  } catch (e) {
+    console.error(e);
+    return "";
+  }
+}
+
 export function createPlayer(client: BotClient) {
   const player = new DisTube(client, {
     leaveOnEmpty: true,
