@@ -176,9 +176,11 @@ export function createPlayer(client: BotClient) {
 
             nowPlayingMessage.edit({
               embeds: [
-                new Embed().setDescription(
-                  `This song was skipped by ${i.user.tag}.`
-                ),
+                new DangerEmbed()
+                  .setTitle("❌ Stopped")
+                  .setDescription(
+                    `This song was skipped by **${i.user.username}**.`
+                  ),
               ],
               components: [],
             });
@@ -231,9 +233,11 @@ export function createPlayer(client: BotClient) {
             queue.skip();
             nowPlayingMessage.edit({
               embeds: [
-                new Embed().setDescription(
-                  `This song was skipped by ${i.user.tag}.`
-                ),
+                new DangerEmbed()
+                  .setTitle("❌ Stopped")
+                  .setDescription(
+                    `This song was skipped by **${i.user.username}**.`
+                  ),
               ],
               components: [],
             });
@@ -251,9 +255,11 @@ export function createPlayer(client: BotClient) {
             queue.stop();
             nowPlayingMessage.edit({
               embeds: [
-                new Embed().setDescription(
-                  `The queue was stopped by ${i.user.tag}.`
-                ),
+                new DangerEmbed()
+                  .setTitle("❌ Stopped")
+                  .setDescription(
+                    `The queue was stopped by **${i.user.username}**.`
+                  ),
               ],
               components: [],
             });
