@@ -7,6 +7,8 @@
     "danger": "#F20000"
   },
   "emotes": {
+    "previous": "<:previous_song:994440947863658516>",
+    "next": "<:next_song:994440946030739486>",
     "player": {
       "previous": "<:previous_song:994440947863658516>",
       "pause": "<:pause:994440942528512152>",

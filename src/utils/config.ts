@@ -5,7 +5,7 @@ interface Config {
   prefix: string;
   guildId: string;
   colors: Record<"primary" | "success" | "danger", ColorResolvable>;
-  emotes: {
+  emotes: Record<"previous" | "next", string> & {
     player: Record<
       | "previous"
       | "pause"
