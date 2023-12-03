@@ -358,7 +358,7 @@ export function createPlayer(client: BotClient) {
             i.reply({
               embeds: [
                 new SuccessEmbed().setDescription(
-                  `Skipped to \`${newQueue.formattedCurrentTime}\`.`
+                  `Skipped to **${newQueue.formattedCurrentTime}**.`
                 ),
               ],
               ephemeral: true,
@@ -385,7 +385,7 @@ export function createPlayer(client: BotClient) {
             i.reply({
               embeds: [
                 new SuccessEmbed().setDescription(
-                  `Rewinded to \`${newQueue.formattedCurrentTime}\`.`
+                  `Rewinded to **${newQueue.formattedCurrentTime}**.`
                 ),
               ],
               ephemeral: true,
