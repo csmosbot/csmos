@@ -497,5 +497,91 @@ export function createPlayer(client: BotClient) {
     }
   });
 
+  client.player.on("addSong", (queue, track) => {
+    queue.textChannel!.send({
+      embeds: [
+        new Embed()
+          .setAuthor({
+            name: "Song added to the queue",
+            iconURL:
+              "https://cdn.discordapp.com/emojis/1180843067713011712.webp?size=160&quality=lossless",
+          })
+          .setTitle(track.name!)
+          .setURL(track.url)
+          .addFields(
+            {
+              name: "💡 Requested by",
+              value: `>>> ${track.member}`,
+              inline: true,
+            },
+            {
+              name: "⏱ Duration",
+              value: `>>> \`${track.formattedDuration}\``,
+              inline: true,
+            }
+          )
+          .setImage(`https://img.youtube.com/vi/${track.id}/mqdefault.jpg`),
+      ],
+    });
+  });
+
+  client.player.on("addList", (queue, playlist) => {
+    queue.textChannel!.send({
+      embeds: [
+        new Embed()
+          .setAuthor({
+            name: "Playlist added to the queue",
+            iconURL:
+              "https://cdn.discordapp.com/emojis/1180843067713011712.webp?size=160&quality=lossless",
+          })
+          .setTitle(playlist.name!)
+          .setURL(playlist.url || null)
+          .addFields(
+            {
+              name: "💡 Requested by",
+              value: `>>> ${playlist.member}`,
+              inline: true,
+            },
+            {
+              name: "⏱ Duration",
+              value: `>>> \`${playlist.formattedDuration}\``,
+              inline: true,
+            }
+          )
+          .setImage(
+            playlist.thumbnail
+              ? playlist.thumbnail
+              : `https://img.youtube.com/vi/${playlist.songs[0].id}/mqdefault.jpg`
+          ),
+      ],
+    });
+  });
+
+  client.player.on("finishSong", (queue) => {
+    if (songEditInterval) clearInterval(songEditInterval);
+
+    if (
+      !client.db.guilds.has(queue.id) ||
+      !client.db.guilds.has(queue.id, "nowPlayingMessage")
+    )
+      return;
+
+    queue
+      .textChannel!.messages.fetch(
+        client.db.guilds.get(queue.id, "nowPlayingMessage")
+      )
+      .then((currentSongMsg) => {
+        currentSongMsg.edit({
+          embeds: [
+            new Embed()
+              .setTitle("❌ Stopped")
+              .setDescription("This song has ended."),
+          ],
+          components: [],
+        });
+        client.db.guilds.delete(queue.id, "nowPlayingMessage");
+      });
+  });
+
   return player;
 }

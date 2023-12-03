@@ -32,6 +32,13 @@ export class Enmap<
     else return super.set(key, val, path);
   }
 
+  public has(key: K): boolean;
+  public has<P extends Path<V>>(key: K, path: P): boolean;
+  public has<P extends Path<V>>(key: K, path?: P): boolean {
+    if (!path) return super.has(key);
+    else return super.has(key, path);
+  }
+
   public push(key: K, val: V): this;
   public push<
     P extends Path<Matching<V, any[]>>,
