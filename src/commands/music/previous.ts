@@ -66,6 +66,25 @@ export default new Command({
         ],
       });
 
+    queue
+      .textChannel!.messages.fetch(
+        client.db.guilds.get(message.guild.id, "nowPlayingMessage")
+      )
+      .then((msg) => {
+        msg.edit({
+          embeds: [
+            new DangerEmbed()
+              .setTitle("❌ Stopped")
+              .setDescription(
+                `This song was skipped by **${message.author.username}**.`
+              ),
+          ],
+          components: [],
+        });
+        client.db.guilds.delete(message.guild.id, "nowPlayingMessage");
+      })
+      .catch(() => null);
+
     await queue.previous();
 
     message.channel.send({

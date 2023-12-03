@@ -9,8 +9,8 @@ import {
 
 export default new SlashCommand({
   data: new SlashCommandBuilder()
-    .setName("previous")
-    .setDescription("Skip to the previous song that played in this server."),
+    .setName("skip")
+    .setDescription("Skips the current song."),
   run: async ({ client, interaction }) => {
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
@@ -97,12 +97,10 @@ export default new SlashCommand({
       })
       .catch(() => null);
 
-    await queue.previous();
+    await queue.skip();
 
     interaction.reply({
-      embeds: [
-        new SuccessEmbed().setDescription("Skipped to the previous song."),
-      ],
+      embeds: [new SuccessEmbed().setDescription("Skipped the current song.")],
       ephemeral: true,
     });
   },
