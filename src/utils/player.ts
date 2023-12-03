@@ -202,7 +202,9 @@ export function createPlayer(client: BotClient) {
             client.db.guilds.delete(queue.id, "nowPlayingMessage");
             i.reply({
               embeds: [
-                new SuccessEmbed().setDescription("Skipped to previous song."),
+                new SuccessEmbed().setDescription(
+                  "Skipped to the previous song."
+                ),
               ],
               ephemeral: true,
             });
