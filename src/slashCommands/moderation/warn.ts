@@ -58,8 +58,6 @@ export default new SlashCommand({
       interaction.options.getString("reason") || "No reason specified.";
 
     client.db.users.ensure(member.id, {
-      xp: 0,
-      level: 0,
       warnings: [],
     });
 

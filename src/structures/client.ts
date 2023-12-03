@@ -4,6 +4,7 @@ import { botOptions } from "@/utils/bot-options.js";
 import { config } from "@/utils/config.js";
 import { Enmap } from "@/utils/enmap.js";
 import { env } from "@/utils/env.js";
+import { createPlayer } from "@/utils/player.js";
 import type { ApplicationCommandDataResolvable } from "discord.js";
 import { Client, Collection } from "discord.js";
 import fs from "fs";
@@ -26,6 +27,8 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
       dataDir: "./db/users",
     }),
   };
+  maps = new Map();
+  player = createPlayer(this);
 
   constructor() {
     super(botOptions);

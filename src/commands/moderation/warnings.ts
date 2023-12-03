@@ -24,8 +24,6 @@ export default new Command({
       });
 
     client.db.users.ensure(member.id, {
-      xp: 0,
-      level: 0,
       warnings: [],
     });
 

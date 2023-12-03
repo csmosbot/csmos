@@ -6,6 +6,10 @@ export class Enmap<
   V = object,
   SV = unknown,
 > extends DefaultEnmap<K, V, SV> {
+  public ensure(key: K, defaultValue: Partial<V>): V {
+    return super.ensure(key, defaultValue as V);
+  }
+
   public get(key: K): V;
   public get<P extends Path<V>, D = GetFieldType<V, P>>(key: K, path: P): D;
   public get<P extends Path<V>, D = GetFieldType<V, P>>(key: K, path?: P): D {
@@ -26,6 +30,13 @@ export class Enmap<
   ): this {
     if (!path) return super.set(key, val as any);
     else return super.set(key, val, path);
+  }
+
+  public has(key: K): boolean;
+  public has<P extends Path<V>>(key: K, path: P): boolean;
+  public has<P extends Path<V>>(key: K, path?: P): boolean {
+    if (!path) return super.has(key);
+    else return super.has(key, path);
   }
 
   public push(key: K, val: V): this;
@@ -58,6 +69,13 @@ export class Enmap<
   ): this {
     if (!path) return super.math(key, operation, operand);
     else return super.math(key, operation, operand, path as any);
+  }
+
+  public delete(key: K): this;
+  public delete<P extends Path<V>>(key: K, path: P): this;
+  public delete<P extends Path<V>>(key: K, path?: P): this {
+    if (!path) return super.delete(key);
+    else return super.delete(key, path);
   }
 }
 

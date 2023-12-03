@@ -40,8 +40,6 @@ export default new Command({
     const reason = args.slice(1).join(" ") || "No reason specified.";
 
     client.db.users.ensure(member.id, {
-      xp: 0,
-      level: 0,
       warnings: [],
     });
 
