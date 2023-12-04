@@ -1,5 +1,4 @@
 import { SlashCommand } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
 import { DangerEmbed, Embed } from "@/utils/embed.js";
 import { getPrefix } from "@/utils/prefix.js";
 import {
