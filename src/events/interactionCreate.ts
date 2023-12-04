@@ -27,6 +27,15 @@ export default new Event({
       } catch (err) {
         console.error(err);
       }
+    } else if (interaction.isAutocomplete()) {
+      const command = client.slashCommands.get(interaction.commandName);
+      if (!command) return;
+
+      try {
+        await command.autocomplete?.({ client, interaction });
+      } catch (err) {
+        console.error(err);
+      }
     }
   },
 });

@@ -1,4 +1,5 @@
 import type {
+  AutocompleteInteraction,
   ChatInputCommandInteraction,
   GuildMember,
   GuildTextBasedChannel,
@@ -47,6 +48,13 @@ export interface SlashCommandOptions {
     | SlashCommandBuilder
     | SlashCommandSubcommandsOnlyBuilder
     | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
+  autocomplete?: ({
+    client,
+    interaction,
+  }: {
+    client: BotClient<true>;
+    interaction: AutocompleteInteraction;
+  }) => any;
   run: ({
     client,
     interaction,

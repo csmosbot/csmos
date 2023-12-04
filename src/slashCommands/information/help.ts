@@ -1,7 +1,11 @@
-import { Command } from "@/structures/command.js";
+import { SlashCommand } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
 import { DangerEmbed, Embed } from "@/utils/embed.js";
-import { PermissionsBitField, type APIEmbedField } from "discord.js";
+import {
+  PermissionsBitField,
+  SlashCommandBuilder,
+  type APIEmbedField,
+} from "discord.js";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 const sortAlphabetically = (a: string, b: string) => a.localeCompare(b);
@@ -12,29 +16,49 @@ const emojis = {
   information: "ℹ️",
 } as const;
 
-export default new Command({
-  name: "help",
-  description: "View information about all my commands.",
-  usage: "help <command>",
-  run: ({ client, message, args }) => {
-    const cmd = args[0]?.toLowerCase();
+export default new SlashCommand({
+  data: new SlashCommandBuilder()
+    .setName("help")
+    .setDescription("View information about all my commands.")
+    .addStringOption((option) =>
+      option
+        .setName("command")
+        .setDescription("The command you want to view the information of.")
+        .setRequired(false)
+        .setAutocomplete(true)
+    ),
+  autocomplete: async ({ client, interaction }) => {
+    const focusedValue = interaction.options.getFocused();
+    const choices = client.commands
+      .map((command) => command.name)
+      .sort(sortAlphabetically);
+    const filtered = choices
+      .filter((choice) => choice.startsWith(focusedValue))
+      .slice(0, 25);
+    await interaction.respond(
+      filtered.map((choice) => ({ name: choice, value: choice }))
+    );
+  },
+  run: ({ client, interaction }) => {
+    const cmd = interaction.options.getString("command")?.toLowerCase();
     if (cmd) {
       const command =
         client.commands.get(cmd) ||
         client.commands.find((c) => c.aliases?.includes(cmd));
       if (!command)
-        return message.channel.send({
+        return interaction.reply({
           embeds: [
             new DangerEmbed().setDescription(
               "The command you specified was invalid."
             ),
           ],
+          ephemeral: true,
         });
 
       const embed = new Embed().setTitle(
-        `${client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix}${
-          command.name
-        }`
+        `${
+          client.db.guilds.get(interaction.guild.id, "prefix") ?? config.prefix
+        }${command.name}`
       );
 
       if (command.description) embed.setDescription(command.description);
@@ -50,7 +74,8 @@ export default new Command({
         embed.addFields({
           name: "Usage",
           value: `${
-            client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix
+            client.db.guilds.get(interaction.guild.id, "prefix") ??
+            config.prefix
           }${command.usage}`,
         });
       if (command.userPermissions)
@@ -63,8 +88,9 @@ export default new Command({
             .join(", "),
         });
 
-      message.channel.send({
+      interaction.reply({
         embeds: [embed],
+        ephemeral: true,
       });
     } else {
       const categories = [
@@ -88,7 +114,7 @@ export default new Command({
         });
       }
 
-      message.channel.send({
+      interaction.reply({
         embeds: [
           new Embed()
             .setTitle("🚀 Need some help blasting off?")
@@ -97,6 +123,7 @@ export default new Command({
             )
             .setFields(fields),
         ],
+        ephemeral: true,
       });
     }
   },
