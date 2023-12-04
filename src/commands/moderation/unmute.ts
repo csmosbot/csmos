@@ -6,6 +6,7 @@ export default new Command({
   description: "Unmute a user from this server.",
   aliases: ["untimeout", "removetimeout", "remove-timeout", "rmtimeout"],
   userPermissions: ["ModerateMembers"],
+  usage: "unmute <user> [reason]",
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

@@ -17,6 +17,7 @@ export interface CommandOptions {
   name: string;
   description?: string;
   aliases?: string[];
+  usage?: string;
   userPermissions?: PermissionResolvable[];
   run: ({
     client,

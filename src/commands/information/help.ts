@@ -14,10 +14,13 @@ const emojis = {
 export default new Command({
   name: "help",
   description: "View information about all my commands.",
+  usage: "help <command>",
   run: ({ client, message, args }) => {
-    const cmd = args[0];
+    const cmd = args[0]?.toLowerCase();
     if (cmd) {
-      const command = client.commands.get(cmd);
+      const command =
+        client.commands.get(cmd) ||
+        client.commands.find((c) => c.aliases?.includes(cmd));
       if (!command)
         return message.channel.send({
           embeds: [
@@ -38,6 +41,13 @@ export default new Command({
         embed.addFields({
           name: "Aliases",
           value: command.aliases.map((alias) => `\`${alias}\``).join(", "),
+        });
+      if (command.usage)
+        embed.addFields({
+          name: "Usage",
+          value: `${
+            client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix
+          }${command.usage}`,
         });
       if (command.userPermissions)
         embed.addFields({

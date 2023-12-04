@@ -7,6 +7,7 @@ export default new Command({
   description: "Mute a user from this server.",
   aliases: ["timeout"],
   userPermissions: ["ModerateMembers"],
+  usage: "mute <user> <time> [reason]",
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

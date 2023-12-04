@@ -7,6 +7,7 @@ import { RepeatMode } from "distube";
 export default new Command({
   name: "loop",
   description: "Set the loop mode for the queue in this server.",
+  usage: 'loop [loop mode ("off", "queue", "song")]',
   run: ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

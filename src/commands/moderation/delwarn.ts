@@ -6,6 +6,7 @@ export default new Command({
   description: "Delete a warn from a user.",
   aliases: ["deletewarn", "delete-warn", "removewarn", "remove-warn", "rmwarn"],
   userPermissions: ["ModerateMembers"],
+  usage: "delwarn <warn ID>",
   run: ({ client, message, args }) => {
     const id = args[0];
     if (!id)

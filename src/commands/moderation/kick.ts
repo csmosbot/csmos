@@ -5,6 +5,7 @@ export default new Command({
   name: "kick",
   description: "Kick a user from this server.",
   userPermissions: ["KickMembers"],
+  usage: "kick <user> [reason]",
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||
