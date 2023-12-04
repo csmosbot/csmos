@@ -5,6 +5,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "volume",
   description: "Change the volume of the current song.",
+  usage: "volume <new volume percentage>",
   run: ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

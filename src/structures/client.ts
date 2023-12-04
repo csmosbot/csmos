@@ -15,7 +15,7 @@ import type { CommandOptions, SlashCommandOptions } from "./command.js";
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
 export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
-  commands = new Collection<string, CommandOptions>();
+  commands = new Collection<string, CommandOptions & { category: string }>();
   slashCommands = new Collection<string, SlashCommandOptions>();
   db = {
     guilds: new Enmap<string, Guild>({
@@ -56,7 +56,7 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
           .catch(() => null);
         if (!command || !command.name || !command.run) continue;
 
-        this.commands.set(command.name, command);
+        this.commands.set(command.name, { ...command, category: dir });
       }
     });
 

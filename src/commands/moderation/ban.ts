@@ -5,6 +5,7 @@ export default new Command({
   name: "ban",
   description: "Ban a user from this server.",
   userPermissions: ["BanMembers"],
+  usage: "ban <user> [reason]",
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

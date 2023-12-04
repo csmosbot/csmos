@@ -7,6 +7,7 @@ export default new Command({
   name: "forward",
   description: "Skips forward in the current song.",
   aliases: ["seek"],
+  usage: "forward <time>",
   run: async ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

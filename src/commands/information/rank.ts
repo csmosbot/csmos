@@ -15,6 +15,7 @@ const statuses = {
 export default new Command({
   name: "rank",
   description: "View someone's current level and XP.",
+  usage: "rank [user]",
   run: async ({ client, message, args }) => {
     const member =
       message.mentions.members.first() ||

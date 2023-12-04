@@ -5,6 +5,7 @@ export default new Command({
   name: "unban",
   description: "Unban a user from this server.",
   userPermissions: ["BanMembers"],
+  usage: "unban <user ID>",
   run: async ({ message, args }) => {
     if (!message.guild.members.me!.permissions.has("BanMembers"))
       return message.channel.send({

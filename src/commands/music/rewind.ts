@@ -6,6 +6,7 @@ import ms from "ms";
 export default new Command({
   name: "rewind",
   description: "Goes backwards in the current song.",
+  usage: "rewind <time>",
   run: async ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -6,6 +6,7 @@ export default new Command({
   name: "warn",
   description: "Warn a user in this server.",
   userPermissions: ["ModerateMembers"],
+  usage: "warn <user> [reason]",
   run: ({ client, message, args }) => {
     const member =
       message.mentions.members.first() ||

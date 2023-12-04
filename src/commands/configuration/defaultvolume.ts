@@ -5,6 +5,7 @@ export default new Command({
   name: "defaultvolume",
   description: "Update the default volume for this server.",
   aliases: ["default-volume"],
+  usage: "defaultvolume <new volume percentage>",
   run: ({ client, message, args }) => {
     if (!args[0])
       return message.channel.send({

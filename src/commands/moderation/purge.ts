@@ -6,6 +6,7 @@ export default new Command({
   name: "purge",
   description: "Purge a number of messages from this channel.",
   userPermissions: ["ManageMessages"],
+  usage: "purge <number of messages>",
   run: async ({ message, args }) => {
     if (!args[0])
       return message.channel.send({

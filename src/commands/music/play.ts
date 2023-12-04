@@ -6,6 +6,7 @@ export default new Command({
   name: "play",
   description: "Play a song in your voice channel.",
   aliases: ["p"],
+  usage: "play <search query>",
   run: async ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

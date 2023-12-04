@@ -6,6 +6,7 @@ export default new Command({
   name: "warnings",
   description: "View all warnings of a user.",
   aliases: ["warns"],
+  usage: "warnings [user]",
   run: ({ client, message, args }) => {
     const member =
       message.mentions.members.first() ||

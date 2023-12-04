@@ -5,6 +5,7 @@ export default new Command({
   name: "roles",
   description: "Add or remove roles from a user.",
   userPermissions: ["ManageRoles"],
+  usage: "roles <add | remove> <role> [user]",
   run: async ({ message, args }) => {
     const subcommand = args[0];
     if (!subcommand)

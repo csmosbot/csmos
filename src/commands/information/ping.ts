@@ -19,7 +19,7 @@ export default new Command({
     res.edit({
       embeds: [
         new Embed()
-          .setTitle("Pong! 🏓")
+          .setTitle("🏓 Pong!")
           .setFields(
             {
               name: "🤖 Bot",

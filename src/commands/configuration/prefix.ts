@@ -5,6 +5,7 @@ export default new Command({
   name: "prefix",
   description: "Update the prefix for this server.",
   userPermissions: ["ManageGuild"],
+  usage: "prefix <new prefix>",
   run: ({ client, message, args }) => {
     const prefix = args[0];
     if (!prefix)
