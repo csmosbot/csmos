@@ -1,5 +1,4 @@
 import { Command } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
 import { getPrefix } from "@/utils/prefix.js";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
