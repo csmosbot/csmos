@@ -1,6 +1,7 @@
 import { Command } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { getPrefix } from "@/utils/prefix.js";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
@@ -70,9 +71,10 @@ export default new Command({
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
-            `The current song is not paused. Try using \`${
-              client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix
-            }pause\` instead.`
+            `The current song is not paused. Try using \`${getPrefix(
+              client,
+              message.guild.id
+            )}pause\` instead.`
           ),
         ],
       });

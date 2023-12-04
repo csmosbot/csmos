@@ -1,6 +1,7 @@
 import { SlashCommand } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
 import { DangerEmbed, Embed } from "@/utils/embed.js";
+import { getPrefix } from "@/utils/prefix.js";
 import {
   PermissionsBitField,
   SlashCommandBuilder,
@@ -56,9 +57,7 @@ export default new SlashCommand({
         });
 
       const embed = new Embed().setTitle(
-        `${
-          client.db.guilds.get(interaction.guild.id, "prefix") ?? config.prefix
-        }${command.name}`
+        `${getPrefix(client, interaction.guild.id)}${command.name}`
       );
 
       if (command.description) embed.setDescription(command.description);
@@ -73,10 +72,7 @@ export default new SlashCommand({
       if (command.usage)
         embed.addFields({
           name: "Usage",
-          value: `${
-            client.db.guilds.get(interaction.guild.id, "prefix") ??
-            config.prefix
-          }${command.usage}`,
+          value: `${getPrefix(client, interaction.guild.id)}${command.usage}`,
         });
       if (command.userPermissions)
         embed.addFields({

@@ -1,6 +1,7 @@
 import { Command } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { getPrefix } from "@/utils/prefix.js";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
@@ -71,9 +72,10 @@ export default new Command({
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
-            `The queue in this server has never been shuffled. Try using \`${
-              client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix
-            }shuffle\` instead.`
+            `The queue in this server has never been shuffled. Try using \`${getPrefix(
+              client,
+              message.guild.id
+            )}shuffle\` instead.`
           ),
         ],
       });

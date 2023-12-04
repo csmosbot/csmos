@@ -1,6 +1,7 @@
 import { SlashCommand } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { getPrefix } from "@/utils/prefix.js";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -82,10 +83,10 @@ export default new SlashCommand({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            `The current song is not paused. Try using \`${
-              client.db.guilds.get(interaction.guild.id, "prefix") ??
-              config.prefix
-            }pause\` instead.`
+            `The current song is not paused. Try using \`${getPrefix(
+              client,
+              interaction.guild.id
+            )}pause\` instead.`
           ),
         ],
         ephemeral: true,
