@@ -497,7 +497,7 @@ export function createPlayer(client: BotClient) {
     }
   });
 
-  client.player.on("addSong", (queue, track) => {
+  player.on("addSong", (queue, track) => {
     queue.textChannel!.send({
       embeds: [
         new Embed()
@@ -525,7 +525,7 @@ export function createPlayer(client: BotClient) {
     });
   });
 
-  client.player.on("addList", (queue, playlist) => {
+  player.on("addList", (queue, playlist) => {
     queue.textChannel!.send({
       embeds: [
         new Embed()
@@ -557,7 +557,7 @@ export function createPlayer(client: BotClient) {
     });
   });
 
-  client.player.on("finishSong", (queue) => {
+  player.on("finishSong", (queue) => {
     if (songEditInterval) clearInterval(songEditInterval);
 
     if (
