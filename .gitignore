@@ -1,6 +1,8 @@
 node_modules/
 dist/
 db/**/*.sqlite*
+config.yml
+config.yaml
 .env
 package-lock.json
 yarn.lock
