@@ -4,7 +4,7 @@ import { parse } from "yaml";
 
 interface Config {
   prefix: string;
-  guildId: string;
+  guildID: string | false;
   colors: Record<"primary" | "success" | "danger", ColorResolvable>;
   emotes: Record<"previous" | "next", string> & {
     player: Record<
