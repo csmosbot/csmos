@@ -8,9 +8,6 @@ config.yaml
 
 # modules
 node_modules/
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
 
 # turbo
 .turbo/
