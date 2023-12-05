@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.cbs article h1,
+.cbs article h2 {
+  @apply tracking-tighter;
+}
+
+.nextra-toc a {
+  @apply transition-colors font-normal;
+}
+
+.nextra-toc a.nx-text-primary-600 {
+  @apply font-semibold;
+}
