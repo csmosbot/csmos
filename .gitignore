@@ -1,9 +1,16 @@
-node_modules/
 dist/
-db/**/*.sqlite*
+apps/bot/db/**/*.sqlite*
+
+# configuration
 config.yml
 config.yaml
 .env
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+
+# modules
+node_modules/
+
+# turbo
+.turbo/
+
+# nextjs
+.next/

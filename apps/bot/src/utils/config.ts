@@ -26,9 +26,10 @@ interface Config {
 const loadConfig = (): Config => {
   let config: string;
 
-  if (existsSync("./config.yml")) config = readFileSync("./config.yml", "utf8");
-  else if (existsSync("./config.yaml"))
-    config = readFileSync("./config.yaml", "utf8");
+  if (existsSync("../../config.yml"))
+    config = readFileSync("../../config.yml", "utf8");
+  else if (existsSync("../../config.yaml"))
+    config = readFileSync("../../config.yaml", "utf8");
   else throw new SyntaxError("No configuration file found");
 
   return parse(config) as Config;

@@ -1,0 +1,10 @@
+{
+  "extends": "@csmos/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "reset.d.ts"]
+}
