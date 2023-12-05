@@ -1,0 +1,43 @@
+# Prefix for message commands.
+# Default is ";".
+prefix: ";"
+
+# Guild ID for deploying slash commands.
+# If set to false (or this is not defined), slash commands will be deployed globally.
+# If set to a guild ID string, slash commands will be deployed to that guild ID>
+guildID: ""
+
+# Colors used for embeds.
+colors:
+  # Primary color used for main embeds.
+  # Default is "#F600E0".
+  primary: "#F600E0"
+
+  # Success color used to indicate a successful action.
+  # Default is "#00F400".
+  success: "#00F400"
+
+  # Danger color mostly used to indicate an unsuccessful action.
+  # Default is "#F20000".
+  danger: "#F20000"
+
+# Emojis used in responses.
+# We recommend you change these defaults as they are from our server, which your bot will most likely not be in.
+emotes:
+  # Previous emoji, usually used for responses with pages.
+  previous: "<:previous_song:994440947863658516>"
+  # Next emoji, usually used for responses with pages.
+  next: "<:next_song:994440946030739486>"
+  # These emojis are used in the music system.
+  player:
+    previous: "<:previous_song:994440947863658516>"
+    pause: "<:pause:994440942528512152>"
+    play: "<:next:994438540429643806>"
+    next: "<:next_song:994440946030739486>"
+    stop: "<:stop:994442358705893378>"
+    shuffle: "<:shuffle:994442357019779132>"
+    loop:
+      default: "<:loop:994442351953055844>"
+      single: "<:loopsingle:994442353655939153>"
+    forward: "<:forward:994442350032081027>"
+    rewind: "<:rewind:994442355442720888>"

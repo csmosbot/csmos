@@ -1,6 +1,7 @@
 import { Command } from "@/structures/command.js";
 import { config } from "@/utils/config.js";
 import { DangerEmbed, Embed } from "@/utils/embed.js";
+import { getPrefix } from "@/utils/prefix.js";
 import { PermissionsBitField, type APIEmbedField } from "discord.js";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -32,9 +33,7 @@ export default new Command({
         });
 
       const embed = new Embed().setTitle(
-        `${client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix}${
-          command.name
-        }`
+        `${getPrefix(client, message.guild.id)}${command.name}`
       );
 
       if (command.description) embed.setDescription(command.description);

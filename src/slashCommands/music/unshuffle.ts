@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { getPrefix } from "@/utils/prefix.js";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -83,10 +83,10 @@ export default new SlashCommand({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            `The queue in this server has never been shuffled. Try using \`${
-              client.db.guilds.get(interaction.guild.id, "prefix") ??
-              config.prefix
-            }shuffle\` instead.`
+            `The queue in this server has never been shuffled. Try using \`${getPrefix(
+              client,
+              interaction.guild.id
+            )}shuffle\` instead.`
           ),
         ],
         ephemeral: true,

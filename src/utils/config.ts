@@ -1,9 +1,10 @@
 import type { ColorResolvable } from "discord.js";
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
+import { parse } from "yaml";
 
 interface Config {
   prefix: string;
-  guildId: string;
+  guildID: string | false;
   colors: Record<"primary" | "success" | "danger", ColorResolvable>;
   emotes: Record<"previous" | "next", string> & {
     player: Record<
@@ -22,6 +23,15 @@ interface Config {
   };
 }
 
-export const config = JSON.parse(
-  readFileSync("./config.json", "utf8")
-) as Config;
+const loadConfig = (): Config => {
+  let config: string;
+
+  if (existsSync("./config.yml")) config = readFileSync("./config.yml", "utf8");
+  else if (existsSync("./config.yaml"))
+    config = readFileSync("./config.yaml", "utf8");
+  else throw new SyntaxError("No configuration file found");
+
+  return parse(config) as Config;
+};
+
+export const config = loadConfig();

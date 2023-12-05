@@ -81,10 +81,10 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
     });
 
     this.on("ready", async () => {
-      if (config.guildId && config.guildId.length) {
-        const guild = this.guilds.cache.get(config.guildId);
+      if (config.guildID && typeof config.guildID === "string") {
+        const guild = this.guilds.cache.get(config.guildID);
         if (!guild)
-          throw new SyntaxError(`No guild exists with ID '${config.guildId}'`);
+          throw new SyntaxError(`No guild exists with ID '${config.guildID}'`);
 
         await guild.commands.set(commands);
         console.log(`Registered commands in ${guild.name}.`);
