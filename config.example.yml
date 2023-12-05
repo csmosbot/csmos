@@ -24,8 +24,11 @@ colors:
 # Emojis used in responses.
 # We recommend you change these defaults as they are from our server, which your bot will most likely not be in.
 emotes:
+  # Previous emoji, usually used for responses with pages.
   previous: "<:previous_song:994440947863658516>"
+  # Next emoji, usually used for responses with pages.
   next: "<:next_song:994440946030739486>"
+  # These emojis are used in the music system.
   player:
     previous: "<:previous_song:994440947863658516>"
     pause: "<:pause:994440942528512152>"
