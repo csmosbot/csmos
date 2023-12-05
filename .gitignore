@@ -1,5 +1,5 @@
 dist/
-db/**/*.sqlite*
+apps/bot/db/**/*.sqlite*
 
 # configuration
 config.yml
