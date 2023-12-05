@@ -1,9 +1,16 @@
-node_modules/
 dist/
 db/**/*.sqlite*
+
+# configuration
 config.yml
 config.yaml
 .env
+
+# modules
+node_modules/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# turbo
+.turbo/
