@@ -1,14 +1,18 @@
-![csmos banner](https://raw.githubusercontent.com/cosmoticlabs/csmos-website/main/public/og.jpg)
+<p align="center">
+ <img src="https://github.com/CosmoticLabs/csmos/assets/50563138/59aa8d17-74a7-46ee-8a8d-a9213357a78b" width="480" height="80" alt="csmos Logo">
+</p>
 
-<h3 align="center"><strong>csmos</strong></h3>
-<div align="center">The <strong>only</strong> Discord bot you need.</div>
-<br />
+<p align="center">
+  The only Discord bot you need.
+</p>
+
 <div align="center">
-<a href="https://csmos.vercel.app">Website</a>
-<span> · </span>
-<a href="https://csmos.vercel.app/docs">Docs</a> 
+  <a href="https://csmos.vercel.app">Home</a> | <a href="https://csmos.vercel.app/docs">Docs</a>
 </div>
-<br />
-<h6 align="center">
-Made with ❤️ by <a href="https://github.com/CosmoticLabs">Cosmotic Labs</a>
-</h6>
+
+## Table of Contents
+
+This repository is a monorepo structured with [Turborepo](https://turbo.build/repo).
+
+- [Discord Bot](https://github.com/CosmoticLabs/csmos/tree/main/apps/bot) - The Node.js bot that interacts with Discord.
+- [Website](https://github.com/CosmoticLabs/csmos/tree/main/apps/web) - The website and documentation hosted on [csmos.vercel.app](https://csmos.vercel.app).
