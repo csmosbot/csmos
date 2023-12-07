@@ -24,13 +24,14 @@ export default new Command({
         ],
       });
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
       warnings: [],
     });
 
-    const warnings = client.db.users
-      .get(member.id, "warnings")
-      .filter((warning) => warning.guildId === message.guild.id);
+    const warnings = client.db.users.get(
+      `${message.guild.id}-${member.id}`,
+      "warnings"
+    );
 
     if (!warnings.length)
       return message.channel.send({

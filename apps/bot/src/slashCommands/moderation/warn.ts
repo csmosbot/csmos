@@ -57,12 +57,12 @@ export default new SlashCommand({
     const reason =
       interaction.options.getString("reason") || "No reason specified.";
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
       warnings: [],
     });
 
     client.db.users.push(
-      member.id,
+      `${interaction.guild.id}-${member.id}`,
       {
         id: randomUUID(),
         guildId: interaction.guild.id,
