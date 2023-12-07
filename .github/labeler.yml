@@ -3,3 +3,6 @@
 
 "🖥️ website":
   - "apps/web/**"
+
+"⚙️ actions":
+  - ".github/workflows/**"
