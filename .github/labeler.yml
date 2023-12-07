@@ -1,0 +1,8 @@
+"🤖 bot":
+  - "apps/bot/**"
+
+"🖥️ website":
+  - "apps/web/**"
+
+"⚙️ actions":
+  - ".github/workflows/**"
