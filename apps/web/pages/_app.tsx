@@ -6,6 +6,8 @@ const font = Inter({
   subsets: ["latin"],
 });
 
+import { Analytics } from "@vercel/analytics/react";
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -17,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
       </style>
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
