@@ -37,7 +37,7 @@
     "@csmos/tsconfig": "workspace:*",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/ms": "^0.7.34",
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.10.4",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.54.0",
