@@ -24,13 +24,14 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
       warnings: [],
     });
 
-    const warnings = client.db.users
-      .get(member.id, "warnings")
-      .filter((warning) => warning.guildId === interaction.guild.id);
+    const warnings = client.db.users.get(
+      `${interaction.guild.id}-${member.id}`,
+      "warnings"
+    );
 
     if (!warnings.length)
       return interaction.reply({

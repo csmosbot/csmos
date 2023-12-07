@@ -12,25 +12,40 @@ export default (client: BotClient<true>) => {
     if (
       !message.inGuild() ||
       message.author.bot ||
-      xpCooldowns.has(message.author.id)
+      xpCooldowns.has(`${message.guild.id}-${message.author.id}`)
     )
       return;
 
-    client.db.users.ensure(message.author.id, {
+    client.db.users.ensure(`${message.guild.id}-${message.author.id}`, {
       xp: 0,
       level: 0,
     });
 
     const xpToGive = random(5, 15);
-    client.db.users.math(message.author.id, "+", xpToGive, "xp");
+    client.db.users.math(
+      `${message.guild.id}-${message.author.id}`,
+      "+",
+      xpToGive,
+      "xp"
+    );
 
-    xpCooldowns.add(message.author.id);
-    setTimeout(() => xpCooldowns.delete(message.author.id), 30_000);
+    xpCooldowns.add(`${message.guild.id}-${message.author.id}`);
+    setTimeout(
+      () => xpCooldowns.delete(`${message.guild.id}-${message.author.id}`),
+      30_000
+    );
 
-    const user = client.db.users.get(message.author.id);
+    const user = client.db.users.get(
+      `${message.guild.id}-${message.author.id}`
+    );
     if (user.xp > calculateLevelXp(user.level)) {
-      client.db.users.set(message.author.id, 0, "xp");
-      client.db.users.math(message.author.id, "+", 1, "level");
+      client.db.users.set(`${message.guild.id}-${message.author.id}`, 0, "xp");
+      client.db.users.math(
+        `${message.guild.id}-${message.author.id}`,
+        "+",
+        1,
+        "level"
+      );
 
       message.reply({
         embeds: [

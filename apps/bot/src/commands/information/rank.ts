@@ -22,12 +22,12 @@ export default new Command({
       message.guild.members.cache.get(args[0]) ||
       message.member!;
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
       xp: 0,
       level: 0,
     });
 
-    const data = client.db.users.get(member.id);
+    const data = client.db.users.get(`${message.guild.id}-${member.id}`);
     const rank =
       client.db.users
         .keyArray()

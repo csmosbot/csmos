@@ -25,12 +25,12 @@ export default new SlashCommand({
   run: async ({ client, interaction }) => {
     const member = interaction.options.getMember("user") ?? interaction.member!;
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
       xp: 0,
       level: 0,
     });
 
-    const data = client.db.users.get(member.id);
+    const data = client.db.users.get(`${interaction.guild.id}-${member.id}`);
     const rank =
       client.db.users
         .keyArray()

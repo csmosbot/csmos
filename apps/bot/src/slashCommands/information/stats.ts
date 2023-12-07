@@ -16,12 +16,14 @@ export default new SlashCommand({
   run: ({ client, interaction }) => {
     const member = interaction.options.getMember("user") ?? interaction.member;
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
+      xp: 0,
+      level: 0,
       messages: 0,
       characters: 0,
     });
 
-    const data = client.db.users.get(member.id);
+    const data = client.db.users.get(`${interaction.guild.id}-${member.id}`);
     interaction.reply({
       embeds: [
         new Embed()

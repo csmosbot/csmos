@@ -13,12 +13,14 @@ export default new Command({
       message.guild.members.cache.get(args[0]) ||
       message.member;
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
+      xp: 0,
+      level: 0,
       messages: 0,
       characters: 0,
     });
 
-    const data = client.db.users.get(member.id);
+    const data = client.db.users.get(`${message.guild.id}-${member.id}`);
     message.channel.send({
       embeds: [
         new Embed()

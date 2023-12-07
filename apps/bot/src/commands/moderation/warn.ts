@@ -40,12 +40,12 @@ export default new Command({
 
     const reason = args.slice(1).join(" ") || "No reason specified.";
 
-    client.db.users.ensure(member.id, {
+    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
       warnings: [],
     });
 
     client.db.users.push(
-      member.id,
+      `${message.guild.id}-${member.id}`,
       {
         id: randomUUID(),
         guildId: message.guild.id,
