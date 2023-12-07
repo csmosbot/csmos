@@ -6,3 +6,14 @@
 
 "⚙️ actions":
   - ".github/workflows/**"
+
+"📖 documentation":
+  - "apps/web/docs/**"
+  - "README.md"
+  - "LICENSE"
+  - ".env.example"
+  - "config.example.yml"
+
+"🔗 dependencies":
+  - "**/package.json"
+  - "**/pnpm-lock.yaml"
