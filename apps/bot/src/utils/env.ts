@@ -6,10 +6,7 @@ config({
 import { z } from "zod";
 
 const envVariables = z.object({
-  TOKEN: z.string(),
-  INFINITYBOTS_TOKEN: z.string().optional(),
-  TOPGG_TOKEN: z.string().optional(),
-  BETTERUPTIME_URL: z.string().optional(),
+  DISCORD_TOKEN: z.string(),
 });
 
 const parsed = envVariables.safeParse(process.env);
