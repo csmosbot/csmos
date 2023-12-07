@@ -35,7 +35,7 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   }
 
   connect() {
-    this.login(env.TOKEN);
+    this.login(env.DISCORD_TOKEN);
   }
 
   register() {
