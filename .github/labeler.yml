@@ -1,0 +1,5 @@
+"🤖 bot":
+  - "apps/bot/**"
+
+"🖥️ website":
+  - "apps/web/**"
