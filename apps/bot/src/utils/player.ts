@@ -1,4 +1,4 @@
-import type { BotClient } from "@/structures/client.js";
+import type { BotClient } from "@/structures/client";
 import { SoundCloudPlugin } from "@distube/soundcloud";
 import { SpotifyPlugin } from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
@@ -12,8 +12,8 @@ import {
 } from "discord.js";
 import type { Queue, Song } from "distube";
 import { DisTube, RepeatMode } from "distube";
-import { config } from "./config.js";
-import { DangerEmbed, Embed, SuccessEmbed } from "./embed.js";
+import { config } from "./config";
+import { DangerEmbed, Embed, SuccessEmbed } from "./embed";
 
 let songEditInterval: ReturnType<typeof setInterval> | null = null;
 

@@ -1,5 +1,5 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed } from "@/utils/embed.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed } from "@/utils/embed";
 import ms from "ms";
 
 export default new Command({

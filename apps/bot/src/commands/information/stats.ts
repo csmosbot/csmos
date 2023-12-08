@@ -1,6 +1,6 @@
-import { Command } from "@/structures/command.js";
-import { Embed } from "@/utils/embed.js";
-import { getPrefix } from "@/utils/prefix.js";
+import { Command } from "@/structures/command";
+import { Embed } from "@/utils/embed";
+import { getPrefix } from "@/utils/prefix";
 
 export default new Command({
   name: "stats",

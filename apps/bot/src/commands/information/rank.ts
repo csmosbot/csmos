@@ -1,6 +1,6 @@
-import { Command } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
-import { calculateLevelXp } from "@/utils/leveling.js";
+import { Command } from "@/structures/command";
+import { config } from "@/utils/config";
+import { calculateLevelXp } from "@/utils/leveling";
 import { Rank } from "@nottca/canvacord";
 import { AttachmentBuilder } from "discord.js";
 

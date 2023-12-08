@@ -1,5 +1,5 @@
-import { SlashCommand } from "@/structures/command.js";
-import { Embed } from "@/utils/embed.js";
+import { SlashCommand } from "@/structures/command";
+import { Embed } from "@/utils/embed";
 import { SlashCommandBuilder } from "discord.js";
 
 const types = {

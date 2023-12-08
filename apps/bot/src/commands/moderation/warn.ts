@@ -1,5 +1,5 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { randomUUID } from "crypto";
 
 export default new Command({

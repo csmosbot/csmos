@@ -1,5 +1,5 @@
-import { SlashCommand } from "@/structures/command.js";
-import { DangerEmbed, Embed, SuccessEmbed } from "@/utils/embed.js";
+import { SlashCommand } from "@/structures/command";
+import { DangerEmbed, Embed, SuccessEmbed } from "@/utils/embed";
 import {
   ActionRowBuilder,
   ButtonBuilder,

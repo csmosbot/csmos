@@ -1,5 +1,5 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed, Embed, SuccessEmbed } from "@/utils/embed.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed, Embed, SuccessEmbed } from "@/utils/embed";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
