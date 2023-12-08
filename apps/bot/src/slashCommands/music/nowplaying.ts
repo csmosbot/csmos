@@ -1,6 +1,6 @@
-import { SlashCommand } from "@/structures/command.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
-import { createBar } from "@/utils/player.js";
+import { SlashCommand } from "@/structures/command";
+import { DangerEmbed, Embed } from "@/utils/embed";
+import { createBar } from "@/utils/player";
 import {
   ActionRowBuilder,
   ButtonBuilder,

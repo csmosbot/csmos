@@ -1,5 +1,5 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed, Embed } from "@/utils/embed";
 import { time } from "discord.js";
 
 export default new Command({

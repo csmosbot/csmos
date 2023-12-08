@@ -1,6 +1,6 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed, SuccessEmbed } from "@/utils/embed.js";
-import { formatRepeatMode } from "@/utils/player.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { formatRepeatMode } from "@/utils/player";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 import { RepeatMode } from "distube";
 

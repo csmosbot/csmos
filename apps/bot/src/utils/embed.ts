@@ -1,6 +1,6 @@
 import type { APIEmbed } from "discord.js";
 import { EmbedBuilder } from "discord.js";
-import { config } from "./config.js";
+import { config } from "./config";
 
 export class Embed extends EmbedBuilder {
   constructor(data?: APIEmbed) {

@@ -1,6 +1,6 @@
-import { SlashCommand } from "@/structures/command.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
-import { getPrefix } from "@/utils/prefix.js";
+import { SlashCommand } from "@/structures/command";
+import { DangerEmbed, Embed } from "@/utils/embed";
+import { getPrefix } from "@/utils/prefix";
 import {
   PermissionsBitField,
   SlashCommandBuilder,

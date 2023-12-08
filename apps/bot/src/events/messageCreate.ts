@@ -1,6 +1,6 @@
-import type { ExtendedMessage } from "@/structures/command.js";
-import { Event } from "@/structures/event.js";
-import { config } from "@/utils/config.js";
+import type { ExtendedMessage } from "@/structures/command";
+import { Event } from "@/structures/event";
+import { config } from "@/utils/config";
 import { EmbedBuilder } from "discord.js";
 
 function escapeRegex(str: string) {

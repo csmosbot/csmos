@@ -1,4 +1,4 @@
-import type { BotClient } from "@/structures/client.js";
+import type { BotClient } from "@/structures/client";
 
 export default (client: BotClient<true>) => {
   client.on("messageCreate", (message) => {

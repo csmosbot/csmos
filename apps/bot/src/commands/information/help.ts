@@ -1,7 +1,7 @@
-import { Command } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
-import { getPrefix } from "@/utils/prefix.js";
+import { Command } from "@/structures/command";
+import { config } from "@/utils/config";
+import { DangerEmbed, Embed } from "@/utils/embed";
+import { getPrefix } from "@/utils/prefix";
 import { PermissionsBitField, type APIEmbedField } from "discord.js";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);

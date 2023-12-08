@@ -1,6 +1,6 @@
-import { Command } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
-import { Embed } from "@/utils/embed.js";
+import { Command } from "@/structures/command";
+import { config } from "@/utils/config";
+import { Embed } from "@/utils/embed";
 
 export default new Command({
   name: "ping",

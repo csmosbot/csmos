@@ -1,6 +1,6 @@
-import { SlashCommand } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
+import { SlashCommand } from "@/structures/command";
+import { config } from "@/utils/config";
+import { DangerEmbed, Embed } from "@/utils/embed";
 import type { ButtonInteraction, EmbedBuilder } from "discord.js";
 import {
   ActionRowBuilder,

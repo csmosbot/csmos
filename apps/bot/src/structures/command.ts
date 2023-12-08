@@ -8,7 +8,7 @@ import type {
   SlashCommandBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from "discord.js";
-import type { BotClient } from "./client.js";
+import type { BotClient } from "./client";
 
 export interface ExtendedMessage extends Message<true> {
   member: GuildMember;

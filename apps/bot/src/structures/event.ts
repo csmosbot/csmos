@@ -1,5 +1,5 @@
 import type { ClientEvents } from "discord.js";
-import type { BotClient } from "./client.js";
+import type { BotClient } from "./client";
 
 export interface EventOptions<E extends keyof ClientEvents> {
   name: E;

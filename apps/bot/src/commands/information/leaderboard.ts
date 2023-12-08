@@ -1,6 +1,6 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
-import { calculateLevelXp } from "@/utils/leveling.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed, Embed } from "@/utils/embed";
+import { calculateLevelXp } from "@/utils/leveling";
 import {
   ActionRowBuilder,
   ButtonBuilder,

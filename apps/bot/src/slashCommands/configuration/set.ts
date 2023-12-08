@@ -1,6 +1,6 @@
-import { SlashCommand } from "@/structures/command.js";
-import { config } from "@/utils/config.js";
-import { SuccessEmbed } from "@/utils/embed.js";
+import { SlashCommand } from "@/structures/command";
+import { config } from "@/utils/config";
+import { SuccessEmbed } from "@/utils/embed";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({

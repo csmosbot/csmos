@@ -1,6 +1,6 @@
-import { Command } from "@/structures/command.js";
-import { DangerEmbed, Embed } from "@/utils/embed.js";
-import { createBar } from "@/utils/player.js";
+import { Command } from "@/structures/command";
+import { DangerEmbed, Embed } from "@/utils/embed";
+import { createBar } from "@/utils/player";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({

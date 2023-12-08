@@ -1,6 +1,6 @@
-import type { BotClient } from "@/structures/client.js";
-import { config } from "@/utils/config.js";
-import { calculateLevelXp } from "@/utils/leveling.js";
+import type { BotClient } from "@/structures/client";
+import { config } from "@/utils/config";
+import { calculateLevelXp } from "@/utils/leveling";
 import { EmbedBuilder } from "discord.js";
 
 const xpCooldowns = new Set<string>();
