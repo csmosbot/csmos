@@ -1,5 +1,8 @@
+# compiled typescript
 dist/
-apps/bot/db/**/*.sqlite*
+
+# database
+/docker-data
 
 # configuration
 config.yml
