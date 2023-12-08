@@ -8,12 +8,9 @@
   - ".github/workflows/**"
 
 "📖 documentation":
+  - "apps/web/about.mdx"
   - "apps/web/docs/**"
   - "README.md"
   - "LICENSE"
   - ".env.example"
   - "config.example.yml"
-
-"🔗 dependencies":
-  - "**/package.json"
-  - "**/pnpm-lock.yaml"
