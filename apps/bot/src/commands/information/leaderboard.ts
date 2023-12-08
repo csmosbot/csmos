@@ -1,6 +1,7 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
 import { calculateLevelXp } from "@/utils/leveling";
+import { db } from "@csmos/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -39,16 +40,19 @@ export default new Command({
         .setTitle(`${types[subcommand as keyof typeof types]} Leaderboard`)
         .setDescription(
           await Promise.all(
-            client.db.users
-              .keyArray()
-              .filter((key) => key.startsWith(message.guild.id))
-              .map((key) => ({ id: key, ...client.db.users.get(key) }))
-              .sort((a, b) =>
+            (
+              await db.user.findMany({
+                where: {
+                  id: message.guild.id,
+                },
+              })
+            )
+              .sort((a, z) =>
                 subcommand === "xp"
-                  ? calculateLevelXp(a.level) +
-                    a.xp -
-                    (calculateLevelXp(b.level) + b.xp)
-                  : a.messages - b.messages
+                  ? calculateLevelXp(z.level) +
+                    z.xp -
+                    (calculateLevelXp(a.level) + a.xp)
+                  : z.messages - a.messages
               )
               .map(
                 async (user, index) =>

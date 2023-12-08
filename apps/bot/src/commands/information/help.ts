@@ -1,5 +1,4 @@
 import { Command } from "@/structures/command";
-import { config } from "@/utils/config";
 import { DangerEmbed, Embed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
 import { PermissionsBitField, type APIEmbedField } from "discord.js";
@@ -17,7 +16,7 @@ export default new Command({
   name: "help",
   description: "View information about all my commands.",
   usage: "help <command>",
-  run: ({ client, message, args }) => {
+  run: async ({ client, message, args }) => {
     const cmd = args[0]?.toLowerCase();
     if (cmd) {
       const command =
@@ -33,7 +32,7 @@ export default new Command({
         });
 
       const embed = new Embed().setTitle(
-        `${getPrefix(client, message.guild.id)}${command.name}`
+        `${await getPrefix(client, message.guild.id)}${command.name}`
       );
 
       if (command.description) embed.setDescription(command.description);
@@ -48,9 +47,7 @@ export default new Command({
       if (command.usage)
         embed.addFields({
           name: "Usage",
-          value: `${
-            client.db.guilds.get(message.guild.id, "prefix") ?? config.prefix
-          }${command.usage}`,
+          value: `${await getPrefix(client, message.guild.id)}${command.usage}`,
         });
       if (command.userPermissions)
         embed.addFields({

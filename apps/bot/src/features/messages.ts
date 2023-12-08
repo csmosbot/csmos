@@ -1,26 +1,36 @@
 import type { BotClient } from "@/structures/client";
+import { db } from "@csmos/db";
 
 export default (client: BotClient<true>) => {
-  client.on("messageCreate", (message) => {
+  client.on("messageCreate", async (message) => {
     if (!message.inGuild() || message.author.bot) return;
 
-    client.db.users.ensure(`${message.guild.id}-${message.author.id}`, {
-      messages: 0,
-      characters: 0,
-    });
+    if (
+      !(await db.user.findFirst({
+        where: { id: message.author.id, guildId: message.guild.id },
+      }))
+    )
+      await db.user.create({
+        data: {
+          id: message.author.id,
+          guildId: message.guild.id,
+        },
+      });
 
     const characters = message.content.split("").length;
-    client.db.users.math(
-      `${message.guild.id}-${message.author.id}`,
-      "+",
-      1,
-      "messages"
-    );
-    client.db.users.math(
-      `${message.guild.id}-${message.author.id}`,
-      "+",
-      characters,
-      "characters"
-    );
+    await db.user.update({
+      where: {
+        id: message.author.id,
+        guildId: message.guild.id,
+      },
+      data: {
+        messages: {
+          increment: 1,
+        },
+        characters: {
+          increment: characters,
+        },
+      },
+    });
   });
 };

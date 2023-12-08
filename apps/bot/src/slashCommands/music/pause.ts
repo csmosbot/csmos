@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command";
-import { config } from "@/utils/config";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { getPrefix } from "@/utils/prefix";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -12,7 +12,7 @@ export default new SlashCommand({
   data: new SlashCommandBuilder()
     .setName("pause")
     .setDescription("Pause the current song."),
-  run: ({ client, interaction }) => {
+  run: async ({ client, interaction }) => {
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 
@@ -82,10 +82,10 @@ export default new SlashCommand({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            `The current song is already paused. Try using \`${
-              client.db.guilds.get(interaction.guild.id, "prefix") ??
-              config.prefix
-            }resume\` instead.`
+            `The current song is already paused. Try using \`${await getPrefix(
+              client,
+              interaction.guild.id
+            )}resume\` instead.`
           ),
         ],
         ephemeral: true,

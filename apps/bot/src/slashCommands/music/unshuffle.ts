@@ -12,7 +12,7 @@ export default new SlashCommand({
   data: new SlashCommandBuilder()
     .setName("unshuffle")
     .setDescription("Unshuffles the queue in this server."),
-  run: ({ client, interaction }) => {
+  run: async ({ client, interaction }) => {
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 
@@ -83,7 +83,7 @@ export default new SlashCommand({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            `The queue in this server has never been shuffled. Try using \`${getPrefix(
+            `The queue in this server has never been shuffled. Try using \`${await getPrefix(
               client,
               interaction.guild.id
             )}shuffle\` instead.`

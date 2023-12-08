@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 
 export default new Command({
   name: "delwarn",
@@ -7,7 +8,7 @@ export default new Command({
   aliases: ["deletewarn", "delete-warn", "removewarn", "remove-warn", "rmwarn"],
   userPermissions: ["ModerateMembers"],
   usage: "delwarn <warn ID>",
-  run: ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     const id = args[0];
     if (!id)
       return message.channel.send({
@@ -16,10 +17,13 @@ export default new Command({
         ],
       });
 
-    const key = client.db.users.findKey(
-      (user) => !!user?.warnings?.find((warning) => warning.id === id)
-    );
-    if (!key)
+    if (
+      !(await db.warning.findFirst({
+        where: {
+          id,
+        },
+      }))
+    )
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
@@ -28,9 +32,11 @@ export default new Command({
         ],
       });
 
-    const user = client.db.users.get(key);
-    const newWarnings = user.warnings.filter((warning) => warning.id !== id);
-    client.db.users.set(key, newWarnings, "warnings");
+    await db.warning.delete({
+      where: {
+        id,
+      },
+    });
 
     message.channel.send({
       embeds: [new SuccessEmbed().setDescription(`Removed warn **${id}**.`)],

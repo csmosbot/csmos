@@ -1,4 +1,5 @@
 import type { BotClient } from "@/structures/client";
+import { db } from "@csmos/db";
 import { SoundCloudPlugin } from "@distube/soundcloud";
 import { SpotifyPlugin } from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
@@ -68,12 +69,16 @@ export function createPlayer(client: BotClient) {
     },
   });
 
-  player.on("initQueue", (queue) => {
-    client.db.guilds.ensure(queue.id, {
-      defaultVolume: 50,
+  player.on("initQueue", async (queue) => {
+    const data = await db.guild.upsert({
+      where: {
+        id: queue.id,
+      },
+      create: {
+        id: queue.id,
+      },
+      update: {},
     });
-
-    const data = client.db.guilds.get(queue.id);
     queue.setVolume(data.defaultVolume);
   });
 
@@ -83,8 +88,19 @@ export function createPlayer(client: BotClient) {
 
     const nowPlayingMessage = await queue
       .textChannel!.send(recieveQueueData(queue, track))
-      .then((msg) => {
-        client.db.guilds.set(queue.id, msg.id, "nowPlayingMessage");
+      .then(async (msg) => {
+        await db.guild.upsert({
+          where: {
+            id: queue.id,
+          },
+          create: {
+            id: queue.id,
+            nowPlayingMessage: msg.id,
+          },
+          update: {
+            nowPlayingMessage: msg.id,
+          },
+        });
         return msg;
       });
 
@@ -199,7 +215,14 @@ export function createPlayer(client: BotClient) {
               ],
               components: [],
             });
-            client.db.guilds.delete(queue.id, "nowPlayingMessage");
+            await db.guild.update({
+              where: {
+                id: queue.id,
+              },
+              data: {
+                nowPlayingMessage: null,
+              },
+            });
             i.reply({
               embeds: [
                 new SuccessEmbed().setDescription(
@@ -258,7 +281,14 @@ export function createPlayer(client: BotClient) {
               ],
               components: [],
             });
-            client.db.guilds.delete(queue.id, "nowPlayingMessage");
+            await db.guild.update({
+              where: {
+                id: queue.id,
+              },
+              data: {
+                nowPlayingMessage: null,
+              },
+            });
             i.reply({
               embeds: [
                 new SuccessEmbed().setDescription("Skipped the current song."),
@@ -280,7 +310,14 @@ export function createPlayer(client: BotClient) {
               ],
               components: [],
             });
-            client.db.guilds.delete(queue.id, "nowPlayingMessage");
+            await db.guild.update({
+              where: {
+                id: queue.id,
+              },
+              data: {
+                nowPlayingMessage: null,
+              },
+            });
             i.reply({
               embeds: [new SuccessEmbed().setDescription("Stopped the queue.")],
               ephemeral: true,
@@ -557,20 +594,15 @@ export function createPlayer(client: BotClient) {
     });
   });
 
-  player.on("finishSong", (queue) => {
+  player.on("finishSong", async (queue) => {
     if (songEditInterval) clearInterval(songEditInterval);
 
-    if (
-      !client.db.guilds.has(queue.id) ||
-      !client.db.guilds.has(queue.id, "nowPlayingMessage")
-    )
-      return;
+    const guild = await db.guild.findFirst({ where: { id: queue.id } });
+    if (!guild || !guild.nowPlayingMessage) return;
 
     queue
-      .textChannel!.messages.fetch(
-        client.db.guilds.get(queue.id, "nowPlayingMessage")
-      )
-      .then((currentSongMsg) => {
+      .textChannel!.messages.fetch(guild.nowPlayingMessage)
+      .then(async (currentSongMsg) => {
         currentSongMsg.edit({
           embeds: [
             new Embed()
@@ -579,7 +611,14 @@ export function createPlayer(client: BotClient) {
           ],
           components: [],
         });
-        client.db.guilds.delete(queue.id, "nowPlayingMessage");
+        await db.guild.update({
+          where: {
+            id: queue.id,
+          },
+          data: {
+            nowPlayingMessage: null,
+          },
+        });
       });
   });
 

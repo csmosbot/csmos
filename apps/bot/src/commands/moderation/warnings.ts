@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
+import { db } from "@csmos/db";
 import { time } from "discord.js";
 
 export default new Command({
@@ -7,7 +8,7 @@ export default new Command({
   description: "View all warnings of a user.",
   aliases: ["warns"],
   usage: "warnings [user]",
-  run: ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     const member =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]) ||
@@ -24,14 +25,20 @@ export default new Command({
         ],
       });
 
-    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
-      warnings: [],
+    const { warnings } = await db.user.upsert({
+      where: {
+        id: message.author.id,
+        guildId: message.guild.id,
+      },
+      create: {
+        id: message.author.id,
+        guildId: message.guild.id,
+      },
+      update: {},
+      include: {
+        warnings: true,
+      },
     });
-
-    const warnings = client.db.users.get(
-      `${message.guild.id}-${member.id}`,
-      "warnings"
-    );
 
     if (!warnings.length)
       return message.channel.send({

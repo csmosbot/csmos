@@ -1,12 +1,13 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 
 export default new Command({
   name: "defaultvolume",
   description: "Update the default volume for this server.",
   aliases: ["default-volume"],
   usage: "defaultvolume <new volume percentage>",
-  run: ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     if (!args[0])
       return message.channel.send({
         embeds: [
@@ -42,7 +43,16 @@ export default new Command({
         ],
       });
 
-    client.db.guilds.set(message.guild.id, volume, "defaultVolume");
+    await db.guild.upsert({
+      where: {
+        id: message.guild.id,
+      },
+      create: {
+        id: message.guild.id,
+        defaultVolume: volume,
+      },
+      update: { defaultVolume: volume },
+    });
 
     message.channel.send({
       embeds: [

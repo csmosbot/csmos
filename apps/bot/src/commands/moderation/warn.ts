@@ -1,13 +1,13 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { randomUUID } from "crypto";
+import { db } from "@csmos/db";
 
 export default new Command({
   name: "warn",
   description: "Warn a user in this server.",
   userPermissions: ["ModerateMembers"],
   usage: "warn <user> [reason]",
-  run: ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     const member =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]);
@@ -38,23 +38,15 @@ export default new Command({
         ],
       });
 
-    const reason = args.slice(1).join(" ") || "No reason specified.";
+    const reason = args.slice(1).join(" ") || "No reason specified";
 
-    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
-      warnings: [],
-    });
-
-    client.db.users.push(
-      `${message.guild.id}-${member.id}`,
-      {
-        id: randomUUID(),
-        guildId: message.guild.id,
-        moderatorId: message.member.id,
+    await db.warning.create({
+      data: {
+        userId: member.id,
+        moderatorId: message.author.id,
         reason,
-        createdAt: Date.now(),
       },
-      "warnings"
-    );
+    });
 
     message.channel.send({
       embeds: [
