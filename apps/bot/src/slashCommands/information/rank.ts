@@ -1,6 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { config } from "@/utils/config";
 import { calculateLevelXp } from "@/utils/leveling";
+import { db } from "@csmos/db";
 import { Rank } from "@nottca/canvacord";
 import { AttachmentBuilder, SlashCommandBuilder } from "discord.js";
 
@@ -22,21 +23,32 @@ export default new SlashCommand({
         .setDescription("The user to view the level and XP of.")
         .setRequired(false)
     ),
-  run: async ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const member = interaction.options.getMember("user") ?? interaction.member!;
 
-    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
-      xp: 0,
-      level: 0,
+    const data = await db.user.upsert({
+      where: {
+        id: member.id,
+        guildId: interaction.guild.id,
+      },
+      create: {
+        id: member.id,
+        guildId: interaction.guild.id,
+      },
+      update: {},
     });
-
-    const data = client.db.users.get(`${interaction.guild.id}-${member.id}`);
-    const rank =
-      client.db.users
-        .keyArray()
-        .map((user) => ({ id: user, ...client.db.users.get(user) }))
-        .sort((a, z) => z.xp - a.xp)
-        .findIndex((u) => u.id === member.id)! + 1;
+    const rank = (
+      await db.user.findMany({
+        where: {
+          guildId: interaction.guild.id,
+        },
+      })
+    )
+      .sort(
+        (a, z) =>
+          calculateLevelXp(z.level) + z.xp - (calculateLevelXp(a.level) + a.xp)
+      )
+      .findIndex((u) => u.id === member.id)!;
 
     const card = new Rank()
       .setUsername(member.displayName)

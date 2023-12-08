@@ -39,7 +39,7 @@ export default new SlashCommand({
       filtered.map((choice) => ({ name: choice, value: choice }))
     );
   },
-  run: ({ client, interaction }) => {
+  run: async ({ client, interaction }) => {
     const cmd = interaction.options.getString("command")?.toLowerCase();
     if (cmd) {
       const command =
@@ -71,7 +71,9 @@ export default new SlashCommand({
       if (command.usage)
         embed.addFields({
           name: "Usage",
-          value: `${getPrefix(client, interaction.guild.id)}${command.usage}`,
+          value: `${await getPrefix(client, interaction.guild.id)}${
+            command.usage
+          }`,
         });
       if (command.userPermissions)
         embed.addFields({

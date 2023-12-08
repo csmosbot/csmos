@@ -1,5 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -78,24 +79,33 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    queue
-      .textChannel!.messages.fetch(
-        client.db.guilds.get(interaction.guild.id, "nowPlayingMessage")
-      )
-      .then((msg) => {
-        msg.edit({
-          embeds: [
-            new DangerEmbed()
-              .setTitle("❌ Stopped")
-              .setDescription(
-                `This song was skipped by **${interaction.user.username}**.`
-              ),
-          ],
-          components: [],
-        });
-        client.db.guilds.delete(interaction.guild.id, "nowPlayingMessage");
-      })
-      .catch(() => null);
+    const guild = await db.guild.findFirst({
+      where: { id: interaction.guild.id },
+    });
+    if (guild && guild.nowPlayingMessage)
+      queue
+        .textChannel!.messages.fetch(guild.nowPlayingMessage)
+        .then(async (msg) => {
+          msg.edit({
+            embeds: [
+              new DangerEmbed()
+                .setTitle("❌ Stopped")
+                .setDescription(
+                  `This song was skipped by **${interaction.user.username}**.`
+                ),
+            ],
+            components: [],
+          });
+          await db.guild.update({
+            where: {
+              id: interaction.guild.id,
+            },
+            data: {
+              nowPlayingMessage: null,
+            },
+          });
+        })
+        .catch(() => null);
 
     await queue.previous();
 

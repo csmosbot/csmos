@@ -1,12 +1,13 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 
 export default new Command({
   name: "prefix",
   description: "Update the prefix for this server.",
   userPermissions: ["ManageGuild"],
   usage: "prefix <new prefix>",
-  run: ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     const prefix = args[0];
     if (!prefix)
       return message.channel.send({
@@ -23,7 +24,16 @@ export default new Command({
         ],
       });
 
-    client.db.guilds.set(message.guild.id, prefix, "prefix");
+    await db.guild.upsert({
+      where: {
+        id: message.guild.id,
+      },
+      create: {
+        id: message.guild.id,
+        prefix,
+      },
+      update: { prefix },
+    });
 
     message.channel.send({
       embeds: [

@@ -1,5 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -13,13 +14,16 @@ export default new SlashCommand({
         .setRequired(true)
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
-  run: ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const id = interaction.options.getString("id", true);
 
-    const key = client.db.users.findKey(
-      (user) => !!user?.warnings?.find((warning) => warning.id === id)
-    );
-    if (!key)
+    if (
+      !(await db.warning.findFirst({
+        where: {
+          id,
+        },
+      }))
+    )
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
@@ -29,9 +33,11 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    const user = client.db.users.get(key);
-    const newWarnings = user.warnings.filter((warning) => warning.id !== id);
-    client.db.users.set(key, newWarnings, "warnings");
+    await db.warning.delete({
+      where: {
+        id,
+      },
+    });
 
     interaction.reply({
       embeds: [new SuccessEmbed().setDescription(`Removed warn **${id}**.`)],

@@ -6,7 +6,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "pause",
   description: "Pause the current song.",
-  run: ({ client, message }) => {
+  run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;
 
@@ -70,7 +70,7 @@ export default new Command({
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
-            `The current song is already paused. Try using \`${getPrefix(
+            `The current song is already paused. Try using \`${await getPrefix(
               client,
               message.guild.id
             )}resume\` instead.`

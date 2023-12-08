@@ -1,5 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
+import { db } from "@csmos/db";
 import { SlashCommandBuilder, time } from "discord.js";
 
 export default new SlashCommand({
@@ -9,7 +10,7 @@ export default new SlashCommand({
     .addUserOption((option) =>
       option.setName("user").setDescription("The user to view the warnings of.")
     ),
-  run: ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const member = interaction.options.getMember("user") || interaction.member;
     if (
       member.id !== interaction.member.id &&
@@ -24,14 +25,20 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
-      warnings: [],
+    const { warnings } = await db.user.upsert({
+      where: {
+        id: interaction.user.id,
+        guildId: interaction.guild.id,
+      },
+      create: {
+        id: interaction.user.id,
+        guildId: interaction.guild.id,
+      },
+      update: {},
+      include: {
+        warnings: true,
+      },
     });
-
-    const warnings = client.db.users.get(
-      `${interaction.guild.id}-${member.id}`,
-      "warnings"
-    );
 
     if (!warnings.length)
       return interaction.reply({

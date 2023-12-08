@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
@@ -66,24 +67,33 @@ export default new Command({
         ],
       });
 
-    queue
-      .textChannel!.messages.fetch(
-        client.db.guilds.get(message.guild.id, "nowPlayingMessage")
-      )
-      .then((msg) => {
-        msg.edit({
-          embeds: [
-            new DangerEmbed()
-              .setTitle("❌ Stopped")
-              .setDescription(
-                `This song was skipped by **${message.author.username}**.`
-              ),
-          ],
-          components: [],
-        });
-        client.db.guilds.delete(message.guild.id, "nowPlayingMessage");
-      })
-      .catch(() => null);
+    const guild = await db.guild.findFirst({
+      where: { id: message.guild.id },
+    });
+    if (guild && guild.nowPlayingMessage)
+      queue
+        .textChannel!.messages.fetch(guild.nowPlayingMessage)
+        .then(async (msg) => {
+          msg.edit({
+            embeds: [
+              new DangerEmbed()
+                .setTitle("❌ Stopped")
+                .setDescription(
+                  `This song was skipped by **${message.author.username}**.`
+                ),
+            ],
+            components: [],
+          });
+          await db.guild.update({
+            where: {
+              id: message.guild.id,
+            },
+            data: {
+              nowPlayingMessage: null,
+            },
+          });
+        })
+        .catch(() => null);
 
     await queue.previous();
 

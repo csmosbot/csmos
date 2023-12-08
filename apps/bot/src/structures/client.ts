@@ -1,8 +1,5 @@
-import type { Guild } from "@/types/guild";
-import type { User } from "@/types/user";
 import { botOptions } from "@/utils/bot-options";
 import { config } from "@/utils/config";
-import { Enmap } from "@/utils/enmap";
 import { env } from "@/utils/env";
 import { createPlayer } from "@/utils/player";
 import type { ApplicationCommandDataResolvable } from "discord.js";
@@ -14,16 +11,6 @@ import type { CommandOptions, SlashCommandOptions } from "./command";
 export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   commands = new Collection<string, CommandOptions & { category: string }>();
   slashCommands = new Collection<string, SlashCommandOptions>();
-  db = {
-    guilds: new Enmap<string, Guild>({
-      name: "Guild",
-      dataDir: "./db/guilds",
-    }),
-    users: new Enmap<string, User>({
-      name: "User",
-      dataDir: "./db/users",
-    }),
-  };
   maps = new Map();
   player = createPlayer(this);
 

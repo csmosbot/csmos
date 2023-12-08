@@ -12,7 +12,7 @@ export default new SlashCommand({
   data: new SlashCommandBuilder()
     .setName("resume")
     .setDescription("Resume the current song."),
-  run: ({ client, interaction }) => {
+  run: async ({ client, interaction }) => {
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 
@@ -82,7 +82,7 @@ export default new SlashCommand({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            `The current song is not paused. Try using \`${getPrefix(
+            `The current song is not paused. Try using \`${await getPrefix(
               client,
               interaction.guild.id
             )}pause\` instead.`

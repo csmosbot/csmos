@@ -1,26 +1,30 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
+import { db } from "@csmos/db";
 
 export default new Command({
   name: "stats",
   description: "View a user's statistics.",
   aliases: ["statistics"],
   usage: "stats [user]",
-  run: ({ client, message, args }) => {
+  run: async ({ client, message, args }) => {
     const member =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]) ||
       message.member;
 
-    client.db.users.ensure(`${message.guild.id}-${member.id}`, {
-      xp: 0,
-      level: 0,
-      messages: 0,
-      characters: 0,
+    const data = await db.user.upsert({
+      where: {
+        id: member.id,
+        guildId: message.guild.id,
+      },
+      create: {
+        id: member.id,
+        guildId: message.guild.id,
+      },
+      update: {},
     });
-
-    const data = client.db.users.get(`${message.guild.id}-${member.id}`);
     message.channel.send({
       embeds: [
         new Embed()
@@ -32,7 +36,7 @@ export default new Command({
             {
               name: "Leveling",
               value: [
-                `You can also view these statistics by running \`${getPrefix(
+                `You can also view these statistics by running \`${await getPrefix(
                   client,
                   message.guild.id
                 )}rank\`.`,

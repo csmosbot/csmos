@@ -6,7 +6,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "unshuffle",
   description: "Unshuffles the queue in this server.",
-  run: ({ client, message }) => {
+  run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;
 
@@ -71,7 +71,7 @@ export default new Command({
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
-            `The queue in this server has never been shuffled. Try using \`${getPrefix(
+            `The queue in this server has never been shuffled. Try using \`${await getPrefix(
               client,
               message.guild.id
             )}shuffle\` instead.`

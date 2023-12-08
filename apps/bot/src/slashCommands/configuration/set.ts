@@ -1,6 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { config } from "@/utils/config";
 import { SuccessEmbed } from "@/utils/embed";
+import { db } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -35,7 +36,7 @@ export default new SlashCommand({
         )
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
-  run: ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const subcommand = interaction.options.getSubcommand();
 
     switch (subcommand) {
@@ -43,7 +44,16 @@ export default new SlashCommand({
         {
           const prefix = interaction.options.getString("prefix", true);
 
-          client.db.guilds.set(interaction.guild.id, prefix, "prefix");
+          await db.guild.upsert({
+            where: {
+              id: interaction.guild.id,
+            },
+            create: {
+              id: interaction.guild.id,
+              prefix,
+            },
+            update: { prefix },
+          });
 
           interaction.reply({
             embeds: [
@@ -61,7 +71,16 @@ export default new SlashCommand({
         {
           const volume = interaction.options.getNumber("volume", true);
 
-          client.db.guilds.set(interaction.guild.id, volume, "defaultVolume");
+          await db.guild.upsert({
+            where: {
+              id: interaction.guild.id,
+            },
+            create: {
+              id: interaction.guild.id,
+              defaultVolume: volume,
+            },
+            update: { defaultVolume: volume },
+          });
 
           interaction.reply({
             embeds: [

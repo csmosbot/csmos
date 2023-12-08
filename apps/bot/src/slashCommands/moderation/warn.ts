@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { randomUUID } from "crypto";
+import { db } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -19,7 +19,7 @@ export default new SlashCommand({
         .setDescription("Why you are warning this user.")
         .setRequired(false)
     ),
-  run: ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const member = interaction.options.getMember("user");
     if (!member)
       return interaction.reply({
@@ -57,21 +57,13 @@ export default new SlashCommand({
     const reason =
       interaction.options.getString("reason") || "No reason specified.";
 
-    client.db.users.ensure(`${interaction.guild.id}-${member.id}`, {
-      warnings: [],
-    });
-
-    client.db.users.push(
-      `${interaction.guild.id}-${member.id}`,
-      {
-        id: randomUUID(),
-        guildId: interaction.guild.id,
-        moderatorId: interaction.member.id,
+    await db.warning.create({
+      data: {
+        userId: member.id,
+        moderatorId: interaction.user.id,
         reason,
-        createdAt: Date.now(),
       },
-      "warnings"
-    );
+    });
 
     interaction.reply({
       embeds: [
