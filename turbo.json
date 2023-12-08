@@ -12,10 +12,10 @@
       "outputs": ["dist/**", ".next/**"]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^db:generate", "^typecheck"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^db:generate", "^lint"]
     },
     "db:generate": {
       "cache": false
