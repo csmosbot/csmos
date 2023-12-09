@@ -39,7 +39,9 @@ const { slug } = Astro.props;
       ))
     }
     <Search {...Astro.props} />
-    <SocialIcons {...Astro.props} />
+    <div class="flex items-center gap-3 social-icons">
+      <SocialIcons {...Astro.props} />
+    </div>
     <ThemeSelect {...Astro.props} />
   </div>
 </div>
