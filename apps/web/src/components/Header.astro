@@ -1,0 +1,45 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+
+interface Link {
+  name: string;
+  href: string;
+  slug?: string;
+}
+const links: Link[] = [
+  {
+    name: "Guide",
+    href: "/guides/example",
+    slug: "/guides",
+  },
+];
+const { slug } = Astro.props;
+---
+
+<div class="h-full flex items-center justify-between">
+  <SiteTitle {...Astro.props} />
+  <div class="flex items-center gap-3">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class='text-gray-400 text-sm no-underline hover:text-black dark:hover:text-gray-100  data-[is-active="true"]:text-black dark:data-[is-active="true"]:text-gray-100'
+          data-is-active={
+            slug.startsWith(link.slug?.slice(1) ?? link.href.slice(1))
+              ? "true"
+              : "false"
+          }
+        >
+          {link.name}
+        </a>
+      ))
+    }
+    <Search {...Astro.props} />
+    <SocialIcons {...Astro.props} />
+    <ThemeSelect {...Astro.props} />
+  </div>
+</div>

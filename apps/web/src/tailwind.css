@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+Add additional Tailwind styles to this file, for example with @layer:
+https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
+*/
+
+:is([data-theme="dark"] body) {
+  --sl-color-text-accent: var(--sl-color-accent) !important;
+  --sl-color-text-invert: var(--sl-color-white) !important;
+}
+
+:is([data-theme="dark"] .sl-markdown-content a:not(:where(.not-content *))) {
+  --sl-color-text-accent: #e879f9 !important;
+}
+
+header.header {
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  @apply bg-white bg-opacity-80 h-14 backdrop-filter backdrop-blur-md;
+}
+
+:is([data-theme="dark"] header.header) {
+  @apply bg-gray-900 bg-opacity-80;
+}
+
+@media (min-width: 50rem) {
+  site-search {
+    @apply w-64 inline;
+  }
+
+  site-search > button {
+    @apply !h-8 !ps-2.5 !pe-2.5 !border-none !bg-neutral-100 dark:!bg-neutral-800 !text-black dark:!text-white hover:!bg-neutral-200 dark:hover:!bg-neutral-700/80;
+  }
+}
+
+.site-title:hover {
+  @apply opacity-75;
+}
+
+.sidebar-pane {
+  background-color: var(--sl-color-bg);
+  border-right: 1px solid var(--sl-color-gray-6);
+}
+
+a:where(.astro-2s4edbx7):hover,
+a:where(.astro-qnwyvmpw):hover {
+  background-color: rgb(217 70 239 / 0.2);
+}
+
+a:where(.astro-jydhtyhg) {
+  @apply text-black dark:text-white;
+}
+
+:root {
+  --overlay-blurple: rgb(232 121 249 / 0.2);
+}
+
+[data-has-hero] .page {
+  background:
+    linear-gradient(215deg, var(--overlay-blurple), transparent 40%),
+    radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh /
+      105vw 200vh,
+    radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50%
+      calc(100% + 20rem) / 60rem 30rem;
+}
+
+[data-has-hero] header {
+  border-bottom: 1px solid transparent;
+  background-color: transparent !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+[data-has-hero] .hero > img {
+  filter: drop-shadow(0 0 3rem var(--overlay-blurple));
+}
+
+.action.primary {
+  @apply bg-accent-400/50 border border-accent-700 hover:bg-accent-500/50 text-black dark:text-white dark:bg-accent-950 dark:border-accent-500 dark:hover:bg-accent-900/80;
+}
+
+.hero:where(.astro-ztmipw3n) > img:where(.astro-ztmipw3n) {
+  animation: vert-move 3s ease-in-out infinite;
+  @apply rounded-full;
+}
+
+@keyframes vert-move {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+h1 {
+  @apply font-bold;
+}
+
+h1,
+h2 {
+  @apply tracking-tighter;
+}

@@ -1,37 +1,33 @@
 {
-  "name": "@csmos/web",
-  "version": "1.0.0",
-  "private": true,
+  "name": "web",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "typecheck": "tsc --noEmit",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "lint": "eslint .",
+    "astro": "astro"
   },
-  "keywords": [],
-  "author": "Cosmotic Labs",
-  "contributors": [
-    "ToastedToast <realtcatech@gmail.com>"
-  ],
-  "license": "MIT",
   "dependencies": {
-    "@radix-ui/react-tooltip": "^1.0.7",
-    "@vercel/analytics": "^1.1.1",
-    "lucide-react": "^0.294.0",
-    "next": "14.0.3",
-    "nextra": "latest",
-    "nextra-theme-docs": "latest",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/starlight": "^0.15.0",
+    "@astrojs/starlight-tailwind": "^2.0.1",
+    "@astrojs/tailwind": "^5.0.3",
+    "@fontsource-variable/inter": "^5.0.16",
+    "astro": "^4.0.1",
+    "sharp": "^0.32.5",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
     "@csmos/eslint-config": "workspace:*",
-    "@types/node": "20.10.4",
-    "@types/react": "^18.2.42",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.3.3"
+    "@csmos/tsconfig": "workspace:*",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-astro": "^0.12.2",
+    "prettier-plugin-tailwindcss": "^0.5.9"
   }
 }
