@@ -53,6 +53,10 @@ a:where(.astro-jydhtyhg) {
   @apply text-black dark:text-white;
 }
 
+.large:where(.astro-2s4edbx7) {
+  @apply tracking-tighter;
+}
+
 :root {
   --overlay-blurple: rgb(232 121 249 / 0.2);
 }
