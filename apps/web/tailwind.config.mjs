@@ -16,6 +16,9 @@ export default {
       fontFamily: {
         sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        fifty: "50rem",
+      },
     },
   },
   plugins: [starlightPlugin()],

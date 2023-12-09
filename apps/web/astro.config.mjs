@@ -8,7 +8,7 @@ export default defineConfig({
     starlight({
       title: "csmos",
       logo: {
-        src: "./src/assets/csmos.png",
+        src: "./src/assets/csmos.webp",
         replacesTitle: true,
       },
       favicon: "/favicon.ico",
