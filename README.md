@@ -7,7 +7,7 @@
 </p>
 
 <div align="center">
-  <a href="https://csmos.vercel.app">Home</a> | <a href="https://csmos.vercel.app/docs">Docs</a>
+  <a href="https://csmos.space">Home</a> | <a href="https://csmos.space/guides/example">Docs</a>
 </div>
 
 ## Table of Contents
@@ -15,6 +15,6 @@
 This repository is a monorepo structured with [Turborepo](https://turbo.build/repo).
 
 - [Discord Bot](https://github.com/CosmoticLabs/csmos/tree/main/apps/bot) - The Node.js bot that interacts with Discord.
-- [Website](https://github.com/CosmoticLabs/csmos/tree/main/apps/web) - The website and documentation hosted on [csmos.vercel.app](https://csmos.vercel.app).
+- [Website](https://github.com/CosmoticLabs/csmos/tree/main/apps/web) - The website and documentation hosted on [csmos.space](https://csmos.space).
 
 <h6 align="center">Made with ❤️ by <a href="https://github.com/CosmoticLabs">Cosmotic Labs</a></h6>
