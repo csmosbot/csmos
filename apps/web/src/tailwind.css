@@ -18,7 +18,7 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 
 header.header {
   border-bottom: 1px solid var(--sl-color-gray-5);
-  @apply bg-white bg-opacity-80 h-14 backdrop-filter backdrop-blur-md;
+  @apply h-14 bg-white bg-opacity-80 backdrop-blur-md backdrop-filter;
 }
 
 :is([data-theme="dark"] header.header) {
@@ -27,11 +27,11 @@ header.header {
 
 @media (min-width: 50rem) {
   site-search {
-    @apply w-64 inline;
+    @apply inline w-64;
   }
 
   site-search > button {
-    @apply !h-8 !ps-2.5 !pe-2.5 !border-none !bg-neutral-100 dark:!bg-neutral-800 !text-black dark:!text-white hover:!bg-neutral-200 dark:hover:!bg-neutral-700/80;
+    @apply !h-8 !border-none !bg-neutral-100 !pe-2.5 !ps-2.5 !text-black hover:!bg-neutral-200 dark:!bg-neutral-800 dark:!text-white dark:hover:!bg-neutral-700/80;
   }
 }
 
@@ -54,7 +54,7 @@ header.header {
 }
 
 .large:where(.astro-2s4edbx7) {
-  @apply tracking-tighter;
+  @apply tracking-tight;
 }
 
 :root {
@@ -82,7 +82,7 @@ header.header {
 }
 
 .action.primary {
-  @apply bg-accent-400/50 border border-accent-700 hover:bg-accent-500/50 text-black dark:text-white dark:bg-accent-950 dark:border-accent-500 dark:hover:bg-accent-900/80;
+  @apply border border-accent-700 bg-accent-400/50 text-black hover:bg-accent-500/50 dark:border-accent-500 dark:bg-accent-950 dark:text-white dark:hover:bg-accent-900/80;
 }
 
 .hero > img {
@@ -108,5 +108,5 @@ h1 {
 
 h1,
 h2 {
-  @apply tracking-tighter;
+  @apply tracking-tight;
 }
