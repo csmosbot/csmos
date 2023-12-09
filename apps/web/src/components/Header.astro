@@ -2,7 +2,7 @@
 import type { Props } from "@astrojs/starlight/props";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import Search from "@astrojs/starlight/components/Search.astro";
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import ThemeSelect from "./ThemeSelect.tsx";
 import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
 
 interface Link {
@@ -45,7 +45,7 @@ const { slug } = Astro.props;
       <div class="social-icons flex items-center gap-3">
         <SocialIcons {...Astro.props} />
       </div>
-      <ThemeSelect {...Astro.props} />
+      <ThemeSelect client:load />
     </div>
   </div>
 </div>

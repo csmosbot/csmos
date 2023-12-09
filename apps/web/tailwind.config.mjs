@@ -1,4 +1,5 @@
 import starlightPlugin from "@astrojs/starlight-tailwind";
+import animatePlugin from "tailwindcss-animate";
 import colors from "tailwindcss/colors";
 import defaultTheme from "tailwindcss/defaultTheme";
 
@@ -21,5 +22,5 @@ export default {
       },
     },
   },
-  plugins: [starlightPlugin()],
+  plugins: [starlightPlugin(), animatePlugin],
 };
