@@ -2,6 +2,8 @@ import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 
+import vercel from "@astrojs/vercel/serverless";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -64,11 +66,15 @@ export default defineConfig({
       sidebar: [
         {
           label: "Guides",
-          autogenerate: { directory: "guides" },
+          autogenerate: {
+            directory: "guides",
+          },
         },
         {
           label: "Reference",
-          autogenerate: { directory: "reference" },
+          autogenerate: {
+            directory: "reference",
+          },
         },
       ],
       editLink: {
@@ -81,6 +87,14 @@ export default defineConfig({
       },
       titleDelimiter: "—",
     }),
-    tailwind({ applyBaseStyles: false }),
+    tailwind({
+      applyBaseStyles: false,
+    }),
   ],
+  output: "server",
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });
