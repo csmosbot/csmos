@@ -1,4 +1,3 @@
 {
-  "extends": "@csmos/tsconfig/nextjs.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "extends": ["@csmos/tsconfig/base.json", "astro/tsconfigs/strict"]
 }

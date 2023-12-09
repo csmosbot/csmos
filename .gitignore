@@ -15,5 +15,5 @@ node_modules/
 # turbo
 .turbo/
 
-# nextjs
-.next/
+# astro
+.astro/
