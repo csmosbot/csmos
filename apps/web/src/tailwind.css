@@ -53,8 +53,12 @@ header.header {
   @apply text-black dark:text-white;
 }
 
-.large:where(.astro-2s4edbx7) {
+.large {
   @apply tracking-tight;
+}
+
+[data-has-hero] .large {
+  @apply tracking-tighter;
 }
 
 :root {
@@ -103,10 +107,9 @@ header.header {
 }
 
 h1 {
-  @apply font-bold;
+  @apply font-bold tracking-tighter;
 }
 
-h1,
 h2 {
   @apply tracking-tight;
 }
