@@ -5,32 +5,37 @@ export default (client: BotClient<true>) => {
   client.on("messageCreate", async (message) => {
     if (!message.inGuild() || message.author.bot) return;
 
-    if (
-      !(await db.user.findFirst({
-        where: { id: message.author.id, guildId: message.guild.id },
-      }))
-    )
-      await db.user.create({
-        data: {
+    const characters = message.content.split("").length;
+    try {
+      await db.user.update({
+        where: {
           id: message.author.id,
           guildId: message.guild.id,
         },
+        data: {
+          messages: {
+            increment: 1,
+          },
+          characters: {
+            increment: characters,
+          },
+        },
       });
-
-    const characters = message.content.split("").length;
-    await db.user.update({
-      where: {
-        id: message.author.id,
-        guildId: message.guild.id,
-      },
-      data: {
-        messages: {
-          increment: 1,
+    } catch {
+      await db.user.update({
+        where: {
+          id: message.author.id,
+          guildId: message.guild.id,
         },
-        characters: {
-          increment: characters,
+        data: {
+          messages: {
+            increment: 1,
+          },
+          characters: {
+            increment: characters,
+          },
         },
-      },
-    });
+      });
+    }
   });
 };
