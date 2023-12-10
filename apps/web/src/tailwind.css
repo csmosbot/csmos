@@ -113,3 +113,21 @@ h1 {
 h2 {
   @apply tracking-tight;
 }
+
+.heading-link::after {
+  content: "#";
+  padding-inline-start: 0.25em;
+  opacity: 0;
+  transition: all 0.3;
+}
+
+.heading-link:hover::after {
+  color: var(--sl-color-text-accent);
+  transition: all 0.3;
+  opacity: 1;
+}
+
+.heading-link {
+  text-decoration: none;
+  color: var(--sl-color-white) !important;
+}

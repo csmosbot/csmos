@@ -37,9 +37,9 @@ export default function ThemeSelect() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="flex cursor-pointer bg-transparent">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <button className="flex cursor-pointer bg-transparent p-0">
+          <Sun className="h-[1.1rem] w-[1.1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.1rem] w-[1.1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </button>
       </DropdownMenu.Trigger>
@@ -50,7 +50,7 @@ export default function ThemeSelect() {
           <DropdownMenu.Item
             className={`relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
               theme !== "light"
-                ? "text-gray-300 hover:bg-fuchsia-500/20 dark:text-gray-500"
+                ? "text-gray-400 hover:bg-fuchsia-500/20 dark:text-gray-500"
                 : "bg-fuchsia-500/20"
             }`}
             onClick={() => setTheme("light")}
@@ -60,7 +60,7 @@ export default function ThemeSelect() {
           <DropdownMenu.Item
             className={`relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
               theme !== "dark"
-                ? "text-gray-300 hover:bg-fuchsia-500/20 dark:text-gray-500"
+                ? "text-gray-400 hover:bg-fuchsia-500/20 dark:text-gray-500"
                 : "bg-fuchsia-500/20"
             }`}
             onClick={() => setTheme("dark")}
@@ -70,7 +70,7 @@ export default function ThemeSelect() {
           <DropdownMenu.Item
             className={`relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
               theme !== "auto"
-                ? "text-gray-300 hover:bg-fuchsia-500/20 dark:text-gray-500"
+                ? "text-gray-400 hover:bg-fuchsia-500/20 dark:text-gray-500"
                 : "bg-fuchsia-500/20"
             }`}
             onClick={() => setTheme("auto")}
