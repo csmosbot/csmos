@@ -2,6 +2,7 @@ import { botOptions } from "@/utils/bot-options";
 import { config } from "@/utils/config";
 import { env } from "@/utils/env";
 import { createPlayer } from "@/utils/player";
+import { db } from "@csmos/db";
 import type { ApplicationCommandDataResolvable } from "discord.js";
 import { Client, Collection } from "discord.js";
 import fs from "fs";
@@ -23,6 +24,66 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   }
 
   register() {
+    // create user
+    this.on("messageCreate", async (message) => {
+      if (
+        !message.inGuild() ||
+        message.author.bot ||
+        (await db.user.findFirst({
+          where: {
+            id: message.author.id,
+            guildId: message.guild.id,
+          },
+        }))
+      )
+        return;
+
+      await db.user.create({
+        data: {
+          id: message.author.id,
+          guildId: message.guild.id,
+        },
+      });
+    });
+
+    this.on("guildMemberAdd", async (member) => {
+      if (
+        await db.user.findFirst({
+          where: {
+            id: member.id,
+            guildId: member.guild.id,
+          },
+        })
+      )
+        return;
+
+      await db.user.create({
+        data: {
+          id: member.id,
+          guildId: member.guild.id,
+        },
+      });
+    });
+
+    this.on("guildMemberRemove", async (member) => {
+      if (
+        !(await db.user.findFirst({
+          where: {
+            id: member.id,
+            guildId: member.guild.id,
+          },
+        }))
+      )
+        return;
+
+      await db.user.delete({
+        where: {
+          id: member.id,
+          guildId: member.guild.id,
+        },
+      });
+    });
+
     const join = (...paths: string[]) => path.join(__dirname, ...paths);
 
     // commands

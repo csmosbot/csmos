@@ -17,28 +17,27 @@ export default (client: BotClient<true>) => {
     )
       return;
 
-    if (
-      !(await db.user.findFirst({
-        where: { id: message.author.id, guildId: message.guild.id },
-      }))
-    )
-      await db.user.create({
-        data: {
-          id: message.author.id,
-          guildId: message.guild.id,
-        },
-      });
-
     const xpToGive = random(5, 15);
 
-    await db.user.update({
-      where: { id: message.author.id, guildId: message.guild.id },
-      data: {
-        xp: {
-          increment: xpToGive,
+    try {
+      await db.user.update({
+        where: { id: message.author.id, guildId: message.guild.id },
+        data: {
+          xp: {
+            increment: xpToGive,
+          },
         },
-      },
-    });
+      });
+    } catch {
+      await db.user.update({
+        where: { id: message.author.id, guildId: message.guild.id },
+        data: {
+          xp: {
+            increment: xpToGive,
+          },
+        },
+      });
+    }
 
     xpCooldowns.add(`${message.guild.id}-${message.author.id}`);
     setTimeout(
@@ -46,17 +45,12 @@ export default (client: BotClient<true>) => {
       30_000
     );
 
-    const user = await db.user.upsert({
+    const user = (await db.user.findFirst({
       where: {
         id: message.author.id,
         guildId: message.guild.id,
       },
-      create: {
-        id: message.author.id,
-        guildId: message.guild.id,
-      },
-      update: {},
-    });
+    }))!;
     if (user.xp > calculateLevelXp(user.level)) {
       await db.user.update({
         where: {
