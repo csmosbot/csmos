@@ -8,6 +8,7 @@
     "typecheck": "turbo typecheck",
     "lint": "turbo lint",
     "db:generate": "turbo db:generate",
+    "db:studio": "turbo db:studio",
     "db:push": "turbo db:push"
   },
   "keywords": [],
