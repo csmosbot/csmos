@@ -64,7 +64,7 @@ header.header {
 
 .sidebar-content ul li details ul li a:hover,
 .right-sidebar a:hover {
-  background-color: rgb(217 70 239 / 0.15);
+  background-color: rgb(217 70 239 / 0.2);
   border-inline-start: 1.5px solid var(--sl-color-accent);
   @apply border-s-[1.5px] border-s-fuchsia-500/30 underline;
 }
