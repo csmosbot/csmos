@@ -1,6 +1,8 @@
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import react from "@astrojs/react";
 
@@ -92,6 +94,22 @@ export default defineConfig({
     }),
     react(),
   ],
+  markdown: {
+    rehypePlugins: [
+      rehypeHeadingIds,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+          properties: {
+            ariaHidden: true,
+            tabIndex: -1,
+            class: "heading-link",
+          },
+        },
+      ],
+    ],
+  },
   vite: {
     ssr: {
       noExternal: ["@radix-ui/*"],
