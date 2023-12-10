@@ -46,21 +46,33 @@ export default function ThemeSelect() {
       <DropdownMenu.Portal>
         {/* For some reason there's a conflict between eslint's prettier plugin and prettier-plugin-tailwindcss that causes this line to error, so we'll just ignore it */}
         {/* eslint-disable-next-line prettier/prettier */}
-        <DropdownMenu.Content className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 mr-8 min-w-[8rem] overflow-hidden rounded-lg bg-[var(--sl-color-bg)] p-2 text-black shadow-md dark:text-white">
+        <DropdownMenu.Content className="z-50 mr-8 min-w-[8rem] overflow-hidden rounded-lg bg-[var(--sl-color-bg)] p-2 text-black shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:text-white">
           <DropdownMenu.Item
-            className="relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+            className={`relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
+              theme !== "light"
+                ? "text-gray-300 hover:bg-fuchsia-500/20 dark:text-gray-500"
+                : "bg-fuchsia-500/20"
+            }`}
             onClick={() => setTheme("light")}
           >
             <Sun width={20} height={20} /> Light
           </DropdownMenu.Item>
           <DropdownMenu.Item
-            className="relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+            className={`relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
+              theme !== "dark"
+                ? "text-gray-300 hover:bg-fuchsia-500/20 dark:text-gray-500"
+                : "bg-fuchsia-500/20"
+            }`}
             onClick={() => setTheme("dark")}
           >
             <Moon width={20} height={20} /> Dark
           </DropdownMenu.Item>
           <DropdownMenu.Item
-            className="relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none hover:bg-fuchsia-500/20 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+            className={`relative flex cursor-pointer select-none items-center gap-1 rounded-lg p-1.5 text-sm outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 ${
+              theme !== "auto"
+                ? "text-gray-300 hover:bg-fuchsia-500/20 dark:text-gray-500"
+                : "bg-fuchsia-500/20"
+            }`}
             onClick={() => setTheme("auto")}
           >
             <Laptop width={20} height={20} /> System
