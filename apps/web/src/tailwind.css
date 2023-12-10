@@ -7,9 +7,18 @@ Add additional Tailwind styles to this file, for example with @layer:
 https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 */
 
+:is([data-theme="dark"] body) {
+  --sl-color-text-accent: var(--sl-color-accent) !important;
+  --sl-color-text-invert: var(--sl-color-white) !important;
+}
+
+:is([data-theme="dark"] .sl-markdown-content a:not(:where(.not-content *))) {
+  --sl-color-text-accent: #e879f9 !important;
+}
+
 :root {
   scrollbar-width: thin;
-  scrollbar-color: rgb(217 70 239) transparent;
+  scrollbar-color: var(--sl-color-accent) transparent;
   scrollbar-gutter: stable;
 }
 
@@ -24,15 +33,6 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-}
-
-:is([data-theme="dark"] body) {
-  --sl-color-text-accent: var(--sl-color-accent) !important;
-  --sl-color-text-invert: var(--sl-color-white) !important;
-}
-
-:is([data-theme="dark"] .sl-markdown-content a:not(:where(.not-content *))) {
-  --sl-color-text-accent: #e879f9 !important;
 }
 
 header.header {
