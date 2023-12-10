@@ -28,6 +28,7 @@ model User {
   characters        Int       @default(0)
   warnings          Warning[] @relation("user")
   moderatedWarnings Warning[] @relation("moderator")
+  afk               Afk[]
 }
 
 model Warning {
@@ -38,4 +39,12 @@ model Warning {
   moderatorId String
   reason      String   @default("No reason specified.")
   createdAt   DateTime @default(now())
+}
+
+model Afk {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  reason    String?
+  createdAt DateTime @default(now())
 }
