@@ -28,7 +28,7 @@ const { slug } = Astro.props;
         links.map((link) => (
           <a
             href={link.href}
-            class='text-sm text-gray-400 no-underline hover:text-black data-[is-active="true"]:text-black  dark:hover:text-gray-100 dark:data-[is-active="true"]:text-gray-100'
+            class='text-sm text-gray-400 no-underline hover:text-black data-[is-active="true"]:font-medium data-[is-active="true"]:text-black dark:hover:text-gray-100 dark:data-[is-active="true"]:text-gray-100'
             data-is-active={
               slug.startsWith(link.slug?.slice(1) ?? link.href.slice(1))
                 ? "true"
