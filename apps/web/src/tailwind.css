@@ -7,6 +7,25 @@ Add additional Tailwind styles to this file, for example with @layer:
 https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 */
 
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(217 70 239) transparent;
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  height: 12rem;
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
 :is([data-theme="dark"] body) {
   --sl-color-text-accent: var(--sl-color-accent) !important;
   --sl-color-text-invert: var(--sl-color-white) !important;
