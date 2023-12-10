@@ -88,6 +88,7 @@ export default defineConfig({
         Header: "./src/components/Header.astro",
       },
       titleDelimiter: "—",
+      lastUpdated: true,
     }),
     tailwind({
       applyBaseStyles: false,
