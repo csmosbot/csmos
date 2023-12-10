@@ -16,6 +16,25 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
   --sl-color-text-accent: #e879f9 !important;
 }
 
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sl-color-accent) transparent;
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  height: 12rem;
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
 header.header {
   border-bottom: 1px solid var(--sl-color-gray-5);
   @apply h-14 bg-white bg-opacity-80 backdrop-blur-md backdrop-filter;
