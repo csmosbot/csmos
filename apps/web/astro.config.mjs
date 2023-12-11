@@ -64,6 +64,7 @@ export default defineConfig({
       favicon: "/favicon.ico",
       social: {
         github: "https://github.com/CosmoticLabs/csmos",
+        discord: "https://discord.com/invite/q7WNcPakYh",
       },
       sidebar: [
         {
@@ -115,5 +116,9 @@ export default defineConfig({
     ssr: {
       noExternal: ["@radix-ui/*"],
     },
+  },
+  redirects: {
+    "/discord": "https://discord.com/invite/q7WNcPakYh",
+    "/status": "https://status.csmos.space",
   },
 });

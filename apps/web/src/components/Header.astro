@@ -4,6 +4,7 @@ import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import Search from "@astrojs/starlight/components/Search.astro";
 import ThemeSelect from "./ThemeSelect.tsx";
 import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+import { MoveUpRight } from "lucide-react";
 
 interface Link {
   name: string;
@@ -16,6 +17,10 @@ const links: Link[] = [
     href: "/guides/example",
     slug: "/guides",
   },
+  {
+    name: "Status",
+    href: "https://status.csmos.space",
+  },
 ];
 const { slug } = Astro.props;
 ---
@@ -23,12 +28,12 @@ const { slug } = Astro.props;
 <div class="flex h-full items-center justify-between">
   <SiteTitle {...Astro.props} />
   <div class="flex items-center gap-3">
-    <div class="hidden fifty:block">
+    <div class="hidden fifty:flex fifty:items-center fifty:gap-3">
       {
         links.map((link) => (
           <a
             href={link.href}
-            class='text-sm text-gray-400 no-underline hover:text-black data-[is-active="true"]:font-medium data-[is-active="true"]:text-black dark:hover:text-gray-100 dark:data-[is-active="true"]:text-gray-100'
+            class='flex items-center gap-1 text-sm text-gray-400 no-underline hover:text-black data-[is-active="true"]:font-medium data-[is-active="true"]:text-black dark:hover:text-gray-100 dark:data-[is-active="true"]:text-gray-100'
             data-is-active={
               slug.startsWith(link.slug?.slice(1) ?? link.href.slice(1))
                 ? "true"
@@ -36,6 +41,9 @@ const { slug } = Astro.props;
             }
           >
             {link.name}
+            {link.href.startsWith("https://") ? (
+              <MoveUpRight width={16} height={16} />
+            ) : null}
           </a>
         ))
       }
