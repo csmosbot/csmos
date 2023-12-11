@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/discord",
+      "destination": "https://discord.com/invite/q7WNcPakYh"
+    },
+    {
+      "source": "/status",
+      "destination": "https://status.csmos.space"
+    }
+  ]
+}

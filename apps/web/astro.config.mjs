@@ -117,8 +117,4 @@ export default defineConfig({
       noExternal: ["@radix-ui/*"],
     },
   },
-  redirects: {
-    "/discord": "https://discord.com/invite/q7WNcPakYh",
-    "/status": "https://status.csmos.space",
-  },
 });
