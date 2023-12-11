@@ -18,11 +18,7 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 
 header.header {
   border-bottom: 1px solid var(--sl-color-gray-5);
-  @apply h-14 bg-white bg-opacity-80 backdrop-blur-md backdrop-filter;
-}
-
-:is([data-theme="dark"] header.header) {
-  @apply bg-gray-900 bg-opacity-80;
+  @apply h-14 bg-[var(--sl-color-bg)];
 }
 
 @media (min-width: 50rem) {
