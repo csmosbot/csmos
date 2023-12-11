@@ -3,6 +3,10 @@ title: Getting Started
 description: Start using csmos in your Discord server.
 ---
 
+:::caution[Warning]
+csmos is still in heavy development and may not be online when you invite it. We promise that once we fully release v1, csmos will be fully online and ready to meet your server's needs.
+:::
+
 Do you want to start using csmos for your Discord server? Well this is the guide for you! In just a few simple steps, you'll have csmos in your server, and you'll be ready to start your dream Discord server.
 
 ## Invite csmos
