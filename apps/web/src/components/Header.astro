@@ -34,6 +34,7 @@ const { slug } = Astro.props;
           <a
             href={link.href}
             class='flex items-center gap-1 text-sm text-gray-400 no-underline hover:text-black data-[is-active="true"]:font-medium data-[is-active="true"]:text-black dark:hover:text-gray-100 dark:data-[is-active="true"]:text-gray-100'
+            target={link.href.startsWith("https") ? "_blank" : undefined}
             data-is-active={
               slug.startsWith(link.slug?.slice(1) ?? link.href.slice(1))
                 ? "true"
