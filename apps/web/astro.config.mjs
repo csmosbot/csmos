@@ -69,16 +69,53 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Guides",
-          autogenerate: {
-            directory: "guides",
-          },
+          label: "Getting Started",
+          link: "/docs/getting-started",
         },
         {
-          label: "Reference",
-          autogenerate: {
-            directory: "reference",
-          },
+          label: "Commands",
+          collapsed: true,
+          items: [
+            {
+              label: "Usage",
+              link: "/commands",
+            },
+            {
+              label: "Configuration",
+              collapsed: true,
+              autogenerate: {
+                directory: "commands/configuration",
+              },
+            },
+            {
+              label: "Information",
+              collapsed: true,
+              autogenerate: {
+                directory: "commands/information",
+              },
+            },
+            {
+              label: "Moderation",
+              collapsed: true,
+              autogenerate: {
+                directory: "commands/moderation",
+              },
+            },
+            {
+              label: "Music",
+              collapsed: true,
+              autogenerate: {
+                directory: "commands/music",
+              },
+            },
+            {
+              label: "Systems",
+              collapsed: true,
+              autogenerate: {
+                directory: "commands/systems",
+              },
+            },
+          ],
         },
       ],
       editLink: {
