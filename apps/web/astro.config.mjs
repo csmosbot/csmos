@@ -125,6 +125,7 @@ export default defineConfig({
       components: {
         Head: "./src/components/Head.astro",
         Header: "./src/components/Header.astro",
+        SocialIcons: "./src/components/SocialIcons.astro",
       },
       titleDelimiter: "—",
       lastUpdated: true,
