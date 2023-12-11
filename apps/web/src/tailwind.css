@@ -63,34 +63,9 @@ header.header {
   border-right: 1px solid var(--sl-color-gray-6);
 }
 
-.sidebar-content ul li details ul li {
-  padding-inline-start: 0;
-  border-inline-start: none;
-}
-
-.sidebar-content ul li details ul li a {
-  border-inline-start: 1.5px solid var(--sl-color-hairline-light);
-  border-radius: 0;
-  margin-inline-start: var(--sl-sidebar-item-padding-inline);
-  padding-inline-start: var(--sl-sidebar-item-padding-inline);
-}
-
-.sidebar-content ul li details ul li a[aria-current="page"],
-.right-sidebar a[aria-current="true"] {
-  background-color: rgb(217 70 239 / 0.3);
-  border-inline-start: 1.5px solid var(--sl-color-accent);
-}
-
-.sidebar-content ul li details ul li a:hover,
-.right-sidebar a:hover {
+.sidebar-content ul li details ul li a:not([aria-current="page"]):hover,
+.right-sidebar a:not([aria-current="true"]):hover {
   background-color: rgb(217 70 239 / 0.2);
-  border-inline-start: 1.5px solid var(--sl-color-accent);
-  @apply border-s-[1.5px] border-s-fuchsia-500/30 underline;
-}
-
-.right-sidebar a {
-  border-inline-start: 1.5px solid var(--sl-color-hairline-light);
-  border-radius: 0;
 }
 
 .social-icons a {
