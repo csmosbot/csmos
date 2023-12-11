@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/docs",
+      "destination": "/docs/getting-started"
+    },
+    {
+      "source": "/invite",
+      "destination": "https://discord.com/api/oauth2/authorize?client_id=1178275478537240626&permissions=1099917502486&scope=bot+applications.commands"
+    },
+    {
       "source": "/discord",
       "destination": "https://discord.com/invite/q7WNcPakYh"
     },

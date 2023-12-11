@@ -3,7 +3,7 @@ import type { Props } from "@astrojs/starlight/props";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 import Search from "@astrojs/starlight/components/Search.astro";
 import ThemeSelect from "./ThemeSelect.tsx";
-import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+import SocialIcons from "./SocialIcons.astro";
 import { MoveUpRight } from "lucide-react";
 
 interface Link {
@@ -13,9 +13,13 @@ interface Link {
 }
 const links: Link[] = [
   {
-    name: "Guide",
-    href: "/guides/example",
-    slug: "/guides",
+    name: "Docs",
+    href: "/docs/getting-started",
+    slug: "/docs",
+  },
+  {
+    name: "Commands",
+    href: "/commands",
   },
   {
     name: "Status",
