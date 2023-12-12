@@ -11,7 +11,7 @@ Do you want to start using csmos for your Discord server? Well this is the guide
 
 ## Invite csmos
 
-Let's add csmos to your Discord server! First, go to [csmos.space/invite](https://csmos.space/invite). This should lead you to a page like this:
+Let's add csmos to your Discord server! First, go to [csmos.space/invite](/invite). This should lead you to a page like this:
 
 ![Select a server](/getting-started/invite-1.png)
 
