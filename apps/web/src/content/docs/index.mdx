@@ -24,6 +24,7 @@ hero:
 ---
 
 import { Card, CardGrid } from "@astrojs/starlight/components";
+import CardMouseMoveScript from "../../components/CardMouseMoveScript";
 
 <CardGrid stagger>
   <Card title="Easy to setup" icon="rocket">
@@ -46,3 +47,5 @@ import { Card, CardGrid } from "@astrojs/starlight/components";
     of it and see what's running behind the scenes.
   </Card>
 </CardGrid>
+
+<CardMouseMoveScript client:only />
