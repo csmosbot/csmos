@@ -91,6 +91,42 @@ header.header {
   filter: drop-shadow(0 0 3rem var(--overlay-blurple));
 }
 
+[data-has-hero] .card {
+  border-radius: 12px;
+  position: relative;
+  background: radial-gradient(
+      300px circle at top left,
+      rgba(232, 121, 249, 0.081) 20%,
+      transparent 100%
+    ),
+    radial-gradient(
+      300px circle at bottom right,
+      rgba(232, 121, 249, 0.081) 20%,
+      transparent 100%
+    );
+}
+
+[data-has-hero] .card::before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  border-radius: inherit;
+  transition: opacity 400ms ease 0s;
+  will-change: background, opacity;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(232, 121, 249, 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+[data-has-hero] .card:hover::before {
+  opacity: 1;
+}
+
 .action.primary {
   @apply border border-accent-700 bg-accent-400/50 text-black hover:bg-accent-500/50 dark:border-accent-500 dark:bg-accent-950 dark:text-white dark:hover:bg-accent-900/80;
 }
