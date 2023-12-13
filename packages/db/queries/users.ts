@@ -6,7 +6,6 @@ export async function getUser(userId: string, guildId: string) {
   const user = await db.query.users.findFirst({
     where: and(eq(users.id, userId), eq(users.guildId, guildId)),
   });
-  console.log(user);
   if (user) return user;
 
   try {

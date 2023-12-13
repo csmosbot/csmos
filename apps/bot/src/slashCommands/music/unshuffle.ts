@@ -84,7 +84,6 @@ export default new SlashCommand({
         embeds: [
           new DangerEmbed().setDescription(
             `The queue in this server has never been shuffled. Try using \`${await getPrefix(
-              client,
               interaction.guild.id
             )}shuffle\` instead.`
           ),

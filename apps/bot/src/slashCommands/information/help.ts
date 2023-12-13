@@ -46,7 +46,7 @@ export default new SlashCommand({
           ephemeral: true,
         });
 
-      const prefix = await getPrefix(client, interaction.guild.id);
+      const prefix = await getPrefix(interaction.guild.id);
 
       const embed = new Embed().setTitle(`${prefix}${command.name}`);
 
