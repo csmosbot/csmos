@@ -1,7 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { Embed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
-import { db } from "@csmos/db";
+import { getUser } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -14,20 +14,10 @@ export default new SlashCommand({
         .setDescription("The user to view the statistics of.")
         .setRequired(false)
     ),
-  run: async ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const member = interaction.options.getMember("user") ?? interaction.member;
 
-    const data = await db.user.upsert({
-      where: {
-        id: member.id,
-        guildId: interaction.guild.id,
-      },
-      create: {
-        id: member.id,
-        guildId: interaction.guild.id,
-      },
-      update: {},
-    });
+    const data = await getUser(member.id, interaction.guild.id);
     interaction.reply({
       embeds: [
         new Embed()
@@ -40,7 +30,6 @@ export default new SlashCommand({
               name: "Leveling",
               value: [
                 `You can also view these statistics by running \`${await getPrefix(
-                  client,
                   interaction.guild.id
                 )}rank\`.`,
                 `• **XP**: ${data.xp}`,

@@ -77,7 +77,6 @@ export default new Command({
         embeds: [
           new DangerEmbed().setDescription(
             `The queue in this server has never been shuffled. Try using \`${await getPrefix(
-              client,
               message.guild.id
             )}shuffle\` instead.`
           ),

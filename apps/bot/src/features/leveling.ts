@@ -1,7 +1,7 @@
 import type { BotClient } from "@/structures/client";
 import { config } from "@/utils/config";
 import { calculateLevelXp } from "@/utils/leveling";
-import { db } from "@csmos/db";
+import { getUser, updateUser } from "@csmos/db";
 import { EmbedBuilder } from "discord.js";
 
 const xpCooldowns = new Set<string>();
@@ -17,27 +17,15 @@ export default (client: BotClient<true>) => {
     )
       return;
 
-    const xpToGive = random(5, 15);
+    const user = await getUser(message.author.id, message.guild.id);
+    let xp = user.xp;
 
-    try {
-      await db.user.update({
-        where: { id: message.author.id, guildId: message.guild.id },
-        data: {
-          xp: {
-            increment: xpToGive,
-          },
-        },
-      });
-    } catch {
-      await db.user.update({
-        where: { id: message.author.id, guildId: message.guild.id },
-        data: {
-          xp: {
-            increment: xpToGive,
-          },
-        },
-      });
-    }
+    const xpToGive = random(5, 15);
+    xp += xpToGive;
+
+    await updateUser(message.author.id, message.guild.id, {
+      xp,
+    });
 
     xpCooldowns.add(`${message.guild.id}-${message.author.id}`);
     setTimeout(
@@ -45,24 +33,10 @@ export default (client: BotClient<true>) => {
       30_000
     );
 
-    const user = (await db.user.findFirst({
-      where: {
-        id: message.author.id,
-        guildId: message.guild.id,
-      },
-    }))!;
-    if (user.xp > calculateLevelXp(user.level)) {
-      await db.user.update({
-        where: {
-          id: message.author.id,
-          guildId: message.guild.id,
-        },
-        data: {
-          xp: 0,
-          level: {
-            increment: 1,
-          },
-        },
+    if (xp > calculateLevelXp(user.level || 0)) {
+      await updateUser(message.author.id, message.guild.id, {
+        xp: 0,
+        level: user.level + 1,
       });
 
       message.reply({
@@ -71,7 +45,7 @@ export default (client: BotClient<true>) => {
             .setTitle("🎉 Congratulations!")
             .setDescription(
               `You've just leveled up to level **${(
-                user.level + 1
+                (user.level || 0) + 1
               ).toLocaleString()}**!`
             )
             .setColor(config.colors.primary),

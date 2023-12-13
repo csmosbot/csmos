@@ -1,16 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+export * from "./db";
+export * from "./schema";
 
-export * from "@prisma/client";
-
-const globalForPrisma = globalThis as { prisma?: PrismaClient };
-
-export const db =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
-  });
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+export * from "./queries/afks";
+export * from "./queries/guild";
+export * from "./queries/users";
+export * from "./queries/warnings";

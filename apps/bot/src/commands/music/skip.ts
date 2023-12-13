@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { getGuild, updateGuild } from "@csmos/db";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
@@ -72,9 +72,7 @@ export default new Command({
         ],
       });
 
-    const guild = await db.guild.findFirst({
-      where: { id: message.guild.id },
-    });
+    const guild = await getGuild(message.guild.id);
     if (guild && guild.nowPlayingMessage)
       queue
         .textChannel!.messages.fetch(guild.nowPlayingMessage)
@@ -89,13 +87,8 @@ export default new Command({
             ],
             components: [],
           });
-          await db.guild.update({
-            where: {
-              id: message.guild.id,
-            },
-            data: {
-              nowPlayingMessage: null,
-            },
+          await updateGuild(message.guild.id, {
+            nowPlayingMessage: null,
           });
         })
         .catch(() => null);

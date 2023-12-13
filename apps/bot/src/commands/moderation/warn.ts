@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { createWarning } from "@csmos/db";
 
 export default new Command({
   name: "warn",
@@ -46,12 +46,11 @@ export default new Command({
 
     const reason = args.slice(1).join(" ") || "No reason specified";
 
-    await db.warning.create({
-      data: {
-        userId: member.id,
-        moderatorId: message.author.id,
-        reason,
-      },
+    await createWarning({
+      userId: member.id,
+      moderatorId: message.author.id,
+      guildId: message.guild.id,
+      reason,
     });
 
     message.channel.send({

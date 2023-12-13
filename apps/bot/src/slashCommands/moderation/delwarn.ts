@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { deleteWarning, getWarning } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -17,13 +17,7 @@ export default new SlashCommand({
   run: async ({ interaction }) => {
     const id = interaction.options.getString("id", true);
 
-    if (
-      !(await db.warning.findFirst({
-        where: {
-          id,
-        },
-      }))
-    )
+    if (!(await getWarning(id)))
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
@@ -33,11 +27,7 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    await db.warning.delete({
-      where: {
-        id,
-      },
-    });
+    await deleteWarning(id);
 
     interaction.reply({
       embeds: [new SuccessEmbed().setDescription(`Removed warn **${id}**.`)],

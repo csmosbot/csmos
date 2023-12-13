@@ -1,5 +1,5 @@
 import type { BotClient } from "@/structures/client";
-import { db } from "@csmos/db";
+import { getGuild, updateGuild } from "@csmos/db";
 import { SoundCloudPlugin } from "@distube/soundcloud";
 import { SpotifyPlugin } from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
@@ -70,15 +70,7 @@ export function createPlayer(client: BotClient) {
   });
 
   player.on("initQueue", async (queue) => {
-    const data = await db.guild.upsert({
-      where: {
-        id: queue.id,
-      },
-      create: {
-        id: queue.id,
-      },
-      update: {},
-    });
+    const data = await getGuild(queue.id);
     queue.setVolume(data.defaultVolume);
   });
 
@@ -89,17 +81,8 @@ export function createPlayer(client: BotClient) {
     const nowPlayingMessage = await queue
       .textChannel!.send(recieveQueueData(queue, track))
       .then(async (msg) => {
-        await db.guild.upsert({
-          where: {
-            id: queue.id,
-          },
-          create: {
-            id: queue.id,
-            nowPlayingMessage: msg.id,
-          },
-          update: {
-            nowPlayingMessage: msg.id,
-          },
+        await updateGuild(queue.id, {
+          nowPlayingMessage: msg.id,
         });
         return msg;
       });
@@ -215,13 +198,8 @@ export function createPlayer(client: BotClient) {
               ],
               components: [],
             });
-            await db.guild.update({
-              where: {
-                id: queue.id,
-              },
-              data: {
-                nowPlayingMessage: null,
-              },
+            await updateGuild(queue.id, {
+              nowPlayingMessage: null,
             });
             i.reply({
               embeds: [
@@ -281,13 +259,8 @@ export function createPlayer(client: BotClient) {
               ],
               components: [],
             });
-            await db.guild.update({
-              where: {
-                id: queue.id,
-              },
-              data: {
-                nowPlayingMessage: null,
-              },
+            await updateGuild(queue.id, {
+              nowPlayingMessage: null,
             });
             i.reply({
               embeds: [
@@ -310,13 +283,8 @@ export function createPlayer(client: BotClient) {
               ],
               components: [],
             });
-            await db.guild.update({
-              where: {
-                id: queue.id,
-              },
-              data: {
-                nowPlayingMessage: null,
-              },
+            await updateGuild(queue.id, {
+              nowPlayingMessage: null,
             });
             i.reply({
               embeds: [new SuccessEmbed().setDescription("Stopped the queue.")],
@@ -597,7 +565,7 @@ export function createPlayer(client: BotClient) {
   player.on("finishSong", async (queue) => {
     if (songEditInterval) clearInterval(songEditInterval);
 
-    const guild = await db.guild.findFirst({ where: { id: queue.id } });
+    const guild = await getGuild(queue.id);
     if (!guild || !guild.nowPlayingMessage) return;
 
     queue
@@ -611,13 +579,8 @@ export function createPlayer(client: BotClient) {
           ],
           components: [],
         });
-        await db.guild.update({
-          where: {
-            id: queue.id,
-          },
-          data: {
-            nowPlayingMessage: null,
-          },
+        await updateGuild(queue.id, {
+          nowPlayingMessage: null,
         });
       });
   });

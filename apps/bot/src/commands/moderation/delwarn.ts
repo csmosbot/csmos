@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { deleteWarning, getWarning } from "@csmos/db";
 
 export default new Command({
   name: "delwarn",
@@ -23,13 +23,7 @@ export default new Command({
         ],
       });
 
-    if (
-      !(await db.warning.findFirst({
-        where: {
-          id,
-        },
-      }))
-    )
+    if (!(await getWarning(id)))
       return message.channel.send({
         embeds: [
           new DangerEmbed().setDescription(
@@ -38,11 +32,7 @@ export default new Command({
         ],
       });
 
-    await db.warning.delete({
-      where: {
-        id,
-      },
-    });
+    await deleteWarning(id);
 
     message.channel.send({
       embeds: [new SuccessEmbed().setDescription(`Removed warn **${id}**.`)],

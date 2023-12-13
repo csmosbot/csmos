@@ -76,7 +76,6 @@ export default new Command({
         embeds: [
           new DangerEmbed().setDescription(
             `The current song is not paused. Try using \`${await getPrefix(
-              client,
               message.guild.id
             )}pause\` instead.`
           ),

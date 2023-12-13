@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { getGuild, updateGuild } from "@csmos/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -79,9 +79,7 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    const guild = await db.guild.findFirst({
-      where: { id: interaction.guild.id },
-    });
+    const guild = await getGuild(interaction.guild.id);
     if (guild && guild.nowPlayingMessage)
       queue
         .textChannel!.messages.fetch(guild.nowPlayingMessage)
@@ -96,13 +94,8 @@ export default new SlashCommand({
             ],
             components: [],
           });
-          await db.guild.update({
-            where: {
-              id: interaction.guild.id,
-            },
-            data: {
-              nowPlayingMessage: null,
-            },
+          await updateGuild(interaction.guild.id, {
+            nowPlayingMessage: null,
           });
         })
         .catch(() => null);
