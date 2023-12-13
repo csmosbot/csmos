@@ -7,7 +7,7 @@
 </p>
 
 <div align="center">
-  <a href="https://csmos.space">Home</a> | <a href="https://csmos.space/guides/example">Docs</a>
+  <a href="https://csmos.space">Home</a> | <a href="https://csmos.space/docs">Docs</a>
 </div>
 
 ## Table of Contents
