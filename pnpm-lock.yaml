@@ -47,6 +47,9 @@ importers:
       distube:
         specifier: ^4.1.1
         version: 4.1.1(@discordjs/opus@0.9.0)(@discordjs/voice@0.16.1)(discord.js@14.14.1)(ffmpeg-static@5.2.0)
+      dotenv-cli:
+        specifier: ^7.3.0
+        version: 7.3.0
       ffmpeg-static:
         specifier: ^5.2.0
         version: 5.2.0
@@ -81,9 +84,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.13.1
         version: 6.13.2(eslint@8.55.0)(typescript@5.3.3)
-      dotenv-cli:
-        specifier: ^7.3.0
-        version: 7.3.0
       eslint:
         specifier: ^8.54.0
         version: 8.55.0
@@ -4184,17 +4184,14 @@ packages:
       dotenv: 16.3.1
       dotenv-expand: 10.0.0
       minimist: 1.2.8
-    dev: true
 
   /dotenv-expand@10.0.0:
     resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
     engines: {node: '>=12'}
-    dev: true
 
   /dotenv@16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: true
 
   /dreamopt@0.8.0:
     resolution: {integrity: sha512-vyJTp8+mC+G+5dfgsY+r3ckxlz+QMX40VjPQsZc5gxVAxLmi64TBoVkP54A/pRAXMXsbu2GMMBrZPxNv23waMg==}
