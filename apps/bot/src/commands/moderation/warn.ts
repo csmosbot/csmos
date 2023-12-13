@@ -7,6 +7,12 @@ export default new Command({
   description: "Warn a user in this server.",
   userPermissions: ["ModerateMembers"],
   usage: "warn <user> [reason]",
+  examples: [
+    {
+      example: "warn @ToastedToast breaking the rules",
+      description: "warn @ToastedToast for the reason 'breaking the rules'",
+    },
+  ],
   run: async ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

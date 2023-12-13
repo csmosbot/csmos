@@ -4,10 +4,17 @@ import ms from "ms";
 
 export default new Command({
   name: "mute",
-  description: "Mute a user from this server.",
+  description: "Mute a user from a server.",
   aliases: ["timeout"],
   userPermissions: ["ModerateMembers"],
   usage: "mute <user> <time> [reason]",
+  examples: [
+    {
+      example: "mute @ToastedToast 1m breaking the rules",
+      description:
+        "mute @ToastedToast for 1 minute for the reason 'breaking the rules'",
+    },
+  ],
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

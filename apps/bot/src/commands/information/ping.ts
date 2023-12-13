@@ -4,7 +4,12 @@ import { Embed } from "@/utils/embed";
 
 export default new Command({
   name: "ping",
-  description: "Pings the bot.",
+  description: "Pings csmos.",
+  examples: [
+    {
+      description: "ping csmos",
+    },
+  ],
   run: async ({ client, message }) => {
     const res = await message.channel.send({
       embeds: [

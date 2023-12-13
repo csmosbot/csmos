@@ -18,8 +18,16 @@ export interface CommandOptions {
   name: string;
   description?: string;
   aliases?: string[];
-  usage?: string;
+  usage?: string | string[];
+  examples?: {
+    example?: string;
+    description: string;
+  }[];
   userPermissions?: PermissionResolvable[];
+  /**
+   * @deprecated **NOT RECOMMENDED**, only used for custom permissions in the documentation. Use `userPermissions` instead.
+   */
+  permissions?: string[];
   run: ({
     client,
     message,

@@ -7,6 +7,12 @@ export default new Command({
   name: "rewind",
   description: "Goes backwards in the current song.",
   usage: "rewind <time>",
+  examples: [
+    {
+      example: "rewind 10s",
+      description: "rewind 10 seconds in the current song",
+    },
+  ],
   run: async ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

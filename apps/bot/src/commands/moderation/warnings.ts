@@ -8,6 +8,7 @@ export default new Command({
   description: "View all warnings of a user.",
   aliases: ["warns"],
   usage: "warnings [user]",
+  permissions: ["Moderate Members (to view other users' warnings)"],
   run: async ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

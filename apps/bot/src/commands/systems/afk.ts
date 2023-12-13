@@ -6,7 +6,17 @@ import { db } from "@csmos/db";
 export default new Command({
   name: "afk",
   description: "Set or remove your AFK status.",
-  usage: 'afk <reason | "reset">',
+  usage: ["afk <reason>", "afk reset"],
+  examples: [
+    {
+      example: "afk eating",
+      description: "set your afk status to 'eating'",
+    },
+    {
+      example: "afk reset",
+      description: "reset your afk status",
+    },
+  ],
   run: async ({ client, message, args }) => {
     const reasonOrSubcommand = args.join(" ") ?? "No reason specified.";
     const data = await db.afk.findFirst({

@@ -3,9 +3,15 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 
 export default new Command({
   name: "kick",
-  description: "Kick a user from this server.",
+  description: "Kick a user from a server.",
   userPermissions: ["KickMembers"],
   usage: "kick <user> [reason]",
+  examples: [
+    {
+      example: "kick @ToastedToast breaking the rules",
+      description: "kick @ToastedToast for the reason 'breaking the rules'",
+    },
+  ],
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

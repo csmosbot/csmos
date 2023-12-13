@@ -8,6 +8,12 @@ export default new Command({
   aliases: ["deletewarn", "delete-warn", "removewarn", "remove-warn", "rmwarn"],
   userPermissions: ["ModerateMembers"],
   usage: "delwarn <warn ID>",
+  examples: [
+    {
+      example: "delwarn cjld2cjxh0000qzrmn831i7rn",
+      description: "delete the warn with ID 'cjld2cjxh0000qzrmn831i7rn'",
+    },
+  ],
   run: async ({ message, args }) => {
     const id = args[0];
     if (!id)

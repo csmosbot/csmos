@@ -7,6 +7,20 @@ export default new Command({
   description: "Update the slowmode for a channel.",
   userPermissions: ["ManageChannels"],
   usage: "slowmode <slowmode length | 0>",
+  examples: [
+    {
+      example: "slowmode 0",
+      description: "disable the slowmode in the channel you're in",
+    },
+    {
+      example: "slowmode 10s",
+      description: "change the slowmode to 10 seconds in the chanenl you're in",
+    },
+    {
+      example: "slowmode 5m #general",
+      description: "change the slowmode to 5 minutes in #general",
+    },
+  ],
   run: ({ message, args }) => {
     const length = args[0];
     if (!length)

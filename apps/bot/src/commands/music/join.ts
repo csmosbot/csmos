@@ -4,7 +4,12 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
   name: "join",
-  description: "Make me join your voice channel.",
+  description: "Connect csmos to your voice channel.",
+  examples: [
+    {
+      description: "connect csmos to your voice channel",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -6,6 +6,12 @@ export default new Command({
   name: "volume",
   description: "Change the volume of the current song.",
   usage: "volume <new volume percentage>",
+  examples: [
+    {
+      example: "volume 50",
+      description: "set the volume to 50%",
+    },
+  ],
   run: ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

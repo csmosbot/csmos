@@ -13,6 +13,11 @@ export default new Command({
   name: "queue",
   description: "View the queue for this server.",
   aliases: ["q", "list"],
+  examples: [
+    {
+      description: "view the queue",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

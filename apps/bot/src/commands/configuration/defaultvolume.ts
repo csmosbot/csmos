@@ -4,9 +4,15 @@ import { db } from "@csmos/db";
 
 export default new Command({
   name: "defaultvolume",
-  description: "Update the default volume for this server.",
+  description: "Update the default volume for a server.",
   aliases: ["default-volume"],
   usage: "defaultvolume <new volume percentage>",
+  examples: [
+    {
+      example: "defaultvolume 50",
+      description: "set the default volume to 50%",
+    },
+  ],
   run: async ({ message, args }) => {
     if (!args[0])
       return message.channel.send({
