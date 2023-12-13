@@ -4,9 +4,15 @@ import { db } from "@csmos/db";
 
 export default new Command({
   name: "prefix",
-  description: "Update the prefix for this server.",
+  description: "Update the prefix for a server.",
   userPermissions: ["ManageGuild"],
   usage: "prefix <new prefix>",
+  examples: [
+    {
+      example: "prefix ?",
+      description: "set the prefix to '?'",
+    },
+  ],
   run: async ({ message, args }) => {
     const prefix = args[0];
     if (!prefix)

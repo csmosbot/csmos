@@ -6,6 +6,11 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "stop",
   description: "Stop the queue in this server.",
+  examples: [
+    {
+      description: "stop the queue",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -1,20 +1,11 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
+import { emojis, permissions } from "@/utils/help";
 import { getPrefix } from "@/utils/prefix";
-import {
-  PermissionsBitField,
-  SlashCommandBuilder,
-  type APIEmbedField,
-} from "discord.js";
+import { SlashCommandBuilder, type APIEmbedField } from "discord.js";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 const sortAlphabetically = (a: string, b: string) => a.localeCompare(b);
-const emojis = {
-  configuration: "⚙️",
-  moderation: "⚒️",
-  music: "🎵",
-  information: "ℹ️",
-} as const;
 
 export default new SlashCommand({
   data: new SlashCommandBuilder()
@@ -55,11 +46,25 @@ export default new SlashCommand({
           ephemeral: true,
         });
 
-      const embed = new Embed().setTitle(
-        `${getPrefix(client, interaction.guild.id)}${command.name}`
-      );
+      const prefix = await getPrefix(client, interaction.guild.id);
+
+      const embed = new Embed().setTitle(`${prefix}${command.name}`);
 
       if (command.description) embed.setDescription(command.description);
+      if (command.usage)
+        embed.addFields({
+          name: "Usage",
+          value:
+            typeof command.usage === "string"
+              ? `${prefix}${command.usage}`
+              : command.usage.map((usage) => `${prefix}${usage}`).join("\n"),
+        });
+
+      if (command.examples)
+        embed.addFields({
+          name: "Examples",
+          value: command.examples.map((example) => example.example).join("\n"),
+        });
       if (command.aliases)
         embed.addFields({
           name: "Aliases",
@@ -68,20 +73,12 @@ export default new SlashCommand({
             .map((alias) => `\`${alias}\``)
             .join(", "),
         });
-      if (command.usage)
-        embed.addFields({
-          name: "Usage",
-          value: `${await getPrefix(client, interaction.guild.id)}${
-            command.usage
-          }`,
-        });
       if (command.userPermissions)
         embed.addFields({
-          name: "Required permissions",
-          value: new PermissionsBitField(command.userPermissions)
-            .toArray()
-            .sort(sortAlphabetically)
-            .map((x) => `\`${x}\``)
+          name: "Required Permissions",
+          value: command.userPermissions
+            .sort(sortAlphabetically as any)
+            .map((x) => `\`${permissions[x as keyof typeof permissions]}\``)
             .join(", "),
         });
 

@@ -7,6 +7,13 @@ export default new Command({
   description: "Play a song in your voice channel.",
   aliases: ["p"],
   usage: "play <search query>",
+  examples: [
+    {
+      example: "play fly me to the moon",
+      description:
+        "search for a song with the title of 'fly me to the moon' and play it",
+    },
+  ],
   run: async ({ client, message, args }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

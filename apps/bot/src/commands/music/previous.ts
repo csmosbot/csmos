@@ -5,7 +5,12 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
   name: "previous",
-  description: "Skip to the previous song that played in this server.",
+  description: "Skip to the previous song that played in a server.",
+  examples: [
+    {
+      description: "skip to the previous song",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

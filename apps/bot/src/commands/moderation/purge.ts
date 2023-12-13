@@ -4,9 +4,15 @@ import ms from "ms";
 
 export default new Command({
   name: "purge",
-  description: "Purge a number of messages from this channel.",
+  description: "Purge a number of messages from the channel you're in.",
   userPermissions: ["ManageMessages"],
   usage: "purge <number of messages>",
+  examples: [
+    {
+      example: "purge 10",
+      description: "purge 10 messages in the channel you're in",
+    },
+  ],
   run: async ({ message, args }) => {
     if (!args[0])
       return message.channel.send({

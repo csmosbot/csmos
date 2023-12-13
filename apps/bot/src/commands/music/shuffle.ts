@@ -5,6 +5,11 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "shuffle",
   description: "Shuffles the queue around in this server.",
+  examples: [
+    {
+      description: "shuffle the queue",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -6,6 +6,11 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "resume",
   description: "Resume the current song.",
+  examples: [
+    {
+      description: "resume the current song",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -1,21 +1,26 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
+import { emojis, permissions } from "@/utils/help";
 import { getPrefix } from "@/utils/prefix";
-import { PermissionsBitField, type APIEmbedField } from "discord.js";
+import { type APIEmbedField } from "discord.js";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 const sortAlphabetically = (a: string, b: string) => a.localeCompare(b);
-const emojis = {
-  configuration: "⚙️",
-  moderation: "⚒️",
-  music: "🎵",
-  information: "ℹ️",
-} as const;
 
 export default new Command({
   name: "help",
-  description: "View information about all my commands.",
-  usage: "help <command>",
+  description: "View information about all of csmos' commands.",
+  usage: ["help", "help <command>"],
+  examples: [
+    {
+      example: "help",
+      description: "view a list of all commands",
+    },
+    {
+      example: "help play",
+      description: "view information about the command 'play'",
+    },
+  ],
   run: async ({ client, message, args }) => {
     const cmd = args[0]?.toLowerCase();
     if (cmd) {
@@ -31,11 +36,25 @@ export default new Command({
           ],
         });
 
-      const embed = new Embed().setTitle(
-        `${await getPrefix(client, message.guild.id)}${command.name}`
-      );
+      const prefix = await getPrefix(client, message.guild.id);
+
+      const embed = new Embed().setTitle(`${prefix}${command.name}`);
 
       if (command.description) embed.setDescription(command.description);
+      if (command.usage)
+        embed.addFields({
+          name: "Usage",
+          value:
+            typeof command.usage === "string"
+              ? `${prefix}${command.usage}`
+              : command.usage.map((usage) => `${prefix}${usage}`).join("\n"),
+        });
+
+      if (command.examples)
+        embed.addFields({
+          name: "Examples",
+          value: command.examples.map((example) => example.example).join("\n"),
+        });
       if (command.aliases)
         embed.addFields({
           name: "Aliases",
@@ -44,18 +63,12 @@ export default new Command({
             .map((alias) => `\`${alias}\``)
             .join(", "),
         });
-      if (command.usage)
-        embed.addFields({
-          name: "Usage",
-          value: `${await getPrefix(client, message.guild.id)}${command.usage}`,
-        });
       if (command.userPermissions)
         embed.addFields({
-          name: "Required permissions",
-          value: new PermissionsBitField(command.userPermissions)
-            .toArray()
-            .sort(sortAlphabetically)
-            .map((x) => `\`${x}\``)
+          name: "Required Permissions",
+          value: command.userPermissions
+            .sort(sortAlphabetically as any)
+            .map((x) => `\`${permissions[x as keyof typeof permissions]}\``)
             .join(", "),
         });
 

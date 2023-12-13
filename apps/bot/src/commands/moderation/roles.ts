@@ -4,8 +4,19 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 export default new Command({
   name: "roles",
   description: "Add or remove roles from a user.",
+  aliases: ["role"],
   userPermissions: ["ManageRoles"],
-  usage: "roles <add | remove> <role> [user]",
+  usage: ["roles add <role> [user]", "roles remove <role> [user]"],
+  examples: [
+    {
+      example: "roles add @Astronaut",
+      description: "add the @Astronaut role to yourself",
+    },
+    {
+      example: "roles remove @Astronaunt @ToastedToast",
+      description: "remove the @Astronaut role from @ToastedToast",
+    },
+  ],
   run: async ({ message, args }) => {
     const subcommand = args[0];
     if (!subcommand)

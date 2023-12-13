@@ -5,7 +5,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
   name: "nowplaying",
-  description: "View the currently playing song in this server.",
+  description: "View the currently playing song in a server.",
   aliases: [
     "np",
     "playing",
@@ -13,6 +13,11 @@ export default new Command({
     "currentlyplaying",
     "currently-playing",
     "current",
+  ],
+  examples: [
+    {
+      description: "view the currently playing song",
+    },
   ],
   run: ({ client, message }) => {
     const { channel } = message.member.voice;

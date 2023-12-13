@@ -6,6 +6,11 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 export default new Command({
   name: "skip",
   description: "Skips the current song.",
+  examples: [
+    {
+      description: "skip the current song",
+    },
+  ],
   run: async ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -4,7 +4,12 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
 export default new Command({
   name: "leave",
-  description: "Make me leave your voice channel.",
+  description: "Disconnect csmos from your voice channel.",
+  examples: [
+    {
+      description: "disconnect csmos from your voice channel",
+    },
+  ],
   run: ({ client, message }) => {
     const { channel } = message.member.voice;
     const me = message.guild.members.me!;

@@ -3,9 +3,15 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 
 export default new Command({
   name: "ban",
-  description: "Ban a user from this server.",
+  description: "Ban a user from a server.",
   userPermissions: ["BanMembers"],
   usage: "ban <user> [reason]",
+  examples: [
+    {
+      example: "ban @ToastedToast breaking the rules",
+      description: "ban @ToastedToast for the reason 'breaking the rules'",
+    },
+  ],
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

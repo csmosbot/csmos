@@ -7,7 +7,16 @@ export default new Command({
   name: "stats",
   description: "View a user's statistics.",
   aliases: ["statistics"],
-  usage: "stats [user]",
+  usage: ["stats", "stats <user>"],
+  examples: [
+    {
+      description: "view your own stats",
+    },
+    {
+      example: "stats @ToastedToast",
+      description: "view @ToastedToast's stats",
+    },
+  ],
   run: async ({ client, message, args }) => {
     const member =
       message.mentions.members.first() ||

@@ -7,6 +7,12 @@ export default new Command({
   aliases: ["untimeout", "removetimeout", "remove-timeout", "rmtimeout"],
   userPermissions: ["ModerateMembers"],
   usage: "unmute <user> [reason]",
+  examples: [
+    {
+      example: "unmute @ToastedToast wrong user",
+      description: "unmute @ToastedToast for the reason 'wrong user'",
+    },
+  ],
   run: ({ message, args }) => {
     const member =
       message.mentions.members.first() ||

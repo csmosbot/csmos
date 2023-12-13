@@ -17,9 +17,19 @@ const types = {
 
 export default new Command({
   name: "leaderboard",
-  description: "View the top 10 users in this server.",
+  description: "View the top 10 users in a server.",
   aliases: ["lb"],
-  usage: "leaderboard <xp | messages>",
+  usage: ["leaderboard xp", "leaderboard message"],
+  examples: [
+    {
+      example: "leaderboard xp",
+      description: "view the xp leaderboard",
+    },
+    {
+      example: "leaderboard message",
+      description: "view the message leaderboard",
+    },
+  ],
   run: async ({ client, message, args }) => {
     let subcommand = args[0] ?? "xp";
     if (!["xp", "messages"].includes(subcommand))
