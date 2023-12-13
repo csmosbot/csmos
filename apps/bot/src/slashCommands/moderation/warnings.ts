@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { getWarnings } from "@csmos/db";
 import { SlashCommandBuilder, time } from "discord.js";
 
 export default new SlashCommand({
@@ -25,20 +25,7 @@ export default new SlashCommand({
         ephemeral: true,
       });
 
-    const { warnings } = await db.user.upsert({
-      where: {
-        id: interaction.user.id,
-        guildId: interaction.guild.id,
-      },
-      create: {
-        id: interaction.user.id,
-        guildId: interaction.guild.id,
-      },
-      update: {},
-      include: {
-        warnings: true,
-      },
-    });
+    const warnings = await getWarnings(member.id, interaction.guild.id);
 
     if (!warnings.length)
       return interaction.reply({

@@ -1,8 +1,3 @@
-import { config } from "dotenv";
-config({
-  path: "../../.env",
-});
-
 import { z } from "zod";
 
 const envVariables = z.object({

@@ -1,7 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
-import { db } from "@csmos/db";
+import { createAfk, deleteAfk, getAfk } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -22,13 +22,9 @@ export default new SlashCommand({
     .addSubcommand((subcommand) =>
       subcommand.setName("remove").setDescription("Remove your AFK status.")
     ),
-  run: async ({ client, interaction }) => {
+  run: async ({ interaction }) => {
     const subcommand = interaction.options.getSubcommand();
-    const data = await db.afk.findFirst({
-      where: {
-        userId: interaction.user.id,
-      },
-    });
+    const data = await getAfk(interaction.user.id, interaction.guild.id);
 
     switch (subcommand) {
       case "set":
@@ -38,7 +34,6 @@ export default new SlashCommand({
               embeds: [
                 new DangerEmbed().setDescription(
                   `You are already AFK. Try using \`${await getPrefix(
-                    client,
                     interaction.guild.id
                   )}afk reset\` instead.`
                 ),
@@ -48,11 +43,10 @@ export default new SlashCommand({
 
           const reason = interaction.options.getString("reason");
 
-          await db.afk.create({
-            data: {
-              userId: interaction.user.id,
-              reason,
-            },
+          await createAfk({
+            userId: interaction.user.id,
+            guildId: interaction.guild.id,
+            reason,
           });
 
           interaction.reply({
@@ -68,7 +62,6 @@ export default new SlashCommand({
               embeds: [
                 new DangerEmbed().setDescription(
                   `You are not currently AFK. Try using \`${await getPrefix(
-                    client,
                     interaction.guild.id
                   )}afk <reason>\` instead.`
                 ),
@@ -76,11 +69,7 @@ export default new SlashCommand({
               ephemeral: true,
             });
 
-          await db.afk.delete({
-            where: {
-              id: data.id,
-            },
-          });
+          await deleteAfk(data.id);
 
           interaction.reply({
             embeds: [

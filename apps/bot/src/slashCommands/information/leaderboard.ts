@@ -1,7 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { Embed } from "@/utils/embed";
 import { calculateLevelXp } from "@/utils/leveling";
-import { db } from "@csmos/db";
+import { getUsers } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 const types = {
@@ -40,13 +40,7 @@ export default new SlashCommand({
           .setTitle(`${types[subcommand as keyof typeof types]} Leaderboard`)
           .setDescription(
             await Promise.all(
-              (
-                await db.user.findMany({
-                  where: {
-                    id: interaction.guild.id,
-                  },
-                })
-              )
+              (await getUsers(interaction.guild.id))
                 .sort((a, z) =>
                   subcommand === "xp"
                     ? calculateLevelXp(z.level) +

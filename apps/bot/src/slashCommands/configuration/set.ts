@@ -1,7 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { config } from "@/utils/config";
 import { SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { updateGuild } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -44,15 +44,8 @@ export default new SlashCommand({
         {
           const prefix = interaction.options.getString("prefix", true);
 
-          await db.guild.upsert({
-            where: {
-              id: interaction.guild.id,
-            },
-            create: {
-              id: interaction.guild.id,
-              prefix,
-            },
-            update: { prefix },
+          await updateGuild(interaction.guild.id, {
+            prefix,
           });
 
           interaction.reply({
@@ -71,15 +64,8 @@ export default new SlashCommand({
         {
           const volume = interaction.options.getNumber("volume", true);
 
-          await db.guild.upsert({
-            where: {
-              id: interaction.guild.id,
-            },
-            create: {
-              id: interaction.guild.id,
-              defaultVolume: volume,
-            },
-            update: { defaultVolume: volume },
+          await updateGuild(interaction.guild.id, {
+            defaultVolume: volume,
           });
 
           interaction.reply({

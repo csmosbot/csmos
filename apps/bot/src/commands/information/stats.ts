@@ -1,7 +1,7 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
-import { db } from "@csmos/db";
+import { getUser } from "@csmos/db";
 
 export default new Command({
   name: "stats",
@@ -17,23 +17,13 @@ export default new Command({
       description: "view @ToastedToast's stats",
     },
   ],
-  run: async ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     const member =
       message.mentions.members.first() ||
       message.guild.members.cache.get(args[0]) ||
       message.member;
 
-    const data = await db.user.upsert({
-      where: {
-        id: member.id,
-        guildId: message.guild.id,
-      },
-      create: {
-        id: member.id,
-        guildId: message.guild.id,
-      },
-      update: {},
-    });
+    const data = await getUser(member.id, message.guild.id);
     message.channel.send({
       embeds: [
         new Embed()
@@ -46,7 +36,6 @@ export default new Command({
               name: "Leveling",
               value: [
                 `You can also view these statistics by running \`${await getPrefix(
-                  client,
                   message.guild.id
                 )}rank\`.`,
                 `• **XP**: ${data.xp}`,

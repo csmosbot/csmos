@@ -83,7 +83,6 @@ export default new SlashCommand({
         embeds: [
           new DangerEmbed().setDescription(
             `The current song is not paused. Try using \`${await getPrefix(
-              client,
               interaction.guild.id
             )}pause\` instead.`
           ),

@@ -1,6 +1,6 @@
 import type { BotClient } from "@/structures/client";
 import { Embed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { deleteAfk, getAfk } from "@csmos/db";
 import { time } from "discord.js";
 
 export default (client: BotClient<true>) => {
@@ -9,11 +9,7 @@ export default (client: BotClient<true>) => {
     const mentioned = message.mentions.members.first();
 
     if (mentioned) {
-      const data = await db.afk.findFirst({
-        where: {
-          userId: mentioned.id,
-        },
-      });
+      const data = await getAfk(mentioned.id, message.guild.id);
       if (!data || new Date().getTime() - data.createdAt.getTime() <= 30 * 1000)
         return;
 
@@ -33,17 +29,9 @@ export default (client: BotClient<true>) => {
       });
     }
 
-    const data = await db.afk.findFirst({
-      where: {
-        userId: message.author.id,
-      },
-    });
+    const data = await getAfk(message.author.id, message.guild.id);
     if (data) {
-      await db.afk.delete({
-        where: {
-          id: data.id,
-        },
-      });
+      await deleteAfk(data.id);
 
       message.channel.send({
         embeds: [

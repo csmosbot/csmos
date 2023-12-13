@@ -1,7 +1,7 @@
 import { SlashCommand } from "@/structures/command";
 import { config } from "@/utils/config";
 import { calculateLevelXp } from "@/utils/leveling";
-import { db } from "@csmos/db";
+import { getUser, getUsers } from "@csmos/db";
 import { Rank } from "@nottca/canvacord";
 import { AttachmentBuilder, SlashCommandBuilder } from "discord.js";
 
@@ -26,24 +26,8 @@ export default new SlashCommand({
   run: async ({ interaction }) => {
     const member = interaction.options.getMember("user") ?? interaction.member!;
 
-    const data = await db.user.upsert({
-      where: {
-        id: member.id,
-        guildId: interaction.guild.id,
-      },
-      create: {
-        id: member.id,
-        guildId: interaction.guild.id,
-      },
-      update: {},
-    });
-    const rank = (
-      await db.user.findMany({
-        where: {
-          guildId: interaction.guild.id,
-        },
-      })
-    )
+    const data = await getUser(member.id, interaction.guild.id);
+    const rank = (await getUsers(interaction.guild.id))
       .sort(
         (a, z) =>
           calculateLevelXp(z.level) + z.xp - (calculateLevelXp(a.level) + a.xp)

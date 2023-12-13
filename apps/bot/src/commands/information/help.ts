@@ -36,7 +36,7 @@ export default new Command({
           ],
         });
 
-      const prefix = await getPrefix(client, message.guild.id);
+      const prefix = await getPrefix(message.guild.id);
 
       const embed = new Embed().setTitle(`${prefix}${command.name}`);
 

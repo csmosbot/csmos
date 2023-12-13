@@ -1,7 +1,7 @@
 import type { ExtendedMessage } from "@/structures/command";
 import { Event } from "@/structures/event";
 import { config } from "@/utils/config";
-import { db } from "@csmos/db";
+import { getPrefix } from "@/utils/prefix";
 import { EmbedBuilder } from "discord.js";
 
 function escapeRegex(str: string) {
@@ -17,18 +17,7 @@ export default new Event({
   run: async (client, message) => {
     if (!message.inGuild() || message.author.bot) return;
 
-    const prefix =
-      (
-        await db.guild.upsert({
-          where: {
-            id: message.guild.id,
-          },
-          create: {
-            id: message.guild.id,
-          },
-          update: {},
-        })
-      ).prefix ?? config.prefix;
+    const prefix = await getPrefix(message.guild.id);
     const prefixRegex = new RegExp(
       `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
     );

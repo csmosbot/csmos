@@ -1,6 +1,6 @@
 import { SlashCommand } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { createWarning } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new SlashCommand({
@@ -57,12 +57,11 @@ export default new SlashCommand({
     const reason =
       interaction.options.getString("reason") || "No reason specified.";
 
-    await db.warning.create({
-      data: {
-        userId: member.id,
-        moderatorId: interaction.user.id,
-        reason,
-      },
+    await createWarning({
+      userId: member.id,
+      moderatorId: interaction.user.id,
+      guildId: interaction.guild.id,
+      reason,
     });
 
     interaction.reply({

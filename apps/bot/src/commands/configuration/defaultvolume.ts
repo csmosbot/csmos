@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { updateGuild } from "@csmos/db";
 
 export default new Command({
   name: "defaultvolume",
@@ -49,15 +49,8 @@ export default new Command({
         ],
       });
 
-    await db.guild.upsert({
-      where: {
-        id: message.guild.id,
-      },
-      create: {
-        id: message.guild.id,
-        defaultVolume: volume,
-      },
-      update: { defaultVolume: volume },
+    await updateGuild(message.guild.id, {
+      defaultVolume: volume,
     });
 
     message.channel.send({

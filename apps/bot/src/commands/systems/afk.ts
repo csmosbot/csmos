@@ -1,7 +1,7 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
-import { db } from "@csmos/db";
+import { createAfk, deleteAfk, getAfk } from "@csmos/db";
 
 export default new Command({
   name: "afk",
@@ -17,13 +17,9 @@ export default new Command({
       description: "reset your afk status",
     },
   ],
-  run: async ({ client, message, args }) => {
+  run: async ({ message, args }) => {
     const reasonOrSubcommand = args.join(" ") ?? "No reason specified.";
-    const data = await db.afk.findFirst({
-      where: {
-        userId: message.author.id,
-      },
-    });
+    const data = await getAfk(message.author.id, message.guild.id);
 
     switch (reasonOrSubcommand) {
       default:
@@ -33,18 +29,16 @@ export default new Command({
               embeds: [
                 new DangerEmbed().setDescription(
                   `You are already AFK. Try using \`${await getPrefix(
-                    client,
                     message.guild.id
                   )}afk reset\` instead.`
                 ),
               ],
             });
 
-          await db.afk.create({
-            data: {
-              userId: message.author.id,
-              reason: reasonOrSubcommand,
-            },
+          await createAfk({
+            userId: message.author.id,
+            guildId: message.guild.id,
+            reason: reasonOrSubcommand,
           });
 
           message.channel.send({
@@ -59,18 +53,13 @@ export default new Command({
               embeds: [
                 new DangerEmbed().setDescription(
                   `You are not currently AFK. Try using \`${await getPrefix(
-                    client,
                     message.guild.id
                   )}afk <reason>\` instead.`
                 ),
               ],
             });
 
-          await db.afk.delete({
-            where: {
-              id: data.id,
-            },
-          });
+          await deleteAfk(data.id);
 
           message.channel.send({
             embeds: [

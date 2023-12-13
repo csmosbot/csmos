@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
-import { db } from "@csmos/db";
+import { getWarnings } from "@csmos/db";
 import { time } from "discord.js";
 
 export default new Command({
@@ -26,20 +26,7 @@ export default new Command({
         ],
       });
 
-    const { warnings } = await db.user.upsert({
-      where: {
-        id: message.author.id,
-        guildId: message.guild.id,
-      },
-      create: {
-        id: message.author.id,
-        guildId: message.guild.id,
-      },
-      update: {},
-      include: {
-        warnings: true,
-      },
-    });
+    const warnings = await getWarnings(member.id, message.guild.id);
 
     if (!warnings.length)
       return message.channel.send({
