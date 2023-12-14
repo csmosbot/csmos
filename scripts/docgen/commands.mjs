@@ -22,7 +22,7 @@ const permissions = {
   ManageGuildExpressions: "Manage Expressions",
   ManageMessages: "Manage Messages",
   ManageNicknames: "Manage Nicknames",
-  ManageROles: "Manage Roles",
+  ManageRoles: "Manage Roles",
   ManageThreads: "Manage Threads",
   MentionEveryone: "Mention @everyone, @here, and All Roles",
   ModerateMembers: "Moderate Members",
