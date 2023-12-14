@@ -34,4 +34,4 @@ Add or remove roles from a user.
 Learn more about permissions in [Discord's FAQ](https://support.discord.com/hc/en-us/articles/206029707-Setting-Up-Permissions-FAQ).
 :::
 
-- undefined
+- Manage Roles
