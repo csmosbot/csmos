@@ -22,6 +22,15 @@ export async function getGuild(guildId: string) {
   }
 }
 
+export async function createGuild(guildId: string) {
+  await db
+    .insert(guilds)
+    .values({
+      id: guildId,
+    })
+    .onConflictDoNothing();
+}
+
 export async function updateGuild(
   guildId: string,
   data: Omit<typeof guilds.$inferInsert, "id">
