@@ -42,7 +42,9 @@ jobs:
         with:
           branch: ci/docgen-commands
           token: ${{ secrets.BOT_TOKEN }}
-          add-paths: apps/web/src/content/docs/commands/*.md
+          add-paths: |
+            apps/web/src/content/docs/commands/*.md
+            apps/web/command-categories.mjs
           commit-message: "ci: update command docs"
           author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
           title: "ci: update command docs"
