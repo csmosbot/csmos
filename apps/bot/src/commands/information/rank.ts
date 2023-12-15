@@ -4,6 +4,8 @@ import { calculateLevelXp } from "@/utils/leveling";
 import { getUser, getUsers } from "@csmos/db";
 import { Rank } from "@nottca/canvacord";
 import { AttachmentBuilder } from "discord.js";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 const statuses = {
   online: "online",
@@ -57,7 +59,12 @@ export default new Command({
       .setLevel(data.level)
       .setRank(rank)
       .setStatus(statuses[member.presence!.status])
-      .setProgressBar(config.colors.primary as string, "COLOR");
+      .setProgressBar(config.colors.primary as string, "COLOR")
+      .setProgressBarTrack("#820077")
+      .setBackground(
+        "IMAGE",
+        readFileSync(join(__dirname, "../../../../../assets/rankcard.jpg"))
+      );
 
     const image = await card.build();
 
