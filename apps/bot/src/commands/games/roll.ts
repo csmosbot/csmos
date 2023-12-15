@@ -4,7 +4,7 @@ import { random } from "@/utils/random";
 
 export default new Command({
   name: "roll",
-  description: "Roll a dice",
+  description: "Roll a dice.",
   aliases: ["dice", "rolladice", "roll-a-dice"],
   examples: [
     {
