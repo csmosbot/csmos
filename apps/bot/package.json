@@ -24,6 +24,7 @@
     "@distube/spotify": "^1.5.1",
     "@distube/yt-dlp": "^1.1.3",
     "@nottca/canvacord": "^5.4.11",
+    "discord-gamecord": "^4.4.1",
     "discord.js": "^14.14.1",
     "distube": "^4.1.1",
     "dotenv-cli": "^7.3.0",
