@@ -10,6 +10,20 @@ export const categories = [
     }
   },
   {
+    "label": "Fun",
+    "collapsed": true,
+    "autogenerate": {
+      "directory": "commands/fun"
+    }
+  },
+  {
+    "label": "Games",
+    "collapsed": true,
+    "autogenerate": {
+      "directory": "commands/games"
+    }
+  },
+  {
     "label": "Information",
     "collapsed": true,
     "autogenerate": {
