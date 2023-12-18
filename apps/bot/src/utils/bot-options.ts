@@ -18,4 +18,10 @@ export const botOptions: ClientOptions = {
       },
     ],
   },
+  allowedMentions: {
+    parse: [],
+    roles: [],
+    users: [],
+    repliedUser: true,
+  },
 };
