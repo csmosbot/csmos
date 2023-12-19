@@ -1,8 +1,11 @@
 export const emojis = {
   configuration: "⚙️",
+  fun: "🤣",
+  games: "🎮",
+  information: "ℹ️",
   moderation: "⚒️",
   music: "🎵",
-  information: "ℹ️",
+  systems: "📠",
 } as const;
 
 export const permissions = {
