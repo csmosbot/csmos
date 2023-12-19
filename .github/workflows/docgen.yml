@@ -28,7 +28,7 @@ jobs:
         id: createpr
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: ci/docgen-commands
+          branch: docgen/commands
           token: ${{ secrets.BOT_TOKEN }}
           add-paths: |
             apps/web/src/content/docs/commands/*.md
