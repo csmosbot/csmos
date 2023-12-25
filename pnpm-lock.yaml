@@ -124,8 +124,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1
       '@astrojs/react':
-        specifier: ^3.0.7
-        version: 3.0.7(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.10)
+        specifier: ^3.0.8
+        version: 3.0.8(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.10)
       '@astrojs/starlight':
         specifier: ^0.15.1
         version: 0.15.1(astro@4.0.7)
@@ -409,8 +409,8 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/react@3.0.7(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.10):
-    resolution: {integrity: sha512-MpjuFw7YGta44OaQExKVCWyXjujUtUsp5Nst/wIjRHbkmBBlypdj+MF9/xqjsYM+vjcrByOGupmluRrFQO67YQ==}
+  /@astrojs/react@3.0.8(@types/react-dom@18.2.17)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.10):
+    resolution: {integrity: sha512-EiIWgiRmw4rAxl2+AUK9VBdKvQrOgG/33dTeP+CX3iPzvlx51deaaHwlJIqEQCIIc6qgaIrXEhsJh8NyG9mxJQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       '@types/react': ^17.0.50 || ^18.0.21
