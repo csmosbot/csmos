@@ -11,13 +11,13 @@
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
-    "drizzle-orm": "^0.29.1",
+    "drizzle-orm": "^0.29.2",
     "postgres": "^3.4.3"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.10.5",
     "dotenv-cli": "^7.3.0",
-    "drizzle-kit": "^0.20.6",
+    "drizzle-kit": "^0.20.8",
     "pg": "^8.11.3",
     "typescript": "^5.3.3"
   }
