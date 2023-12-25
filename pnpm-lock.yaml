@@ -131,10 +131,10 @@ importers:
         version: 0.15.1(astro@4.0.7)
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.1
-        version: 2.0.1(@astrojs/starlight@0.15.1)(@astrojs/tailwind@5.0.3)(tailwindcss@3.3.6)
+        version: 2.0.1(@astrojs/starlight@0.15.1)(@astrojs/tailwind@5.0.4)(tailwindcss@3.3.6)
       '@astrojs/tailwind':
-        specifier: ^5.0.3
-        version: 5.0.3(astro@4.0.7)(tailwindcss@3.3.6)
+        specifier: ^5.0.4
+        version: 5.0.4(astro@4.0.7)(tailwindcss@3.3.6)
       '@fontsource-variable/inter':
         specifier: ^5.0.16
         version: 5.0.16
@@ -436,7 +436,7 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@astrojs/starlight-tailwind@2.0.1(@astrojs/starlight@0.15.1)(@astrojs/tailwind@5.0.3)(tailwindcss@3.3.6):
+  /@astrojs/starlight-tailwind@2.0.1(@astrojs/starlight@0.15.1)(@astrojs/tailwind@5.0.4)(tailwindcss@3.3.6):
     resolution: {integrity: sha512-niMgFcR7NHcsBVy8UAN3F2gqhmoN5v83st5Hu4YzvUL+6SNwjQmIipXppXdN9+iVneRjPr6PLGzDfI+wnjSBWQ==}
     peerDependencies:
       '@astrojs/starlight': '>=0.9.0'
@@ -444,7 +444,7 @@ packages:
       tailwindcss: ^3.3.3
     dependencies:
       '@astrojs/starlight': 0.15.1(astro@4.0.7)
-      '@astrojs/tailwind': 5.0.3(astro@4.0.7)(tailwindcss@3.3.6)
+      '@astrojs/tailwind': 5.0.4(astro@4.0.7)(tailwindcss@3.3.6)
       tailwindcss: 3.3.6
     dev: false
 
@@ -476,8 +476,8 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/tailwind@5.0.3(astro@4.0.7)(tailwindcss@3.3.6):
-    resolution: {integrity: sha512-p+uFa1PNuV8RxhGkPUFgVq8CUbmS3xr0u5k1An2xKECLotRh7vsrGcPUijHvYOt42URohcg8rIq0CxNoVMhReg==}
+  /@astrojs/tailwind@5.0.4(astro@4.0.7)(tailwindcss@3.3.6):
+    resolution: {integrity: sha512-50ImfEFRBjndtWus6xJOWQ4EVpZWB4d+hieosMPm1Tca68mNTX+Yi1/PhTMk9q/w7iZPIUK/KGBoovo15O10eQ==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
