@@ -1,4 +1,4 @@
-import type { ColorResolvable } from "discord.js";
+import type { ColorResolvable, PresenceStatus } from "discord.js";
 import { existsSync, readFileSync } from "fs";
 import { parse } from "yaml";
 
@@ -6,7 +6,27 @@ interface Config {
   prefix: string;
   guildID: string | false;
   colors: Record<"primary" | "success" | "danger", ColorResolvable>;
-  emotes: Record<"previous" | "next", string> & {
+  emotes: {
+    previous: string;
+    next: string;
+    statuses: Record<PresenceStatus, string>;
+    badges: Record<
+      | "activeDeveloper"
+      | "bugHunterLevel1"
+      | "bugHunterLevel2"
+      | "discordPartner"
+      | "discordStaff"
+      | "earlySupporter"
+      | "hypeSquadBalance"
+      | "hypeSquadBravery"
+      | "hypeSquadBrilliance"
+      | "hypeSquadEvents"
+      | "moderatorProgramAlumni"
+      | "nitro"
+      | "serverBooster"
+      | "verifiedDeveloper",
+      string
+    >;
     player: Record<
       | "previous"
       | "pause"
