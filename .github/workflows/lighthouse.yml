@@ -31,7 +31,7 @@ jobs:
         id: loading_comment_to_pr
         uses: marocchino/sticky-pull-request-comment@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           number: ${{ github.event.issue.number }}
           header: lighthouse
           message: |
