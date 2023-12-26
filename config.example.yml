@@ -28,6 +28,28 @@ emotes:
   previous: "<:previous_song:994440947863658516>"
   # Next emoji, usually used for responses with pages.
   next: "<:next_song:994440946030739486>"
+  # These emojis are used to represent user statuses.
+  statuses:
+    online: "<:online:1189177633708195871>"
+    idle: "<:idle:1189177478300831865>"
+    dnd: "<:dnd:1189177504053870642>"
+    offline: "<:offline:1189177529282605137>"
+  # These emojis are used to represent user badges.
+  badges:
+    activeDeveloper: "<:ACTIVE_DEVELOPER:1189162716041060434>"
+    bugHunterLevel1: "<:BUGHUNTER_LEVEL_1:1189161933354573895>"
+    bugHunterLevel2: "<:BUGHUNTER_LEVEL_2:1189161938127691808>"
+    discordPartner: "<:DISCORD_PARTNER:1189162807699189760>"
+    discordStaff: "<:DISCORD_EMPLOYEE:1189161941667684452>"
+    earlySupporter: "<:EARLY_SUPPORTER:1189161904560685127>"
+    hypeSquadBalance: "<:HOUSE_BALANCE:1189161906221625375>"
+    hypeSquadBravery: "<:HOUSE_BRAVERY:1189161910508212244>"
+    hypeSquadBrilliance: "<:HOUSE_BRILLIANCE:1189161913809125448>"
+    hypeSquadEvents: "<:HYPESQUAD_EVENTS:1189161917265235989>"
+    moderatorProgramAlumni: "<:MODERATOR_PROGRAM_ALUMNI:1189162558343630878>"
+    nitro: "<:NITRO:1189161919496593460>"
+    serverBooster: "<:SERVER_BOOSTER:1189161923250495508>"
+    verifiedDeveloper: "<:VERIFIED_DEVELOPER:1189161928719867935>"
   # These emojis are used in the music system.
   player:
     previous: "<:previous_song:994440947863658516>"
