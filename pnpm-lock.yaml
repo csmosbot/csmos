@@ -33,8 +33,8 @@ importers:
         specifier: ^1.3.3
         version: 1.3.3(distube@4.1.1)
       '@distube/spotify':
-        specifier: ^1.5.1
-        version: 1.5.1(distube@4.1.1)
+        specifier: ^1.5.2
+        version: 1.5.2(distube@4.1.1)
       '@distube/yt-dlp':
         specifier: ^1.1.3
         version: 1.1.3(distube@4.1.1)
@@ -2153,16 +2153,16 @@ packages:
       soundcloud.ts: 0.5.2
     dev: false
 
-  /@distube/spotify@1.5.1(distube@4.1.1):
-    resolution: {integrity: sha512-89S2LaTefn88BoOs4Cy6mRC7mIgGjzc0d9/GKbyyDnWG7APSjC7JevJAC+R207btIl/+o/JozGeroIllJx1s3g==}
+  /@distube/spotify@1.5.2(distube@4.1.1):
+    resolution: {integrity: sha512-RJN4ttKZb/nfYSJmSX4A5rKO52cD2laPHCFY8Pj/u3QY58xOO81fQhEIlfVgN8iexxYkzGNJBY7ySRopBV5Mig==}
     peerDependencies:
       distube: ^3.3.1||4
     dependencies:
       distube: 4.1.1(@discordjs/opus@0.9.0)(@discordjs/voice@0.16.1)(discord.js@14.14.1)(ffmpeg-static@5.2.0)
-      spotify-uri: 3.0.4
-      spotify-url-info: 3.2.9
+      spotify-uri: 4.0.1
+      spotify-url-info: 3.2.10
       spotify-web-api-node: 5.0.2
-      undici: 5.28.2
+      undici: 6.2.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -11290,22 +11290,17 @@ packages:
       through: 2.3.8
     dev: false
 
-  /spotify-uri@3.0.4:
-    resolution: {integrity: sha512-wtofZNzMjPXR1KD2/gw8F/7ng1QwxpfFbrVgcRaAh0oSJ6ZGC5ln+IBptIRuti1dYGOxJqEIvDc88ctLvTSWiQ==}
+  /spotify-uri@4.0.1:
+    resolution: {integrity: sha512-dEt8UN5fSsZpcPk8HOEHkv29U71kefKjcYt2dopsShrkIZhXtDXe9Xse4xq0GW6831LnEZFry5mpzm1HV/TNLw==}
     engines: {node: '>= 16'}
     dev: false
 
-  /spotify-uri@4.0.0:
-    resolution: {integrity: sha512-ZAJKcnfx73glWG+3SCDRvW4nkVMzA2hqZwJtSDZ/o87EoGawh/CZ8YkqZIoVcLkg94suicEa/ZOiBFSz1MJ6Pg==}
-    engines: {node: '>= 16'}
-    dev: false
-
-  /spotify-url-info@3.2.9:
-    resolution: {integrity: sha512-e/hXlXMecNKtxQLLr2MOoQD3m8VVTru+L0zQk5oTMvXhRrnIGK1JFSUqay7GNyEn8dQgBpwH/lZ5aJ3uzoU0Cw==}
+  /spotify-url-info@3.2.10:
+    resolution: {integrity: sha512-xQBjzkRwoZE7UzMoGr2XPFcd3TMVccF8Kjqo8dDJFfDiilkdYo69ovVBcUMMObndo3zgzTmTxrFOM0jJjDI2Gw==}
     engines: {node: '>= 12'}
     dependencies:
       himalaya: 1.1.0
-      spotify-uri: 4.0.0
+      spotify-uri: 4.0.1
     dev: false
 
   /spotify-web-api-node@5.0.2:
@@ -12037,6 +12032,13 @@ packages:
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.1.0
+
+  /undici@6.2.1:
+    resolution: {integrity: sha512-7Wa9thEM6/LMnnKtxJHlc8SrTlDmxqJecgz1iy8KlsN0/iskQXOQCuPkrZLXbElPaSw5slFFyKIKXyJ3UtbApw==}
+    engines: {node: '>=18.0'}
+    dependencies:
+      '@fastify/busboy': 2.1.0
+    dev: false
 
   /unherit@3.0.1:
     resolution: {integrity: sha512-akOOQ/Yln8a2sgcLj4U0Jmx0R5jpIg2IUyRrWOzmEbjBtGzBdHtSeFKgoEcoH4KYIG/Pb8GQ/BwtYm0GCq1Sqg==}
