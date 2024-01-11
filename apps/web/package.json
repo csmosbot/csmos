@@ -24,7 +24,7 @@
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "astro": "^4.1.1",
-    "lucide-react": "^0.303.0",
+    "lucide-react": "^0.309.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rehype-autolink-headings": "^7.1.0",
