@@ -81,8 +81,9 @@ export default new Command({
         const emoji = `${
           activity.emoji
             ? activity.emoji?.id
-              ? `<${activity.emoji?.animated ? "a" : ""}:${activity.emoji
-                  ?.name}:${activity.emoji?.id}>`
+              ? `<${activity.emoji?.animated ? "a" : ""}:${
+                  activity.emoji?.name
+                }:${activity.emoji?.id}>`
               : activity.emoji?.name
             : ""
         }`;

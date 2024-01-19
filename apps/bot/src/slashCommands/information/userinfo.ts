@@ -74,8 +74,9 @@ export default new SlashCommand({
         const emoji = `${
           activity.emoji
             ? activity.emoji?.id
-              ? `<${activity.emoji?.animated ? "a" : ""}:${activity.emoji
-                  ?.name}:${activity.emoji?.id}>`
+              ? `<${activity.emoji?.animated ? "a" : ""}:${
+                  activity.emoji?.name
+                }:${activity.emoji?.id}>`
               : activity.emoji?.name
             : ""
         }`;
