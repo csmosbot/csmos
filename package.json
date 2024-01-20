@@ -10,7 +10,7 @@
     "db:generate": "turbo db:generate",
     "db:studio": "turbo db:studio",
     "db:push": "turbo db:push",
-    "docgen:commands": "node ./scripts/docgen/commands.mjs"
+    "docgen:commands": "node ./scripts/docgen/commands.js"
   },
   "keywords": [],
   "author": "Cosmotic Labs",
