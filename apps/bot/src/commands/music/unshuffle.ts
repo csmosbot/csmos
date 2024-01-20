@@ -1,6 +1,5 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { getPrefix } from "@/utils/prefix";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -83,9 +82,7 @@ export default new Command({
       return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
-            `The queue in this server has never been shuffled. Try using \`${await getPrefix(
-              interaction.guild.id
-            )}shuffle\` instead.`
+            "The queue in this server has never been shuffled. Try using `/shuffle` instead."
           ),
         ],
         ephemeral: true,

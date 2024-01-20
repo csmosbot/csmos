@@ -1,6 +1,5 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { getPrefix } from "@/utils/prefix";
 import { createAfk, deleteAfk, getAfk } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
@@ -33,9 +32,7 @@ export default new Command({
             return interaction.reply({
               embeds: [
                 new DangerEmbed().setDescription(
-                  `You are already AFK. Try using \`${await getPrefix(
-                    interaction.guild.id
-                  )}afk reset\` instead.`
+                  "You are already AFK. Try using `/afk reset` instead."
                 ),
               ],
               ephemeral: true,
@@ -61,9 +58,7 @@ export default new Command({
             return interaction.reply({
               embeds: [
                 new DangerEmbed().setDescription(
-                  `You are not currently AFK. Try using \`${await getPrefix(
-                    interaction.guild.id
-                  )}afk <reason>\` instead.`
+                  "You are not currently AFK. Try using `/afk <reason>` instead."
                 ),
               ],
               ephemeral: true,

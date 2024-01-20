@@ -3,7 +3,6 @@ import { existsSync, readFileSync } from "fs";
 import { parse } from "yaml";
 
 interface Config {
-  prefix: string;
   guildID: string | false;
   colors: Record<"primary" | "success" | "danger", ColorResolvable>;
   emotes: {

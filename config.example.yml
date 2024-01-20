@@ -1,7 +1,3 @@
-# Prefix for message commands.
-# Default is ";".
-prefix: ";"
-
 # Guild ID for deploying slash commands.
 # If set to false (or this is not defined), slash commands will be deployed globally.
 # If set to a guild ID string, slash commands will be deployed to that guild ID>
