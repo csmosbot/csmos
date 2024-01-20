@@ -127,11 +127,11 @@ importers:
         specifier: ^3.0.9
         version: 3.0.9(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)(vite@5.0.10)
       '@astrojs/starlight':
-        specifier: ^0.15.4
-        version: 0.15.4(astro@4.2.1)
+        specifier: ^0.16.0
+        version: 0.16.0(astro@4.2.1)
       '@astrojs/starlight-tailwind':
         specifier: ^2.0.1
-        version: 2.0.1(@astrojs/starlight@0.15.4)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1)
+        version: 2.0.1(@astrojs/starlight@0.16.0)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1)
       '@astrojs/tailwind':
         specifier: ^5.1.0
         version: 5.1.0(astro@4.2.1)(tailwindcss@3.4.1)
@@ -412,20 +412,20 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@astrojs/starlight-tailwind@2.0.1(@astrojs/starlight@0.15.4)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1):
+  /@astrojs/starlight-tailwind@2.0.1(@astrojs/starlight@0.16.0)(@astrojs/tailwind@5.1.0)(tailwindcss@3.4.1):
     resolution: {integrity: sha512-niMgFcR7NHcsBVy8UAN3F2gqhmoN5v83st5Hu4YzvUL+6SNwjQmIipXppXdN9+iVneRjPr6PLGzDfI+wnjSBWQ==}
     peerDependencies:
       '@astrojs/starlight': '>=0.9.0'
       '@astrojs/tailwind': ^5.0.0
       tailwindcss: ^3.3.3
     dependencies:
-      '@astrojs/starlight': 0.15.4(astro@4.2.1)
+      '@astrojs/starlight': 0.16.0(astro@4.2.1)
       '@astrojs/tailwind': 5.1.0(astro@4.2.1)(tailwindcss@3.4.1)
       tailwindcss: 3.4.1
     dev: false
 
-  /@astrojs/starlight@0.15.4(astro@4.2.1):
-    resolution: {integrity: sha512-o3heYH+RltsCsvO3L0qLnnFJEakwLSRoxW4wFX2zDeDWta9BIpdSOo7+Zg+sSn7k9RPOhI9SGvdFx67B53I18Q==}
+  /@astrojs/starlight@0.16.0(astro@4.2.1):
+    resolution: {integrity: sha512-zwSNiCqzZeiuivUp4Yhx+eMLGww8v8cRYoCYXg9myTXNUwphqPaVG3rp7dbaZ4y1MaejnjYWB444ZRItEgTDcQ==}
     peerDependencies:
       astro: ^4.0.0
     dependencies:
