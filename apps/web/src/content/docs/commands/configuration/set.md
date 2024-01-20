@@ -13,21 +13,10 @@ Update settings for this server.
 ## Usage
 
 ```sh
-/set prefix
 /set default-volume
 ```
 
 ## Subcommands
-
-### prefix
-
-Update the prefix for this server.
-
-#### Options
-
-|   Name   |           Description           | Required |
-| :------: | :-----------------------------: | :------: |
-| `prefix` | The new prefix for this server. |    Yes   |
 
 ### default-volume
 
