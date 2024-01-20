@@ -1,56 +1,64 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "roles",
-  description: "Add or remove roles from a user.",
-  aliases: ["role"],
-  userPermissions: ["ManageRoles"],
-  usage: ["roles add <role> [user]", "roles remove <role> [user]"],
-  examples: [
-    {
-      example: "roles add @Astronaut",
-      description: "add the @Astronaut role to yourself",
-    },
-    {
-      example: "roles remove @Astronaunt @ToastedToast",
-      description: "remove the @Astronaut role from @ToastedToast",
-    },
-  ],
-  run: async ({ message, args }) => {
-    const subcommand = args[0];
-    if (!subcommand)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "Subcommand must be specified. Subcommand can be either `add` or `remove`."
-          ),
-        ],
-      });
-    if (!["add", "remove"].includes(subcommand))
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "Invalid subcommand specified. Subcommand can be either `add` or `remove`."
-          ),
-        ],
-      });
+  data: new SlashCommandBuilder()
+    .setName("roles")
+    .setDescription("Add or remove roles from a user.")
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("add")
+        .setDescription("Add a role to a user.")
+        .addRoleOption((option) =>
+          option
+            .setName("role")
+            .setDescription("The role to add.")
+            .setRequired(true)
+        )
+        .addUserOption((option) =>
+          option
+            .setName("user")
+            .setDescription("The user to add the role to.")
+            .setRequired(false)
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("remove")
+        .setDescription("Remove a role from a user.")
+        .addRoleOption((option) =>
+          option
+            .setName("role")
+            .setDescription("The role to remove.")
+            .setRequired(true)
+        )
+        .addUserOption((option) =>
+          option
+            .setName("user")
+            .setDescription("The user to remove the role from.")
+            .setRequired(false)
+        )
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
+  run: async ({ interaction }) => {
+    const subcommand = interaction.options.getSubcommand();
 
-    const role =
-      message.mentions.roles.first() || message.guild.roles.cache.get(args[1]);
+    const role = interaction.options.getRole("role", true);
     if (!role)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `Role to be ${subcommand}ed must be specified.`
           ),
         ],
+        ephemeral: true,
       });
     if (
       role.managed ||
-      role.position >= message.guild.members.me!.roles.highest.position
+      role.position >= interaction.guild.members.me!.roles.highest.position
     )
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `I cannot ${subcommand} **${role.name}** ${
@@ -58,25 +66,24 @@ export default new Command({
             } users.`
           ),
         ],
+        ephemeral: true,
       });
 
-    const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[2]) ||
-      message.member;
+    const member = interaction.options.getMember("user") || interaction.member;
     if (
-      member.id !== message.member.id &&
-      member.roles.highest.position >= message.member.roles.highest.position
+      member.id !== interaction.member.id &&
+      member.roles.highest.position >= interaction.member.roles.highest.position
     )
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `**${member.user.username}** has a higher/equal role to yours.`
           ),
         ],
+        ephemeral: true,
       });
     if (!member.manageable)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `I cannot ${
@@ -84,6 +91,7 @@ export default new Command({
             } **${member.user.username}**.`
           ),
         ],
+        ephemeral: true,
       });
 
     await member.fetch();
@@ -92,12 +100,13 @@ export default new Command({
       case "add":
         {
           if (member.roles.cache.has(role.id))
-            return message.channel.send({
+            return interaction.reply({
               embeds: [
                 new DangerEmbed().setDescription(
                   `**${member.user.username}** already has the role **${role.name}**.`
                 ),
               ],
+              ephemeral: true,
             });
           await member.roles.add(role);
         }
@@ -105,19 +114,20 @@ export default new Command({
       case "remove":
         {
           if (!member.roles.cache.has(role.id))
-            return message.channel.send({
+            return interaction.reply({
               embeds: [
                 new DangerEmbed().setDescription(
                   `**${member.user.username}** does not have the role **${role.name}**.`
                 ),
               ],
+              ephemeral: true,
             });
           await member.roles.remove(role);
         }
         break;
     }
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new SuccessEmbed().setDescription(
           `**${role.name}** has been ${
@@ -125,6 +135,7 @@ export default new Command({
           } **${member.user.username}**.`
         ),
       ],
+      ephemeral: true,
     });
   },
 });

@@ -1,29 +1,26 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "membercount",
-  description: "View the amount of members in a server.",
-  examples: [
-    {
-      description: "view the amount of members in the server you're in",
-    },
-  ],
-  run: async ({ message }) => {
-    const members = message.guild.memberCount;
-    const users = message.guild.members.cache.filter(
+  data: new SlashCommandBuilder()
+    .setName("membercount")
+    .setDescription("View the amount of members in a server."),
+  run: async ({ interaction }) => {
+    const members = interaction.guild.memberCount;
+    const users = interaction.guild.members.cache.filter(
       (member) => !member.user.bot
     ).size;
-    const bots = message.guild.members.cache.filter(
+    const bots = interaction.guild.members.cache.filter(
       (member) => member.user.bot
     ).size;
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed()
           .setAuthor({
-            name: message.guild.name,
-            iconURL: message.guild.iconURL() ?? undefined,
+            name: interaction.guild.name,
+            iconURL: interaction.guild.iconURL() ?? undefined,
           })
           .addFields(
             {

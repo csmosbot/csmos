@@ -2,29 +2,23 @@ import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
 import { getUser } from "@csmos/db";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "stats",
-  description: "View a user's statistics.",
-  aliases: ["statistics"],
-  usage: ["stats", "stats <user>"],
-  examples: [
-    {
-      description: "view your own stats",
-    },
-    {
-      example: "stats @ToastedToast",
-      description: "view @ToastedToast's stats",
-    },
-  ],
-  run: async ({ message, args }) => {
-    const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+  data: new SlashCommandBuilder()
+    .setName("stats")
+    .setDescription("View a user's statistics.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to view the statistics of.")
+        .setRequired(false)
+    ),
+  run: async ({ interaction }) => {
+    const member = interaction.options.getMember("user") ?? interaction.member;
 
-    const data = await getUser(member.id, message.guild.id);
-    message.channel.send({
+    const data = await getUser(member.id, interaction.guild.id);
+    interaction.reply({
       embeds: [
         new Embed()
           .setAuthor({
@@ -36,7 +30,7 @@ export default new Command({
               name: "Leveling",
               value: [
                 `You can also view these statistics by running \`${await getPrefix(
-                  message.guild.id
+                  interaction.guild.id
                 )}rank\`.`,
                 `• **XP**: ${data.xp}`,
                 `• **Level**: ${data.level}`,

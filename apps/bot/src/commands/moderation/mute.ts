@@ -1,91 +1,103 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import ms from "ms";
 
 export default new Command({
-  name: "mute",
-  description: "Mute a user from a server.",
-  aliases: ["timeout"],
-  userPermissions: ["ModerateMembers"],
-  usage: "mute <user> <time> [reason]",
-  examples: [
-    {
-      example: "mute @ToastedToast 1m breaking the rules",
-      description:
-        "mute @ToastedToast for 1 minute for the reason 'breaking the rules'",
-    },
-  ],
-  run: ({ message, args }) => {
-    const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]);
+  data: new SlashCommandBuilder()
+    .setName("mute")
+    .setDescription("Mute a user from this server.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to mute.")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("length")
+        .setDescription("The length of time this user will be muted for.")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Why you are muting this user.")
+        .setRequired(false)
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
+  run: ({ interaction }) => {
+    const member = interaction.options.getMember("user");
     if (!member)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription("A member must be specified."),
         ],
+        ephemeral: true,
       });
-    if (member.id === message.member.id)
-      return message.channel.send({
+    if (member.id === interaction.member.id)
+      return interaction.reply({
         embeds: [new DangerEmbed().setDescription("You can't mute yourself.")],
+        ephemeral: true,
       });
-    if (member.roles.highest.position >= message.member.roles.highest.position)
-      return message.channel.send({
+    if (
+      member.roles.highest.position >= interaction.member.roles.highest.position
+    )
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `**${member.user.username}** has a higher/equal role to yours.`
           ),
         ],
+        ephemeral: true,
       });
     if (!member.moderatable)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `I cannot mute **${member.user.username}**.`
           ),
         ],
+        ephemeral: true,
       });
     if (member.isCommunicationDisabled())
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `**${member.user.username}** is already muted.`
           ),
         ],
+        ephemeral: true,
       });
 
-    const length = args[1];
-    if (!length)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription("A mute length must be specified."),
-        ],
-      });
-    if (!ms(length))
-      return message.channel.send({
+    const time = interaction.options.getString("length", true);
+    if (!ms(time))
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "The mute length you specified is invalid."
           ),
         ],
+        ephemeral: true,
       });
 
-    const reason = args.slice(2).join(" ") || "No reason specified.";
+    const reason =
+      interaction.options.getString("reason") || "No reason specified.";
 
     member
       .send({
         embeds: [
           new DangerEmbed()
-            .setTitle(`❌ You have been muted from ${message.guild.name}.`)
+            .setTitle(`❌ You have been muted from ${interaction.guild.name}.`)
             .setFields(
               {
                 name: "Muted by",
-                value: `${message.member} (${message.member.id})`,
+                value: `${interaction.member} (${interaction.member.id})`,
                 inline: true,
               },
               {
                 name: "Length",
-                value: ms(ms(length), { long: true }),
+                value: ms(ms(time), { long: true }),
                 inline: true,
               },
               {
@@ -98,14 +110,15 @@ export default new Command({
       })
       .catch(() => null);
 
-    member.timeout(ms(length), reason);
+    member.timeout(ms(time), reason);
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new SuccessEmbed().setDescription(
           `**${member.user.username}** has been muted from this server.`
         ),
       ],
+      ephemeral: true,
     });
   },
 });

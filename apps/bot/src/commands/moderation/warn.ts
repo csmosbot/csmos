@@ -1,75 +1,87 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { createWarning } from "@csmos/db";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "warn",
-  description: "Warn a user in this server.",
-  userPermissions: ["ModerateMembers"],
-  usage: "warn <user> [reason]",
-  examples: [
-    {
-      example: "warn @ToastedToast breaking the rules",
-      description: "warn @ToastedToast for the reason 'breaking the rules'",
-    },
-  ],
-  run: async ({ message, args }) => {
-    const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]);
+  data: new SlashCommandBuilder()
+    .setName("warn")
+    .setDescription("Warn a user in this server.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to warn.")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Why you are warning this user.")
+        .setRequired(false)
+    ),
+  run: async ({ interaction }) => {
+    const member = interaction.options.getMember("user");
     if (!member)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription("A member must be specified."),
         ],
+        ephemeral: true,
       });
-    if (member.id === message.member.id)
-      return message.channel.send({
+    if (member.id === interaction.member.id)
+      return interaction.reply({
         embeds: [new DangerEmbed().setDescription("You can't warn yourself.")],
+        ephemeral: true,
       });
-    if (member.roles.highest.position >= message.member.roles.highest.position)
-      return message.channel.send({
+    if (
+      member.roles.highest.position >= interaction.member.roles.highest.position
+    )
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `**${member.user.username}** has a higher/equal role to yours.`
           ),
         ],
+        ephemeral: true,
       });
     if (!member.moderatable)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `I cannot warn **${member.user.username}**.`
           ),
         ],
+        ephemeral: true,
       });
 
-    const reason = args.slice(1).join(" ") || "No reason specified";
+    const reason =
+      interaction.options.getString("reason") || "No reason specified.";
 
     await createWarning({
       userId: member.id,
-      moderatorId: message.author.id,
-      guildId: message.guild.id,
+      moderatorId: interaction.user.id,
+      guildId: interaction.guild.id,
       reason,
     });
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new SuccessEmbed().setDescription(
           `**${member.user.username}** has been warned in this server.`
         ),
       ],
+      ephemeral: true,
     });
 
     member
       .send({
         embeds: [
           new DangerEmbed()
-            .setTitle(`❌ You have been warned in ${message.guild.name}.`)
+            .setTitle(`❌ You have been warned in ${interaction.guild.name}.`)
             .setFields(
               {
                 name: "Warned by",
-                value: `${message.member} (${message.member.id})`,
+                value: `${interaction.member} (${interaction.member.id})`,
                 inline: true,
               },
               {

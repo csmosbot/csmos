@@ -1,35 +1,24 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
-import { DangerEmbed } from "@/utils/embed";
 import { RockPaperScissors } from "discord-gamecord";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "rockpaperscissors",
-  description: "Play a game of Rock Paper Scissors against someone.",
-  aliases: ["rps"],
-  usage: "rockpaperscissors <user>",
-  examples: [
-    {
-      example: "rockpaperscissors @ToastedToast",
-      description: "play rock paper scissors against @ToastedToast",
-    },
-  ],
-  run: ({ message, args }) => {
-    const member =
-      message.mentions.users.first() ||
-      message.guild.members.cache.get(args[0])?.user;
-    if (!member)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "The user to battle against must be specified."
-          ),
-        ],
-      });
+  data: new SlashCommandBuilder()
+    .setName("rockpaperscissors")
+    .setDescription("Play a game of Rock Paper Scissors against someone.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to play Rock Paper Scissors against.")
+        .setRequired(true)
+    ),
+  run: ({ interaction }) => {
+    const member = interaction.options.getUser("user");
 
     const Game = new RockPaperScissors({
-      message,
-      isSlashGame: false,
+      message: interaction,
+      isSlashGame: true,
       opponent: member,
       embed: {
         title: "Rock Paper Scissors",

@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
+import { SlashCommandBuilder } from "discord.js";
 
 function hexToRgb(hex: string) {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -59,17 +60,12 @@ function hexToHsl(hex: string) {
 }
 
 export default new Command({
-  name: "randomcolor",
-  description: "Get a random color.",
-  aliases: ["randomcolour", "randcolor", "randclr", "rclr"],
-  examples: [
-    {
-      description: "get a random color",
-    },
-  ],
-  run: ({ message }) => {
+  data: new SlashCommandBuilder()
+    .setName("randomcolor")
+    .setDescription("Get a random color."),
+  run: ({ interaction }) => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed()
           .setTitle("🎨 Random Color")

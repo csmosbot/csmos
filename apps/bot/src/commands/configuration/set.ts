@@ -1,10 +1,10 @@
-import { SlashCommand } from "@/structures/command";
+import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { SuccessEmbed } from "@/utils/embed";
 import { updateGuild } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
-export default new SlashCommand({
+export default new Command({
   data: new SlashCommandBuilder()
     .setName("set")
     .setDescription("Update settings for this server.")

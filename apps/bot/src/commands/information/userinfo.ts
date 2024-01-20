@@ -2,7 +2,7 @@ import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { Embed } from "@/utils/embed";
 import type { Activity } from "discord.js";
-import { ActivityType, UserFlags, time } from "discord.js";
+import { ActivityType, SlashCommandBuilder, UserFlags, time } from "discord.js";
 
 const statuses = {
   online: `${config.emotes.statuses.online} Online`,
@@ -49,24 +49,17 @@ const badges = {
 };
 
 export default new Command({
-  name: "userinfo",
-  description: "View information about a user.",
-  aliases: ["whois"],
-  usage: "userinfo [user]",
-  examples: [
-    {
-      description: "view information about you",
-    },
-    {
-      example: "userinfo @ToastedToast",
-      description: "view information about @ToastedToast",
-    },
-  ],
-  run: async ({ message, args }) => {
-    const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+  data: new SlashCommandBuilder()
+    .setName("userinfo")
+    .setDescription("View information about a user.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to view the information of.")
+        .setRequired(false)
+    ),
+  run: async ({ interaction }) => {
+    const member = interaction.options.getMember("user") ?? interaction.member;
 
     const activity = member.presence
       ? member.presence.activities[0]
@@ -95,7 +88,7 @@ export default new Command({
 
     const userFlags = (await member.user.fetchFlags()).toArray();
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed()
           .setAuthor({

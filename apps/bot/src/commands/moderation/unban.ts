@@ -1,49 +1,44 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "unban",
-  description: "Unban a user from this server.",
-  userPermissions: ["BanMembers"],
-  usage: "unban <user ID>",
-  examples: [
-    {
-      example: "unban 955408387905048637",
-      description: "unban the user with the ID of '955408387905048637'",
-    },
-  ],
-  run: async ({ message, args }) => {
-    if (!message.guild.members.me!.permissions.has("BanMembers"))
-      return message.channel.send({
+  data: new SlashCommandBuilder()
+    .setName("unban")
+    .setDescription("Unban a user from this server.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to unban.")
+        .setRequired(true)
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+  run: async ({ interaction }) => {
+    if (!interaction.guild.members.me!.permissions.has("BanMembers"))
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "I cannot unban users in this server."
           ),
         ],
+        ephemeral: true,
       });
 
-    const id = args[0];
-    if (!id)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "A user ID to unban must be specified."
-          ),
-        ],
-      });
+    const id = interaction.options.getUser("user", true).id;
 
-    const bans = await message.guild.bans.fetch();
+    const bans = await interaction.guild.bans.fetch();
     if (!bans.has(id))
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "The user ID specified is not banned in this server."
           ),
         ],
+        ephemeral: true,
       });
 
-    const user = await message.guild.members.unban(id);
-    message.channel.send({
+    const user = await interaction.guild.members.unban(id);
+    interaction.reply({
       embeds: [
         new SuccessEmbed().setDescription(
           `${
@@ -51,6 +46,7 @@ export default new Command({
           } has been unbanned from this server.`
         ),
       ],
+      ephemeral: true,
     });
   },
 });

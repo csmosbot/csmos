@@ -1,32 +1,38 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  SlashCommandBuilder,
+} from "discord.js";
 import ms from "ms";
 
 export default new Command({
-  name: "rewind",
-  description: "Goes backwards in the current song.",
-  usage: "rewind <time>",
-  examples: [
-    {
-      example: "rewind 10s",
-      description: "rewind 10 seconds in the current song",
-    },
-  ],
-  run: async ({ client, message, args }) => {
-    const { channel } = message.member.voice;
-    const me = message.guild.members.me!;
+  data: new SlashCommandBuilder()
+    .setName("rewind")
+    .setDescription("Goes backwards in the current song")
+    .addStringOption((option) =>
+      option
+        .setName("time")
+        .setDescription("The amount of time to skip forward to.")
+        .setRequired(true)
+    ),
+  run: async ({ client, interaction }) => {
+    const { channel } = interaction.member.voice;
+    const me = interaction.guild.members.me!;
 
     if (!channel)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "You need to be in a voice channel."
           ),
         ],
+        ephemeral: true,
       });
     if (me.voice.channel && me.voice.channel.id !== channel.id)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription("I am in another voice channel."),
         ],
@@ -36,82 +42,82 @@ export default new Command({
               .setStyle(ButtonStyle.Link)
               .setLabel("Show me!")
               .setURL(
-                `https://discord.com/channels/${message.guild.id}/${me.voice.channel.id}`
+                `https://discord.com/channels/${interaction.guild.id}/${me.voice.channel.id}`
               )
           ),
         ],
+        ephemeral: true,
       });
     if (!channel.members.has(me.id) && channel.userLimit !== 0 && channel.full)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription("Your voice channel is full."),
         ],
+        ephemeral: true,
       });
     if (!channel.permissionsFor(me).has("Connect"))
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "I do not have permission to connect to your voice channel."
           ),
         ],
+        ephemeral: true,
       });
     if (!channel.permissionsFor(me).has("Speak"))
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "I do not have permission to speak to your voice channel."
           ),
         ],
+        ephemeral: true,
       });
 
-    const queue = client.player.getQueue(message.guild.id);
+    const queue = client.player.getQueue(interaction.guild.id);
     if (!queue || !queue.songs || queue.songs.length === 0)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "No music is being played in this server."
           ),
         ],
+        ephemeral: true,
       });
 
-    if (!args[0])
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "The amount of time to rewind to must be specified."
-          ),
-        ],
-      });
-
-    let seekNumber = parseInt(args[0]);
-    if (isNaN(seekNumber)) seekNumber = ms(args[0]);
+    let seekNumber = parseInt(interaction.options.getString("time", true));
     if (isNaN(seekNumber))
-      return message.channel.send({
+      seekNumber = ms(interaction.options.getString("time", true));
+    if (isNaN(seekNumber))
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "The amount of time to rewind to must be a number."
           ),
         ],
+        ephemeral: true,
       });
 
     const seekTime = queue.currentTime - seekNumber;
     if (seekTime < 0 || seekTime >= queue.songs[0].duration - queue.currentTime)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "The amount of time to rewind to must be greater than the beginning of the current song."
           ),
         ],
+        ephemeral: true,
       });
 
     queue.seek(seekTime);
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new SuccessEmbed().setDescription(
           `Rewinded to **${queue.formattedCurrentTime}**.`
         ),
       ],
+      ephemeral: true,
     });
   },
 });

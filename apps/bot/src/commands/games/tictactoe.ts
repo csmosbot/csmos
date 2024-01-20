@@ -1,35 +1,24 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
-import { DangerEmbed } from "@/utils/embed";
 import { TicTacToe } from "discord-gamecord";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "tictactoe",
-  description: "Play a game of TicTacToe against someone.",
-  aliases: ["ttt"],
-  usage: "tictactoe <user>",
-  examples: [
-    {
-      example: "tictactoe @ToastedToast",
-      description: "play tictactoe against @ToastedToast",
-    },
-  ],
-  run: ({ message, args }) => {
-    const member =
-      message.mentions.users.first() ||
-      message.guild.members.cache.get(args[0])?.user;
-    if (!member)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "The user to battle against must be specified."
-          ),
-        ],
-      });
+  data: new SlashCommandBuilder()
+    .setName("tictactoe")
+    .setDescription("Play a game of TicTacToe against someone.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to play TicTacToe against.")
+        .setRequired(true)
+    ),
+  run: ({ interaction }) => {
+    const member = interaction.options.getUser("user");
 
     const Game = new TicTacToe({
-      message,
-      isSlashGame: false,
+      message: interaction,
+      isSlashGame: true,
       opponent: member,
       embed: {
         title: "TicTacToe",

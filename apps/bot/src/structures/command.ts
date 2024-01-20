@@ -3,47 +3,10 @@ import type {
   ChatInputCommandInteraction,
   GuildMember,
   GuildTextBasedChannel,
-  Message,
-  PermissionResolvable,
   SlashCommandBuilder,
   SlashCommandSubcommandsOnlyBuilder,
 } from "discord.js";
 import type { BotClient } from "./client";
-
-export interface ExtendedMessage extends Message<true> {
-  member: GuildMember;
-}
-
-export interface CommandOptions {
-  name: string;
-  description?: string;
-  aliases?: string[];
-  usage?: string | string[];
-  examples?: {
-    example?: string;
-    description: string;
-  }[];
-  userPermissions?: PermissionResolvable[];
-  /**
-   * @deprecated **NOT RECOMMENDED**, only used for custom permissions in the documentation. Use `userPermissions` instead.
-   */
-  permissions?: string[];
-  run: ({
-    client,
-    message,
-    args,
-  }: {
-    client: BotClient<true>;
-    message: ExtendedMessage;
-    args: string[];
-  }) => any;
-}
-
-export class Command {
-  constructor(options: CommandOptions) {
-    Object.assign(this, options);
-  }
-}
 
 export interface ExtendedInteraction
   extends ChatInputCommandInteraction<"cached"> {
@@ -51,7 +14,7 @@ export interface ExtendedInteraction
   channel: GuildTextBasedChannel;
 }
 
-export interface SlashCommandOptions {
+export interface CommandOptions {
   data:
     | SlashCommandBuilder
     | SlashCommandSubcommandsOnlyBuilder
@@ -72,8 +35,8 @@ export interface SlashCommandOptions {
   }) => any;
 }
 
-export class SlashCommand {
-  constructor(options: SlashCommandOptions) {
+export class Command {
+  constructor(options: CommandOptions) {
     Object.assign(this, options);
   }
 }

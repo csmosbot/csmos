@@ -1,19 +1,16 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { MatchPairs } from "discord-gamecord";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "matchpairs",
-  description: "Play a game of Match Pairs.",
-  examples: [
-    {
-      description: "play a game of match pairs",
-    },
-  ],
-  run: ({ message }) => {
+  data: new SlashCommandBuilder()
+    .setName("matchpairs")
+    .setDescription("Play a game of Match Pairs."),
+  run: ({ interaction }) => {
     const game = new MatchPairs({
-      message,
-      isSlashGame: false,
+      message: interaction,
+      isSlashGame: true,
       embed: {
         title: "Match Pairs",
         color: config.colors.primary,

@@ -1,39 +1,38 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
 import { getWarnings } from "@csmos/db";
-import { time } from "discord.js";
+import { SlashCommandBuilder, time } from "discord.js";
 
 export default new Command({
-  name: "warnings",
-  description: "View all warnings of a user.",
-  aliases: ["warns"],
-  usage: "warnings [user]",
-  permissions: ["Moderate Members (to view other users' warnings)"],
-  run: async ({ message, args }) => {
-    const member =
-      message.mentions.members.first() ||
-      message.guild.members.cache.get(args[0]) ||
-      message.member;
+  data: new SlashCommandBuilder()
+    .setName("warnings")
+    .setDescription("View all warnings of a user.")
+    .addUserOption((option) =>
+      option.setName("user").setDescription("The user to view the warnings of.")
+    ),
+  run: async ({ interaction }) => {
+    const member = interaction.options.getMember("user") || interaction.member;
     if (
-      member.id !== message.member.id &&
-      !message.member.permissions.has("ModerateMembers")
+      member.id !== interaction.member.id &&
+      !interaction.member.permissions.has("ModerateMembers")
     )
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "You do not have permission to view other users' warnings."
           ),
         ],
+        ephemeral: true,
       });
 
-    const warnings = await getWarnings(member.id, message.guild.id);
+    const warnings = await getWarnings(member.id, interaction.guild.id);
 
     if (!warnings.length)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             `${
-              member.id === message.member.id
+              member.id === interaction.member.id
                 ? "You don't"
                 : `**${member.user.username}** doesn't`
             } have any warnings yet.`
@@ -41,7 +40,7 @@ export default new Command({
         ],
       });
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed()
           .setAuthor({

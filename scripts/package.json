@@ -1,0 +1,23 @@
+{
+  "name": "@csmos/scripts",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "keywords": [],
+  "author": "Cosmotic Labs",
+  "contributors": [
+    "ToastedToast <realtcatech@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@discordjs/builders": "^1.7.0",
+    "discord-api-types": "^0.37.67",
+    "discord.js": "^14.14.1",
+    "distube": "^4.1.1",
+    "markdown-table": "^3.0.3",
+    "superjson": "^2.2.1"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  }
+}

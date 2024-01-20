@@ -1,29 +1,23 @@
 import { Command } from "@/structures/command";
-import { DangerEmbed, Embed } from "@/utils/embed";
+import { Embed } from "@/utils/embed";
 import { eightBall, randomChoice } from "@/utils/games";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "8ball",
-  description: "Ask a question to the magic 8 ball.",
-  usage: "8ball <question>",
-  examples: [
-    {
-      example: "8ball is csmos a good bot?",
-      description: "ask the magic 8 ball the question 'is csmos a good bot?'",
-    },
-  ],
-  run: ({ message, args }) => {
-    if (!args[0])
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription("The question must be specified."),
-        ],
-      });
-
-    const question = args.join(" ");
+  data: new SlashCommandBuilder()
+    .setName("8ball")
+    .setDescription("Ask a question to the magic 8 ball.")
+    .addStringOption((option) =>
+      option
+        .setName("question")
+        .setDescription("The question to ask to the magic 8 ball.")
+        .setRequired(true)
+    ),
+  run: ({ interaction }) => {
+    const question = interaction.options.getString("question", true);
     const response = randomChoice(eightBall.choices);
 
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed().setTitle("🎱 8 Ball").addFields(
           {

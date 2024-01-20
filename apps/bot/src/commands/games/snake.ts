@@ -1,20 +1,16 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { Snake } from "discord-gamecord";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "snake",
-  description: "Play a game of Snake.",
-  aliases: ["snek"],
-  examples: [
-    {
-      description: "play a game of snake",
-    },
-  ],
-  run: ({ message }) => {
+  data: new SlashCommandBuilder()
+    .setName("snake")
+    .setDescription("Play a game of Snake."),
+  run: ({ interaction }) => {
     const Game = new Snake({
-      message,
-      isSlashGame: false,
+      message: interaction,
+      isSlashGame: true,
       embed: {
         title: "Snake",
         overTitle: "Game Over",
