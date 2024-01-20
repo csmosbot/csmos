@@ -1,27 +1,15 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
 import { coinflip, randomChoice } from "@/utils/games";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "coinflip",
-  description: "Flip a coin.",
-  aliases: [
-    "cf",
-    "flip",
-    "coin",
-    "flipacoin",
-    "flip-a-coin",
-    "coin-flip",
-    "cointoss",
-  ],
-  examples: [
-    {
-      description: "flip a coin",
-    },
-  ],
-  run: ({ message }) => {
+  data: new SlashCommandBuilder()
+    .setName("coinflip")
+    .setDescription("Flip a coin."),
+  run: ({ interaction }) => {
     const choice = randomChoice(coinflip.outcomes);
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed()
           .setTitle("🪙 Coin Flip")

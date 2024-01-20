@@ -1,26 +1,16 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { TwoZeroFourEight } from "discord-gamecord";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "2048",
-  description: "Play a game of 2048.",
-  aliases: [
-    "twozerofoureight",
-    "two-zero-four-eight",
-    "twentyfourtyeight",
-    "twenty-fourtyeight",
-    "twenty-fourty-eight",
-  ],
-  examples: [
-    {
-      description: "play a game of 2048",
-    },
-  ],
-  run: ({ message }) => {
+  data: new SlashCommandBuilder()
+    .setName("2048")
+    .setDescription("Play a game of 2048."),
+  run: ({ interaction }) => {
     const game = new TwoZeroFourEight({
-      message,
-      isSlashGame: false,
+      message: interaction,
+      isSlashGame: true,
       embed: {
         title: "2048",
         color: config.colors.primary,

@@ -1,6 +1,11 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
-import { ChannelType, GuildPremiumTier, time } from "discord.js";
+import {
+  ChannelType,
+  GuildPremiumTier,
+  SlashCommandBuilder,
+  time,
+} from "discord.js";
 
 const boostTier = {
   [GuildPremiumTier.None]: "No Tier",
@@ -10,18 +15,14 @@ const boostTier = {
 } as const;
 
 export default new Command({
-  name: "serverinfo",
-  description: "Get information about a server.",
-  examples: [
-    {
-      description: "get information about the server you're in",
-    },
-  ],
-  run: async ({ message }) => {
-    const { guild } = message;
+  data: new SlashCommandBuilder()
+    .setName("serverinfo")
+    .setDescription("Get information about a server."),
+  run: async ({ interaction }) => {
+    const { guild } = interaction;
     const owner = await guild.fetchOwner();
 
-    return message.channel.send({
+    return interaction.reply({
       embeds: [
         new Embed()
           .setAuthor({

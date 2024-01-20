@@ -1,68 +1,77 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import {
+  ChannelType,
+  PermissionFlagsBits,
+  SlashCommandBuilder,
+} from "discord.js";
 import ms from "ms";
 
 export default new Command({
-  name: "slowmode",
-  description: "Update the slowmode for a channel.",
-  userPermissions: ["ManageChannels"],
-  usage: "slowmode <slowmode length | 0>",
-  examples: [
-    {
-      example: "slowmode 0",
-      description: "disable the slowmode in the channel you're in",
-    },
-    {
-      example: "slowmode 10s",
-      description: "change the slowmode to 10 seconds in the chanenl you're in",
-    },
-    {
-      example: "slowmode 5m #general",
-      description: "change the slowmode to 5 minutes in #general",
-    },
-  ],
-  run: ({ message, args }) => {
-    const length = args[0];
-    if (!length)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription("A length must be specified."),
-        ],
-      });
+  data: new SlashCommandBuilder()
+    .setName("slowmode")
+    .setDescription("Update the slowmode for this channel.")
+    .addStringOption((option) =>
+      option
+        .setName("length")
+        .setDescription("The length of slowmode.")
+        .setRequired(true)
+    )
+    .addChannelOption((option) =>
+      option
+        .setName("channel")
+        .setDescription("The channel to update the slowmode of.")
+        .addChannelTypes(
+          ChannelType.GuildAnnouncement,
+          ChannelType.PublicThread,
+          ChannelType.PrivateThread,
+          ChannelType.AnnouncementThread,
+          ChannelType.GuildText,
+          ChannelType.GuildForum,
+          ChannelType.GuildVoice,
+          ChannelType.GuildStageVoice,
+          ChannelType.GuildMedia
+        )
+        .setRequired(false)
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
+  run: ({ interaction }) => {
+    const length = interaction.options.getString("length", true);
     if (ms(length) > ms("6h"))
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "Slowmode length cannot be higher than 6 hours."
           ),
         ],
+        ephemeral: true,
       });
 
     const channel =
-      message.mentions.channels.first() ||
-      message.guild.channels.cache.get(args[1]) ||
-      message.channel;
+      interaction.options.getChannel("channel") || interaction.channel;
     if (!channel.isTextBased() || channel.isDMBased())
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new DangerEmbed().setDescription(
             "Channel must be a text channel in this server."
           ),
         ],
+        ephemeral: true,
       });
 
     channel.setRateLimitPerUser(ms(length) / 1000);
 
     if (ms(length) === 0)
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new SuccessEmbed().setDescription(
             "The slowmode for this channel has been disabled."
           ),
         ],
+        ephemeral: true,
       });
     else
-      return message.channel.send({
+      return interaction.reply({
         embeds: [
           new SuccessEmbed().setDescription(
             `The slowmode for this channel has been set to **${ms(ms(length), {
@@ -70,6 +79,7 @@ export default new Command({
             })}**.`
           ),
         ],
+        ephemeral: true,
       });
   },
 });

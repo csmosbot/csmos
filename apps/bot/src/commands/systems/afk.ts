@@ -2,71 +2,82 @@ import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { getPrefix } from "@/utils/prefix";
 import { createAfk, deleteAfk, getAfk } from "@csmos/db";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "afk",
-  description: "Set or remove your AFK status.",
-  usage: ["afk <reason>", "afk reset"],
-  examples: [
-    {
-      example: "afk eating",
-      description: "set your afk status to 'eating'",
-    },
-    {
-      example: "afk reset",
-      description: "reset your afk status",
-    },
-  ],
-  run: async ({ message, args }) => {
-    const reasonOrSubcommand = args.join(" ") ?? "No reason specified.";
-    const data = await getAfk(message.author.id, message.guild.id);
+  data: new SlashCommandBuilder()
+    .setName("afk")
+    .setDescription("Set or remove your AFK status.")
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("set")
+        .setDescription("Set your AFK status.")
+        .addStringOption((option) =>
+          option
+            .setName("reason")
+            .setDescription("Why you are going AFK.")
+            .setRequired(false)
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand.setName("remove").setDescription("Remove your AFK status.")
+    ),
+  run: async ({ interaction }) => {
+    const subcommand = interaction.options.getSubcommand();
+    const data = await getAfk(interaction.user.id, interaction.guild.id);
 
-    switch (reasonOrSubcommand) {
-      default:
+    switch (subcommand) {
+      case "set":
         {
           if (data)
-            return message.channel.send({
+            return interaction.reply({
               embeds: [
                 new DangerEmbed().setDescription(
                   `You are already AFK. Try using \`${await getPrefix(
-                    message.guild.id
+                    interaction.guild.id
                   )}afk reset\` instead.`
                 ),
               ],
+              ephemeral: true,
             });
 
+          const reason = interaction.options.getString("reason");
+
           await createAfk({
-            userId: message.author.id,
-            guildId: message.guild.id,
-            reason: reasonOrSubcommand,
+            userId: interaction.user.id,
+            guildId: interaction.guild.id,
+            reason,
           });
 
-          message.channel.send({
+          interaction.reply({
             embeds: [new SuccessEmbed().setDescription("You are now AFK.")],
+            ephemeral: true,
           });
         }
         break;
       case "reset":
         {
           if (!data)
-            return message.channel.send({
+            return interaction.reply({
               embeds: [
                 new DangerEmbed().setDescription(
                   `You are not currently AFK. Try using \`${await getPrefix(
-                    message.guild.id
+                    interaction.guild.id
                   )}afk <reason>\` instead.`
                 ),
               ],
+              ephemeral: true,
             });
 
           await deleteAfk(data.id);
 
-          message.channel.send({
+          interaction.reply({
             embeds: [
               new SuccessEmbed().setDescription(
                 "Welcome back! I've removed your AFK."
               ),
             ],
+            ephemeral: true,
           });
         }
         break;

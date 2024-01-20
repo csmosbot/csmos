@@ -2,78 +2,71 @@ import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
 import { emojis, permissions } from "@/utils/help";
 import { getPrefix } from "@/utils/prefix";
-import { type APIEmbedField } from "discord.js";
+import {
+  SlashCommandBuilder,
+  type APIEmbedField,
+  PermissionsBitField,
+} from "discord.js";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 const sortAlphabetically = (a: string, b: string) => a.localeCompare(b);
 
 export default new Command({
-  name: "help",
-  description: "View information about all of csmos' commands.",
-  usage: ["help", "help <command>"],
-  examples: [
-    {
-      example: "help",
-      description: "view a list of all commands",
-    },
-    {
-      example: "help play",
-      description: "view information about the command 'play'",
-    },
-  ],
-  run: async ({ client, message, args }) => {
-    const cmd = args[0]?.toLowerCase();
+  data: new SlashCommandBuilder()
+    .setName("help")
+    .setDescription("View information about all my commands.")
+    .addStringOption((option) =>
+      option
+        .setName("command")
+        .setDescription("The command you want to view the information of.")
+        .setRequired(false)
+        .setAutocomplete(true)
+    ),
+  autocomplete: async ({ client, interaction }) => {
+    const focusedValue = interaction.options.getFocused();
+    const choices = client.commands
+      .map((command) => command.data.toJSON().name)
+      .sort(sortAlphabetically);
+    const filtered = choices
+      .filter((choice) => choice.startsWith(focusedValue))
+      .slice(0, 25);
+    await interaction.respond(
+      filtered.map((choice) => ({ name: choice, value: choice }))
+    );
+  },
+  run: async ({ client, interaction }) => {
+    const cmd = interaction.options.getString("command")?.toLowerCase();
     if (cmd) {
-      const command =
-        client.commands.get(cmd) ||
-        client.commands.find((c) => c.aliases?.includes(cmd));
+      const command = client.commands.get(cmd);
       if (!command)
-        return message.channel.send({
+        return interaction.reply({
           embeds: [
             new DangerEmbed().setDescription(
               "The command you specified was invalid."
             ),
           ],
+          ephemeral: true,
         });
 
-      const prefix = await getPrefix(message.guild.id);
+      const prefix = await getPrefix(interaction.guild.id);
 
-      const embed = new Embed().setTitle(`${prefix}${command.name}`);
+      const data = command.data.toJSON();
+      const embed = new Embed().setTitle(`${prefix}${data.name}`);
 
-      if (command.description) embed.setDescription(command.description);
-      if (command.usage)
-        embed.addFields({
-          name: "Usage",
-          value:
-            typeof command.usage === "string"
-              ? `${prefix}${command.usage}`
-              : command.usage.map((usage) => `${prefix}${usage}`).join("\n"),
-        });
-
-      if (command.examples)
-        embed.addFields({
-          name: "Examples",
-          value: command.examples.map((example) => example.example).join("\n"),
-        });
-      if (command.aliases)
-        embed.addFields({
-          name: "Aliases",
-          value: command.aliases
-            .sort(sortAlphabetically)
-            .map((alias) => `\`${alias}\``)
-            .join(", "),
-        });
-      if (command.userPermissions)
+      if (data.description) embed.setDescription(data.description);
+      if (data.default_member_permissions)
         embed.addFields({
           name: "Required Permissions",
-          value: command.userPermissions
+          value: new PermissionsBitField(data.default_member_permissions as any)
+            .toArray()
             .sort(sortAlphabetically as any)
             .map((x) => `\`${permissions[x as keyof typeof permissions]}\``)
             .join(", "),
         });
 
-      message.channel.send({
+      interaction.reply({
         embeds: [embed],
+        ephemeral: true,
       });
     } else {
       const categories = [
@@ -91,13 +84,13 @@ export default new Command({
             category
           )}`,
           value: commands
-            .map((command) => `\`${command.name}\``)
+            .map((command) => `\`${command.data.toJSON().name}\``)
             .sort(sortAlphabetically)
             .join(", "),
         });
       }
 
-      message.channel.send({
+      interaction.reply({
         embeds: [
           new Embed()
             .setTitle("🚀 Need some help blasting off?")
@@ -106,6 +99,7 @@ export default new Command({
             )
             .setFields(fields),
         ],
+        ephemeral: true,
       });
     }
   },

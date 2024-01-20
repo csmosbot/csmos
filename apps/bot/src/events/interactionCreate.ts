@@ -16,7 +16,7 @@ export default new Event({
           ],
         });
 
-      const command = client.slashCommands.get(interaction.commandName);
+      const command = client.commands.get(interaction.commandName);
       if (!command) return;
 
       try {
@@ -28,7 +28,7 @@ export default new Event({
         console.error(err);
       }
     } else if (interaction.isAutocomplete()) {
-      const command = client.slashCommands.get(interaction.commandName);
+      const command = client.commands.get(interaction.commandName);
       if (!command) return;
 
       try {

@@ -1,30 +1,23 @@
 import { Command } from "@/structures/command";
-import { DangerEmbed, Embed } from "@/utils/embed";
+import { Embed } from "@/utils/embed";
 import { random } from "@/utils/random";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "rate",
-  description: "Rate something.",
-  usage: "rate <thing to rate>",
-  examples: [
-    {
-      example: "rate csmos",
-      description: "rate 'csmos'",
-    },
-  ],
-  run: ({ message, args }) => {
-    const something = args.join(" ");
-    if (!something)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "The thing to rate must be specified."
-          ),
-        ],
-      });
+  data: new SlashCommandBuilder()
+    .setName("rate")
+    .setDescription("Rate something.")
+    .addStringOption((option) =>
+      option
+        .setName("thing")
+        .setDescription("The thing to rate.")
+        .setRequired(true)
+    ),
+  run: ({ interaction }) => {
+    const something = interaction.options.getString("thing");
 
     const rating = random(0, 100);
-    message.channel.send({
+    interaction.reply({
       embeds: [
         new Embed()
           .setTitle("⭐ Rating")

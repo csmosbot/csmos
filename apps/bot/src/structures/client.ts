@@ -6,11 +6,10 @@ import type { ApplicationCommandDataResolvable } from "discord.js";
 import { Client, Collection } from "discord.js";
 import fs from "fs";
 import path from "path";
-import type { CommandOptions, SlashCommandOptions } from "./command";
+import type { CommandOptions } from "./command";
 
 export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   commands = new Collection<string, CommandOptions & { category: string }>();
-  slashCommands = new Collection<string, SlashCommandOptions>();
   maps = new Map();
   player = createPlayer(this);
 
@@ -26,6 +25,7 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
     const join = (...paths: string[]) => path.join(__dirname, ...paths);
 
     // commands
+    const commands: ApplicationCommandDataResolvable[] = [];
     fs.readdirSync(join("../commands")).forEach(async (dir) => {
       const commandFiles = fs
         .readdirSync(join("../commands", dir))
@@ -33,25 +33,13 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
 
       for (const file of commandFiles) {
         const command = require(join("../commands", dir, file))?.default;
-        if (!command || !command.name || !command.run) continue;
-
-        this.commands.set(command.name, { ...command, category: dir });
-      }
-    });
-
-    // slash commands
-    const commands: ApplicationCommandDataResolvable[] = [];
-    fs.readdirSync(join("../slashCommands")).forEach(async (dir) => {
-      const commandFiles = fs
-        .readdirSync(join("../slashCommands", dir))
-        .filter((file) => file.endsWith("js") || file.endsWith("ts"));
-
-      for (const file of commandFiles) {
-        const command = require(join("../slashCommands", dir, file))?.default;
         if (!command || !command.data || !command.run) return;
 
         commands.push(command.data.toJSON());
-        this.slashCommands.set(command.data.toJSON().name, command);
+        this.commands.set(command.data.toJSON().name, {
+          ...command,
+          category: dir,
+        });
       }
     });
 

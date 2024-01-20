@@ -1,30 +1,23 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { Embed } from "@/utils/embed";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "ping",
-  description: "Pings csmos.",
-  examples: [
-    {
-      description: "ping csmos",
-    },
-  ],
-  run: async ({ client, message }) => {
-    const res = await message.channel.send({
-      embeds: [
-        new Embed()
-          .setDescription("Pinging...")
-          .setColor(config.colors.primary),
-      ],
+  data: new SlashCommandBuilder()
+    .setName("ping")
+    .setDescription("Pings the bot."),
+  run: async ({ client, interaction }) => {
+    const res = await interaction.deferReply({
+      ephemeral: true,
     });
 
-    const ping = res.createdTimestamp - message.createdTimestamp;
+    const ping = res.createdTimestamp - interaction.createdTimestamp;
 
-    res.edit({
+    interaction.editReply({
       embeds: [
         new Embed()
-          .setTitle("🏓 Pong!")
+          .setTitle("Pong! 🏓")
           .setFields(
             {
               name: "🤖 Bot",

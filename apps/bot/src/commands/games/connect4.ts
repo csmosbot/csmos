@@ -1,34 +1,24 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
-import { DangerEmbed } from "@/utils/embed";
 import { Connect4 } from "discord-gamecord";
+import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
-  name: "connect4",
-  description: "Play a game of Connect 4 against someone.",
-  usage: "connect4 <user>",
-  examples: [
-    {
-      example: "connect4 @ToastedToast",
-      description: "play connect 4 against @ToastedToast",
-    },
-  ],
-  run: ({ message, args }) => {
-    const member =
-      message.mentions.users.first() ||
-      message.guild.members.cache.get(args[0])?.user;
-    if (!member)
-      return message.channel.send({
-        embeds: [
-          new DangerEmbed().setDescription(
-            "The user to battle against must be specified."
-          ),
-        ],
-      });
+  data: new SlashCommandBuilder()
+    .setName("connect4")
+    .setDescription("Play a game of Connect 4 against someone.")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("The user to play Connect 4 against.")
+        .setRequired(true)
+    ),
+  run: ({ interaction }) => {
+    const member = interaction.options.getUser("user", true);
 
     const game = new Connect4({
-      message,
-      isSlashGame: false,
+      message: interaction,
+      isSlashGame: true,
       opponent: member,
       embed: {
         title: "Connect 4",
