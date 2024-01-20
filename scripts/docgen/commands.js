@@ -148,7 +148,7 @@ async function main() {
         `./apps/bot/src/commands/${category}/${file}`,
         "utf8"
       );
-      const [rawCode] = command.match(/(?<=(new SlashCommand\()){[\s\S]*}/g);
+      const [rawCode] = command.match(/(?<=(new Command\()){[\s\S]*}/g);
       const code = rawCode
         .replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2":')
         .split("\n");
