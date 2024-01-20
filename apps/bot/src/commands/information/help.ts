@@ -1,7 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
 import { emojis, permissions } from "@/utils/help";
-import { getPrefix } from "@/utils/prefix";
 import {
   SlashCommandBuilder,
   type APIEmbedField,
@@ -48,10 +47,8 @@ export default new Command({
           ephemeral: true,
         });
 
-      const prefix = await getPrefix(interaction.guild.id);
-
       const data = command.data.toJSON();
-      const embed = new Embed().setTitle(`${prefix}${data.name}`);
+      const embed = new Embed().setTitle(`/${data.name}`);
 
       if (data.description) embed.setDescription(data.description);
       if (data.default_member_permissions)

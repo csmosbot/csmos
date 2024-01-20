@@ -1,6 +1,5 @@
 import { Command } from "@/structures/command";
 import { Embed } from "@/utils/embed";
-import { getPrefix } from "@/utils/prefix";
 import { getUser } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
@@ -29,9 +28,7 @@ export default new Command({
             {
               name: "Leveling",
               value: [
-                `You can also view these statistics by running \`${await getPrefix(
-                  interaction.guild.id
-                )}rank\`.`,
+                "You can also view these statistics by running `/rank`.",
                 `• **XP**: ${data.xp}`,
                 `• **Level**: ${data.level}`,
               ].join("\n"),

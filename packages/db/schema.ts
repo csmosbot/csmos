@@ -1,16 +1,9 @@
 import { createId } from "@paralleldrive/cuid2";
 import { relations } from "drizzle-orm";
-import {
-  integer,
-  pgTable,
-  text,
-  timestamp,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const guilds = pgTable("guilds", {
   id: text("id").primaryKey().notNull(),
-  prefix: varchar("prefix", { length: 5 }),
   defaultVolume: integer("default_volume").notNull().default(50),
   nowPlayingMessage: text("now_playing_message"),
 });
