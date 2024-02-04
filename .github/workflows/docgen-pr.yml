@@ -1,0 +1,31 @@
+name: PR Docgen
+
+on: ["pull_request"]
+
+jobs:
+  commands:
+    name: Generate Command Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.BOT_TOKEN }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Run generation script
+        run: pnpm run docgen:commands
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: CosmoticRovee
+          message: "ci: update command docs"

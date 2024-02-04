@@ -18,7 +18,7 @@ import {
 export default new Command({
   data: new SlashCommandBuilder()
     .setName("leaver")
-    .setDescription("Configure the leaver system.")
+    .setDescription("Configure the leaver system. test")
     .addSubcommand((subcommand) =>
       subcommand
         .setName("setup")
