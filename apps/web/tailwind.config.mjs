@@ -15,7 +15,7 @@ export default {
         gray: colors.zinc,
       },
       fontFamily: {
-        sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       screens: {
         fifty: "50rem",

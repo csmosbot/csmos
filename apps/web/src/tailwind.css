@@ -13,12 +13,23 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 }
 
 :is([data-theme="dark"] .sl-markdown-content a:not(:where(.not-content *))) {
-  --sl-color-text-accent: #e879f9 !important;
+  --sl-color-text-accent: #d946ef !important;
+}
+
+.sl-markdown-content a:not(:where(.not-content *)) {
+  text-decoration: none;
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--sl-color-asides-text-accent, var(--sl-color-text-accent));
+  @apply underline;
 }
 
 header.header {
-  border-bottom: 1px solid var(--sl-color-gray-5);
   @apply h-14 bg-[var(--sl-color-bg)];
+  border: none;
+  backdrop-filter: blur(24px) saturate(250%);
+  background: var(--sl-color-bg-overlay);
 }
 
 @media (min-width: 50rem) {
@@ -27,7 +38,7 @@ header.header {
   }
 
   site-search > button {
-    @apply !h-8 !border-none !bg-neutral-100 !pe-2.5 !ps-2.5 !text-black hover:!bg-neutral-200 dark:!bg-neutral-800 dark:!text-white dark:hover:!bg-neutral-700/80;
+    @apply !h-8 !border-none !bg-neutral-100 !pe-2.5 !ps-2.5 !text-black hover:!bg-neutral-200 dark:!bg-neutral-900 dark:!text-white dark:hover:!bg-neutral-800/80;
   }
 }
 
@@ -35,24 +46,117 @@ header.header {
   @apply opacity-75;
 }
 
+:root {
+  --sl-color-bg: white;
+  --sl-color-hairline-light: theme("colors.gray.200") !important;
+}
+
+:root[data-theme="dark"] {
+  --sl-color-bg: black;
+  --sl-color-hairline-light: hsl(235, 5%, 12%) !important;
+  --sl-color-bg-overlay: rgba(0, 0, 0, 0.62);
+}
+
+.expressive-code .frame {
+  --code-background: var(--sl-color-bg) !important;
+  --tab-border-radius: 7px;
+  --ec-brdRad: 7px;
+  --ec-frm-trmTtbDotsFg: #2f363d;
+  --ec-frm-trmTtbDotsOpa: 0.15;
+}
+
+:is([data-theme="dark"] .expressive-code .frame) {
+  --code-background: var(--sl-color-bg) !important;
+  --ec-brdCol: hsl(235, 5%, 12%);
+  --ec-frm-trmTtbBg: var(--ec-brdCol);
+  --ec-frm-trmTtbBrdBtmCol: var(--ec-brdCol);
+  --ec-frm-edTabBarBrdBtmCol: var(--ec-brdCol);
+  --ec-frm-edTabBarBrdCol: var(--ec-brdCol);
+  --ec-frm-edTabBarBg: var(--sl-color-bg);
+  --ec-frm-edActTabBg: var(--ec-brdCol);
+  --ec-frm-trmTtbDotsFg: #768390;
+  --ec-frm-trmTtbDotsOpa: 0.15;
+}
+
+dialog {
+  --sl-color-gray-5: hsl(235, 5%, 87%);
+  --sl-color-gray-6: hsl(235, 5%, 87%);
+  --sl-color-black: #fff;
+}
+
+:is([data-theme="dark"] dialog) {
+  --sl-color-gray-5: hsl(235, 5%, 12%);
+  --sl-color-gray-6: hsl(235, 5%, 4%);
+  --sl-color-black: hsl(235, 5%, 1%);
+}
+
+:root mobile-starlight-toc nav {
+  backdrop-filter: blur(32px) saturate(250%);
+  background: var(--sl-color-bg-overlay);
+  margin-top: calc(-1 * var(--sl-nav-height));
+  margin-left: calc(-1 * var(--sl-sidebar-width));
+  padding-top: var(--sl-nav-height);
+  padding-left: var(--sl-sidebar-width);
+}
+
+:root mobile-starlight-toc summary {
+  border: none;
+}
+
 .sidebar-pane {
   background-color: var(--sl-color-bg);
-  border-right: 1px solid var(--sl-color-gray-6);
+}
+
+.sidebar-pane,
+.right-sidebar {
+  border: none;
 }
 
 .sidebar-content ul li {
   margin-top: 0;
 }
 
-.sidebar-content ul li details summary {
-  border-radius: 0.25rem;
+.sidebar-content ul li a,
+.sidebar-content ul li details ul li a {
+  background: transparent !important;
 }
 
-.sidebar-content ul li details summary:hover,
+.sidebar-content ul li a[aria-current="page"],
+.sidebar-content ul li details ul li a[aria-current="page"] {
+  color: var(--sl-color-white);
+}
+
+.sidebar-content ul li a:not([aria-current="page"]),
+.sidebar-content ul li details ul li a:not([aria-current="page"]) {
+  color: var(--sl-color-gray-3);
+}
+
 .sidebar-content ul li a:not([aria-current="page"]):hover,
-.sidebar-content ul li details ul li a:not([aria-current="page"]):hover,
+.sidebar-content ul li details ul li a:not([aria-current="page"]):hover {
+  @apply underline;
+}
+
+.content-panel {
+  border: none !important;
+  @apply py-3;
+}
+
+.right-sidebar a {
+  background: transparent !important;
+  @apply transition-colors;
+}
+
+.right-sidebar a[aria-current="true"] {
+  color: var(--sl-color-white);
+  font-weight: 500;
+}
+
 .right-sidebar a:not([aria-current="true"]):hover {
-  background-color: rgb(217 70 239 / 0.2);
+  color: var(--sl-color-gray-3);
+}
+
+.right-sidebar a:hover {
+  @apply underline;
 }
 
 .social-icons a {
@@ -174,6 +278,6 @@ h2 {
 }
 
 .heading-link {
-  text-decoration: none;
+  text-decoration: none !important;
   color: var(--sl-color-white) !important;
 }
