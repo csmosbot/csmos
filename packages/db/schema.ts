@@ -1,6 +1,12 @@
 import { createId } from "@paralleldrive/cuid2";
 import { relations } from "drizzle-orm";
-import { integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
 export const guilds = pgTable("guilds", {
   id: text("id").primaryKey().notNull(),
@@ -69,4 +75,26 @@ export const afks = pgTable("afks", {
     .references(() => guilds.id),
   reason: text("reason"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const welcomers = pgTable("welcomers", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  guildId: text("guild_id")
+    .notNull()
+    .references(() => guilds.id),
+  channelId: text("channel_id").notNull(),
+  message: varchar("message", { length: 2000 }).notNull(),
+});
+
+export const leavers = pgTable("leavers", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => createId()),
+  guildId: text("guild_id")
+    .notNull()
+    .references(() => guilds.id),
+  channelId: text("channel_id").notNull(),
+  message: varchar("message", { length: 2000 }).notNull(),
 });
