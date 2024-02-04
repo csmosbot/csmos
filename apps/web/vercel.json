@@ -3,7 +3,7 @@
   "redirects": [
     {
       "source": "/docs",
-      "destination": "/docs/getting-started"
+      "destination": "/docs/introduction"
     },
     {
       "source": "/invite",
