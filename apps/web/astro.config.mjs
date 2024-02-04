@@ -65,7 +65,7 @@ export default defineConfig({
       },
       favicon: "/favicon.ico",
       social: {
-        github: "https://github.com/CosmoticLabs/csmos",
+        github: "https://github.com/csmosspace/csmos",
         discord: "https://discord.com/invite/q7WNcPakYh",
       },
       sidebar: [
@@ -95,7 +95,7 @@ export default defineConfig({
         },
       ],
       editLink: {
-        baseUrl: "https://github.com/CosmoticLabs/csmos/edit/main/apps/web",
+        baseUrl: "https://github.com/csmosspace/csmos/edit/main/apps/web",
       },
       customCss: [
         "@fontsource/inter/latin-400.css",
