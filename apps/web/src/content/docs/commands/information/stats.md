@@ -3,7 +3,7 @@
 
 title: stats
 description: View a user's statistics.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/stats.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/stats.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

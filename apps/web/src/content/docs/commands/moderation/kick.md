@@ -3,7 +3,7 @@
 
 title: kick
 description: Kick a user from this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/kick.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/kick.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

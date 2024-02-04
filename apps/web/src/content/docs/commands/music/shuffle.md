@@ -3,7 +3,7 @@
 
 title: shuffle
 description: Shuffles the queue around in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/shuffle.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/shuffle.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

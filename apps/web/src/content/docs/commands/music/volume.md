@@ -3,7 +3,7 @@
 
 title: volume
 description: Change the volume of the current song.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/volume.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/volume.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

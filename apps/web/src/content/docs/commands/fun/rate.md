@@ -3,7 +3,7 @@
 
 title: rate
 description: Rate something.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/rate.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/rate.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

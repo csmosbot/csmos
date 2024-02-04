@@ -3,7 +3,7 @@
 
 title: delwarn
 description: Delete a warn from a user.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/delwarn.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/delwarn.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

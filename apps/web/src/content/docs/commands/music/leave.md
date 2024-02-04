@@ -3,7 +3,7 @@
 
 title: leave
 description: Make me leave your voice channel.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/leave.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/leave.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

@@ -3,7 +3,7 @@
 
 title: unshuffle
 description: Unshuffles the queue in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/unshuffle.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/unshuffle.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

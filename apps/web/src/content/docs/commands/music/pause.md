@@ -3,7 +3,7 @@
 
 title: pause
 description: Pause the current song.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/pause.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/pause.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

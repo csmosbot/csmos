@@ -3,7 +3,7 @@
 
 title: play
 description: Play a song in your voice channel.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/play.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/play.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

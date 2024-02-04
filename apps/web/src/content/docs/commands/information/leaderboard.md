@@ -3,7 +3,7 @@
 
 title: leaderboard
 description: View the top 10 users in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/leaderboard.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/leaderboard.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

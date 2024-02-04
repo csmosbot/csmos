@@ -3,7 +3,7 @@
 
 title: warnings
 description: View all warnings of a user.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/warnings.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/warnings.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

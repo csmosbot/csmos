@@ -3,7 +3,7 @@
 
 title: ban
 description: Ban a user from this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/ban.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/ban.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

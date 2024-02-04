@@ -3,7 +3,7 @@
 
 title: roles
 description: Add or remove roles from a user.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/roles.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/roles.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

@@ -3,7 +3,7 @@
 
 title: unmute
 description: Unmute a user from this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/unmute.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/unmute.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

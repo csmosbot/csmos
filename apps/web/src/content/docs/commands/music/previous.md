@@ -3,7 +3,7 @@
 
 title: previous
 description: Skip to the previous song that played in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/previous.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/previous.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

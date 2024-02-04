@@ -3,7 +3,7 @@
 
 title: nowplaying
 description: View the currently playing song in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/nowplaying.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/nowplaying.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

@@ -3,7 +3,7 @@
 
 title: snake
 description: Play a game of Snake.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/games/snake.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/games/snake.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

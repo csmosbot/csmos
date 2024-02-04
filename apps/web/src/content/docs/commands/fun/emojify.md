@@ -3,7 +3,7 @@
 
 title: emojify
 description: Convert text into emojis.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/emojify.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/emojify.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

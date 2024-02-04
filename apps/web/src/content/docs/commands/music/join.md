@@ -3,7 +3,7 @@
 
 title: join
 description: Make me join your voice channel.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/join.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/join.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

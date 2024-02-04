@@ -3,7 +3,7 @@
 
 title: coinflip
 description: Flip a coin.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/coinflip.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/coinflip.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---
