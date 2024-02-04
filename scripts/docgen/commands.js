@@ -75,9 +75,12 @@ const usage = (command) => {
       .filter((option) => option.type === 1 || option.type === 2)
       .map((option) => {
         if (option.type === 2)
-          return option.options.map(
-            (subcommand) => `/${command.name} ${option.name} ${subcommand.name}`
-          );
+          return option.options
+            .map(
+              (subcommand) =>
+                `/${command.name} ${option.name} ${subcommand.name}`
+            )
+            .join("\n");
         return `/${command.name} ${option.name}`;
       })
       .join("\n");
