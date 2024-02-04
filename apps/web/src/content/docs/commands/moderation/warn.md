@@ -3,7 +3,7 @@
 
 title: warn
 description: Warn a user in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/warn.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/warn.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

@@ -3,7 +3,7 @@
 
 title: randomcolor
 description: Get a random color.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/randomcolor.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/randomcolor.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

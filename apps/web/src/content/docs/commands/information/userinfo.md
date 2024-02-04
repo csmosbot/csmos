@@ -3,7 +3,7 @@
 
 title: userinfo
 description: View information about a user.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/userinfo.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/userinfo.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

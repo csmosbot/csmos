@@ -3,7 +3,7 @@
 
 title: 8ball
 description: Ask a question to the magic 8 ball.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/8ball.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/8ball.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

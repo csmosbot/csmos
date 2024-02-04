@@ -3,7 +3,7 @@
 
 title: serverinfo
 description: Get information about a server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/serverinfo.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/serverinfo.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

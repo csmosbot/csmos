@@ -3,7 +3,7 @@
 
 title: ping
 description: Pings the bot.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/ping.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/ping.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

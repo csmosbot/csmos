@@ -3,7 +3,7 @@
 
 title: help
 description: View information about all my commands.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/help.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/help.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

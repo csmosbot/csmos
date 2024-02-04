@@ -3,7 +3,7 @@
 
 title: skip
 description: Skips the current song.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/skip.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/skip.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

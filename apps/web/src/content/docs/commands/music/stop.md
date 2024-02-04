@@ -3,7 +3,7 @@
 
 title: stop
 description: Stop the queue in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/stop.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/stop.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

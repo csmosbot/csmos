@@ -3,7 +3,7 @@
 
 title: purge
 description: Delete a number of messages from this channel at once.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/purge.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/purge.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

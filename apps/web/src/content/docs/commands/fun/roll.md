@@ -3,7 +3,7 @@
 
 title: roll
 description: Roll a dice.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/roll.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/roll.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

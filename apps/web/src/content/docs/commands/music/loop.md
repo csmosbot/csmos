@@ -3,7 +3,7 @@
 
 title: loop
 description: Set the loop mode for the queue in this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/loop.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/loop.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

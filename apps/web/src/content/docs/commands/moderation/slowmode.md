@@ -3,7 +3,7 @@
 
 title: slowmode
 description: Update the slowmode for this channel.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/moderation/slowmode.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/moderation/slowmode.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

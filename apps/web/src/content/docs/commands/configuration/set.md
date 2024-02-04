@@ -3,7 +3,7 @@
 
 title: set
 description: Update settings for this server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/configuration/set.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/configuration/set.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

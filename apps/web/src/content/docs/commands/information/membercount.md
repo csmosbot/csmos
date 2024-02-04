@@ -3,7 +3,7 @@
 
 title: membercount
 description: View the amount of members in a server.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/membercount.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/membercount.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

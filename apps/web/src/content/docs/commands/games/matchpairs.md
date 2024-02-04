@@ -3,7 +3,7 @@
 
 title: matchpairs
 description: Play a game of Match Pairs.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/games/matchpairs.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/games/matchpairs.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

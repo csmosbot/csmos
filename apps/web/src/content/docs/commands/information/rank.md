@@ -3,7 +3,7 @@
 
 title: rank
 description: View someone's current level and XP.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/information/rank.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/information/rank.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

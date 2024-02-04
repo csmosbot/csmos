@@ -3,7 +3,7 @@
 
 title: connect4
 description: Play a game of Connect 4 against someone.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/games/connect4.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/games/connect4.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

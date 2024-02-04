@@ -3,7 +3,7 @@
 
 title: rockpaperscissors
 description: Play a game of Rock Paper Scissors against someone.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/games/rockpaperscissors.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/games/rockpaperscissors.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

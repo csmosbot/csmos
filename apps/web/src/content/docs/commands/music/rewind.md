@@ -3,7 +3,7 @@
 
 title: rewind
 description: Goes backwards in the current song
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/rewind.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/rewind.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

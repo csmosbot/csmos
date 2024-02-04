@@ -3,7 +3,7 @@
 
 title: resume
 description: Resume the current song.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/music/resume.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/music/resume.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---

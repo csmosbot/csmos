@@ -3,7 +3,7 @@
 
 title: meme
 description: Get a random meme.
-editUrl: https://github.com/CosmoticLabs/csmos/edit/main/apps/bot/src/commands/fun/meme.ts
+editUrl: https://github.com/csmosspace/csmos/edit/main/apps/bot/src/commands/fun/meme.ts
 tableOfContents:
   maxHeadingLevel: 5
 ---
