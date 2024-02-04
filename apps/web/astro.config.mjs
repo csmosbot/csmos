@@ -70,12 +70,21 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Getting Started",
-          link: "/docs/getting-started",
+          label: "Get Started",
+          items: [
+            {
+              label: "What is csmos?",
+              link: "/docs/introduction",
+            },
+            {
+              label: "Inviting csmos to your server",
+              link: "/docs/invite",
+            },
+          ],
         },
         {
           label: "Commands",
-          collapsed: true,
+          collapsed: false,
           items: [
             {
               label: "Usage",
@@ -88,9 +97,14 @@ export default defineConfig({
       editLink: {
         baseUrl: "https://github.com/CosmoticLabs/csmos/edit/main/apps/web",
       },
-      customCss: ["./src/tailwind.css"],
+      customCss: [
+        "@fontsource/inter/latin-400.css",
+        "@fontsource/inter/latin-500.css",
+        "@fontsource/inter/latin-600.css",
+        "@fontsource/inter/latin-700.css",
+        "./src/tailwind.css",
+      ],
       components: {
-        Head: "./src/components/Head.astro",
         Header: "./src/components/Header.astro",
         SocialIcons: "./src/components/SocialIcons.astro",
       },

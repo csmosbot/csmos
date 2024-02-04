@@ -1,15 +1,11 @@
 ---
-title: Getting Started
+title: Inviting csmos
 description: Start using csmos in your Discord server.
 ---
 
 :::caution[Warning]
 csmos is still in heavy development and may not be online when you invite it. We promise that once we fully release v1, csmos will be fully online and ready to meet your server's needs.
 :::
-
-Do you want to start using csmos for your Discord server? Well this is the guide for you! In just a few simple steps, you'll have csmos in your server, and you'll be ready to start your dream Discord server.
-
-## Invite csmos
 
 Let's add csmos to your Discord server! First, go to [csmos.space/invite](/invite). This should lead you to a page like this:
 
@@ -28,7 +24,3 @@ This means that csmos has been invited into your server! If you check your serve
 ![csmos in the server](/getting-started/invite-4.png)
 
 csmos is now in your server and you can now start building your dream Discord server!
-
-## Commands
-
-To use csmos, you have to run commands. If you want to know how to run commands and use them, you can check out [the command usage guide](/commands).
