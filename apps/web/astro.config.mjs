@@ -98,10 +98,10 @@ export default defineConfig({
         baseUrl: "https://github.com/csmosspace/csmos/edit/main/apps/web",
       },
       customCss: [
-        "@fontsource/inter/latin-400.css",
-        "@fontsource/inter/latin-500.css",
-        "@fontsource/inter/latin-600.css",
-        "@fontsource/inter/latin-700.css",
+        "@fontsource/geist-sans/latin-400.css",
+        "@fontsource/geist-sans/latin-500.css",
+        "@fontsource/geist-sans/latin-600.css",
+        "@fontsource/geist-sans/latin-700.css",
         "./src/tailwind.css",
       ],
       components: {
