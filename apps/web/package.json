@@ -16,7 +16,7 @@
     "@astrojs/check": "^0.5.4",
     "@astrojs/markdown-remark": "^4.2.1",
     "@astrojs/react": "^3.0.10",
-    "@astrojs/starlight": "^0.18.0",
+    "@astrojs/starlight": "^0.19.0",
     "@astrojs/starlight-tailwind": "^2.0.1",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/geist-sans": "^5.0.1",
