@@ -15,7 +15,7 @@
     "postgres": "^3.4.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.11.19",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.14",
     "pg": "^8.11.3",
