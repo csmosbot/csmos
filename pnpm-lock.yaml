@@ -136,8 +136,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(astro@4.4.0)(tailwindcss@3.4.1)
       '@fontsource/geist-sans':
-        specifier: ^5.0.1
-        version: 5.0.1
+        specifier: ^5.0.2
+        version: 5.0.2
       '@radix-ui/react-dropdown-menu':
         specifier: ^2.0.6
         version: 2.0.6(@types/react-dom@18.2.19)(@types/react@18.2.59)(react-dom@18.2.0)(react@18.2.0)
@@ -1489,8 +1489,8 @@ packages:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
     dev: false
 
-  /@fontsource/geist-sans@5.0.1:
-    resolution: {integrity: sha512-Q/GGewhqc6WTtqbOQWaHCar/BZY3H6Nu0J65BuWYOCXUhc/iEhRP9n+7V2KZ3X8+/ZNMCfFzxzrUZrQYB/lnNw==}
+  /@fontsource/geist-sans@5.0.2:
+    resolution: {integrity: sha512-i2djbiDmVBmoGAD3LbW0b75fnPIBFCTBJ0eOJB1VlcyNc5M7RbdmVNoSW38MVl3VPoXWIxXoQvlCHnhZMSJ4TA==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:
