@@ -19,6 +19,6 @@
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.14",
     "pg": "^8.11.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }
