@@ -23,7 +23,7 @@
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@types/react": "^18.2.59",
     "@types/react-dom": "^18.2.19",
-    "astro": "^4.4.11",
+    "astro": "^4.5.5",
     "lucide-react": "^0.341.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
