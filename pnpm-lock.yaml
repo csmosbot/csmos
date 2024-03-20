@@ -258,8 +258,8 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0
       discord-api-types:
-        specifier: ^0.37.73
-        version: 0.37.73
+        specifier: ^0.37.75
+        version: 0.37.75
       discord.js:
         specifier: ^14.14.1
         version: 14.14.1
@@ -3894,8 +3894,8 @@ packages:
   /discord-api-types@0.37.61:
     resolution: {integrity: sha512-o/dXNFfhBpYHpQFdT6FWzeO7pKc838QeeZ9d91CfVAtpr5XLK4B/zYxQbYgPdoMiTDvJfzcsLW5naXgmHGDNXw==}
 
-  /discord-api-types@0.37.73:
-    resolution: {integrity: sha512-mi915PBUxF1G233EwHKNegNAF/tVfiSRN9+hKwu0G3NpbtLXvWUxCuCjgSyY+QmQ6/Hvpqm0xs5HxzfvhAS20A==}
+  /discord-api-types@0.37.75:
+    resolution: {integrity: sha512-pnb2iPp63+TqSs+3MCzl47y0CFQYjDDQBmuiCs0LkLoRdFx2dDpjrzJYC7BcHJCa/Xlpf+/JuDT/YADvQLu3yQ==}
     dev: true
 
   /discord-gamecord@4.4.1:
