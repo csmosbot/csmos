@@ -16,5 +16,3 @@ This repository is a monorepo structured with [Turborepo](https://turbo.build/re
 
 - [Discord Bot](https://github.com/csmosspace/csmos/tree/main/apps/bot) - The Node.js bot that interacts with Discord.
 - [Website](https://github.com/csmosspace/csmos/tree/main/apps/web) - The website and documentation hosted on [csmos.space](https://csmos.space).
-
-<h6 align="center">Made with ❤️ by <a href="https://github.com/CosmoticLabs">Cosmotic Labs</a></h6>
