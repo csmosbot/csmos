@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://github.com/csmosspace/csmos/assets/50563138/e445c5d5-6095-40bc-8473-b9c4367855a1" width="480" height="80" alt="csmos Logo">
+ <img src="https://raw.githubusercontent.com/csmosbot/csmos/main/assets/logo.png" width="480" height="80" alt="csmos Logo">
 </p>
 
 <p align="center">
