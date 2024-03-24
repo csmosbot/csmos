@@ -1,6 +1,5 @@
-import { Event } from "@/structures/event";
+import { event } from "@/structures/event";
 
-export default new Event({
-  name: "ready",
-  run: (client) => console.log(`Logged in as ${client.user.tag}!`),
-});
+export default event("ready", (client) =>
+  console.log(`Logged in as ${client.user.username}!`)
+);
