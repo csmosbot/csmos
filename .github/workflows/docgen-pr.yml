@@ -14,8 +14,15 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.BOT_TOKEN }}
-      - name: Setup
-        uses: ./tooling/gh-actions/setup
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        shell: bash
+        run: bun install
       - name: Run generation script
         run: bun run docgen:commands
       - name: Commit
