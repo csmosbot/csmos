@@ -2,7 +2,7 @@ import type { ExtendedInteraction } from "@/structures/command";
 import { event } from "@/structures/event";
 import { config } from "@/utils/config";
 import { getCommandByName } from "@csmos/db";
-import { AutocompleteInteraction, EmbedBuilder } from "discord.js";
+import { type AutocompleteInteraction, EmbedBuilder } from "discord.js";
 
 export default event("interactionCreate", async (client, interaction) => {
   if (interaction.isCommand()) {
