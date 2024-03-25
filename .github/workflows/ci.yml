@@ -11,8 +11,18 @@ env:
   TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 jobs:
-  ci:
-    name: CI
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        uses: ./tooling/gh-actions-setup
+      - name: Lint
+        run: bun run lint
+  typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,5 +31,3 @@ jobs:
         uses: ./tooling/gh-actions-setup
       - name: Typecheck
         run: bun run typecheck
-      - name: Lint
-        run: bun run lint
