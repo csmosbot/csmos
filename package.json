@@ -2,6 +2,10 @@
   "name": "@csmos/root",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
@@ -23,5 +27,9 @@
     "@csmos/tsconfig": "workspace:*",
     "turbo": "^1.12.5"
   },
-  "packageManager": "pnpm@8.9.0"
+  "trustedDependencies": [
+    "@distube/yt-dlp",
+    "@nottca/canvacord",
+    "es5-ext"
+  ]
 }
