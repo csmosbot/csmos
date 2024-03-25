@@ -5,8 +5,10 @@ import {
   pgTable,
   text,
   timestamp,
+  uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
+import warn from "../../apps/bot/src/commands/moderation/warn";
 
 export const guilds = pgTable("guilds", {
   id: text("id").primaryKey().notNull(),
@@ -98,3 +100,24 @@ export const leavers = pgTable("leavers", {
   channelId: text("channel_id").notNull(),
   message: varchar("message", { length: 2000 }).notNull(),
 });
+
+export const commands = pgTable(
+  "commands",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    guildId: text("guild_id")
+      .notNull()
+      .references(() => guilds.id),
+    name: varchar("name", { length: 32 }).unique().notNull(),
+    description: varchar("description", { length: 100 }).notNull(),
+    response: text("response").notNull(),
+  },
+  (table) => ({
+    nameGuildIdIdx: uniqueIndex("unique_name_guild_id_idx").on(
+      table.name,
+      table.guildId
+    ),
+  })
+);
