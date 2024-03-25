@@ -51,3 +51,11 @@ Delete a command.
 |    Name   |           Description           | Required |
 | :-------: | :-----------------------------: | :------: |
 | `command` | The command you want to delete. |    Yes   |
+
+## Required Permissions
+
+:::note
+Learn more about permissions in [Discord's FAQ](https://support.discord.com/hc/en-us/articles/206029707-Setting-Up-Permissions-FAQ).
+:::
+
+- Manage Server
