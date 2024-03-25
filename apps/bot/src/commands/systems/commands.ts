@@ -59,7 +59,7 @@ export default new Command({
     ),
   autocomplete: async ({ interaction }) => {
     const focusedValue = interaction.options.getFocused();
-    const choices = (await getCommands(interaction.guild!.id)).map(
+    const choices = (await getCommands(interaction.guild.id)).map(
       (command) => command.name
     );
     const filtered = choices.filter((choice) =>
