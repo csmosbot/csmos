@@ -15,6 +15,7 @@ Create, update, and delete commands.
 ```sh
 /commands create
 /commands update
+/commands delete
 ```
 
 ## Subcommands
@@ -40,3 +41,13 @@ Update a command.
 |    Name   |           Description           | Required |
 | :-------: | :-----------------------------: | :------: |
 | `command` | The command you want to update. |    Yes   |
+
+### delete
+
+Delete a command.
+
+#### Options
+
+|    Name   |           Description           | Required |
+| :-------: | :-----------------------------: | :------: |
+| `command` | The command you want to delete. |    Yes   |
