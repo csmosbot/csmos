@@ -2,6 +2,7 @@ import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import {
   createCommand,
+  deleteCommand,
   getCommandByName,
   getCommands,
   updateCommand,
@@ -53,6 +54,18 @@ export default new Command({
           option
             .setName("command")
             .setDescription("The command you want to update.")
+            .setAutocomplete(true)
+            .setRequired(true)
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("delete")
+        .setDescription("Delete a command.")
+        .addStringOption((option) =>
+          option
+            .setName("command")
+            .setDescription("The command you want to delete.")
             .setAutocomplete(true)
             .setRequired(true)
         )
@@ -155,6 +168,7 @@ export default new Command({
                   `No command exists with name \`${commandName}\`.`
                 ),
               ],
+              ephemeral: true,
             });
 
           const modal = new ModalBuilder()
@@ -239,6 +253,41 @@ export default new Command({
               ephemeral: true,
             });
           }
+        }
+        break;
+      case "delete":
+        {
+          const commandName = interaction.options.getString("command", true);
+          const command = await getCommandByName(
+            commandName,
+            interaction.guild.id
+          );
+          if (!command)
+            return interaction.reply({
+              embeds: [
+                new DangerEmbed().setDescription(
+                  `No command exists with name \`${commandName}\`.`
+                ),
+              ],
+              ephemeral: true,
+            });
+
+          await deleteCommand(command.id);
+
+          const discordCommand = interaction.guild.commands.cache.find(
+            (command) => command.name
+          );
+          if (discordCommand)
+            await interaction.guild.commands.delete(discordCommand.id);
+
+          interaction.reply({
+            embeds: [
+              new SuccessEmbed().setDescription(
+                `Command \`${command.name}\` has been deleted.`
+              ),
+            ],
+            ephemeral: true,
+          });
         }
         break;
     }
