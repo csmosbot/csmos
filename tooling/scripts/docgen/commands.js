@@ -217,13 +217,15 @@ async function main() {
       "/* eslint-disable */",
       "",
       `export const categories = ${JSON.stringify(
-        categories.map((category) => ({
-          label: capitalize(category.replace("-", " ")),
-          collapsed: true,
-          autogenerate: {
-            directory: `commands/${category}`,
-          },
-        })),
+        categories
+          .map((category) => ({
+            label: capitalize(category.replace("-", " ")),
+            collapsed: true,
+            autogenerate: {
+              directory: `commands/${category}`,
+            },
+          }))
+          .sort((a, b) => a.label.localeCompare(b)),
         null,
         2
       )};`,
