@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup
-        uses: ./tooling/gh-actions-setup
+        uses: ./tooling/gh-actions/setup
       - name: Lint
         run: bun run lint
   typecheck:
@@ -28,6 +28,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup
-        uses: ./tooling/gh-actions-setup
+        uses: ./tooling/gh-actions/setup
       - name: Typecheck
         run: bun run typecheck

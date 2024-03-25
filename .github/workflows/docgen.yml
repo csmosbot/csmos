@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup
-        uses: ./tooling/gh-actions-setup
+        uses: ./tooling/gh-actions/setup
       - name: Run generation script
         run: bun run docgen:commands
       - name: Create Pull Request
