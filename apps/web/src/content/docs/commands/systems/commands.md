@@ -14,6 +14,7 @@ Create, update, and delete commands.
 
 ```sh
 /commands create
+/commands update
 ```
 
 ## Subcommands
@@ -29,3 +30,13 @@ Create a command.
 |     `name`    |             The name for the command.             |    Yes   |
 | `description` |          The description for the command.         |    Yes   |
 |   `response`  | How csmos responds when someone uses the command. |    Yes   |
+
+### update
+
+Update a command.
+
+#### Options
+
+|    Name   |           Description           | Required |
+| :-------: | :-----------------------------: | :------: |
+| `command` | The command you want to update. |    Yes   |
