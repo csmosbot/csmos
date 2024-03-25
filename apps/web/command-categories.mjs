@@ -3,24 +3,10 @@
 
 export const categories = [
   {
-    "label": "Configuration",
+    "label": "Moderation",
     "collapsed": true,
     "autogenerate": {
-      "directory": "commands/configuration"
-    }
-  },
-  {
-    "label": "Fun",
-    "collapsed": true,
-    "autogenerate": {
-      "directory": "commands/fun"
-    }
-  },
-  {
-    "label": "Games",
-    "collapsed": true,
-    "autogenerate": {
-      "directory": "commands/games"
+      "directory": "commands/moderation"
     }
   },
   {
@@ -31,17 +17,17 @@ export const categories = [
     }
   },
   {
-    "label": "Moderation",
+    "label": "Games",
     "collapsed": true,
     "autogenerate": {
-      "directory": "commands/moderation"
+      "directory": "commands/games"
     }
   },
   {
-    "label": "Music",
+    "label": "Fun",
     "collapsed": true,
     "autogenerate": {
-      "directory": "commands/music"
+      "directory": "commands/fun"
     }
   },
   {
@@ -49,6 +35,20 @@ export const categories = [
     "collapsed": true,
     "autogenerate": {
       "directory": "commands/systems"
+    }
+  },
+  {
+    "label": "Configuration",
+    "collapsed": true,
+    "autogenerate": {
+      "directory": "commands/configuration"
+    }
+  },
+  {
+    "label": "Music",
+    "collapsed": true,
+    "autogenerate": {
+      "directory": "commands/music"
     }
   }
 ];

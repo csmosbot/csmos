@@ -1,16 +1,11 @@
 "🤖 bot":
-  - "apps/bot/**"
+  - any: "apps/bot/**"
 
 "🖥️ website":
-  - "apps/web/**"
+  - any: "apps/web/**"
 
 "⚙️ actions":
-  - ".github/workflows/**"
+  - any: ".github/workflows/**"
 
 "📖 documentation":
-  - "apps/web/about.mdx"
-  - "apps/web/docs/**"
-  - "README.md"
-  - "LICENSE"
-  - ".env.example"
-  - "config.example.yml"
+  - any: ["apps/web/src/content/docs/**", "README.md", 'LICENSE', ".env.example", "config.example.yml"]
