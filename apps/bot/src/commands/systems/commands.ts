@@ -8,7 +8,6 @@ import {
 } from "@csmos/db";
 import {
   ActionRowBuilder,
-  ComponentType,
   ModalBuilder,
   SlashCommandBuilder,
   TextInputBuilder,
@@ -159,7 +158,7 @@ export default new Command({
             });
 
           const modal = new ModalBuilder()
-            .setCustomId("commandUpdateModal")
+            .setCustomId(`commandUpdateModal-${command.id}`)
             .setTitle(`Update ${command.name}`);
 
           const inputs = [
@@ -195,7 +194,9 @@ export default new Command({
           const submitted = await interaction
             .awaitModalSubmit({
               time: 120_000,
-              filter: (i) => i.user.id === interaction.user.id,
+              filter: (i) =>
+                i.customId === `commandUpdateModal-${command.id}` &&
+                i.user.id === interaction.user.id,
             })
             .catch((err) => {
               console.error(err);
@@ -212,6 +213,22 @@ export default new Command({
               description,
               response,
             });
+
+            if (name !== command.name || description !== command.description) {
+              const discordCommand = interaction.guild.commands.cache.find(
+                (command) => command.name
+              );
+              if (discordCommand)
+                await interaction.guild.commands.edit(discordCommand.id, {
+                  name,
+                  description,
+                });
+              else
+                await interaction.guild.commands.create({
+                  name,
+                  description,
+                });
+            }
 
             submitted.reply({
               embeds: [
