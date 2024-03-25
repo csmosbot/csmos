@@ -10,6 +10,7 @@ import {
 import {
   ActionRowBuilder,
   ModalBuilder,
+  PermissionFlagsBits,
   SlashCommandBuilder,
   TextInputBuilder,
   TextInputStyle,
@@ -69,7 +70,8 @@ export default new Command({
             .setAutocomplete(true)
             .setRequired(true)
         )
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
   autocomplete: async ({ interaction }) => {
     const focusedValue = interaction.options.getFocused();
     const choices = (await getCommands(interaction.guild.id)).map(
