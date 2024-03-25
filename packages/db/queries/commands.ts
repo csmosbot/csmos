@@ -26,7 +26,7 @@ export async function createCommand(data: typeof commands.$inferInsert) {
 
 export async function updateCommand(
   id: string,
-  data: Omit<typeof commands.$inferInsert, "id">
+  data: Omit<typeof commands.$inferInsert, "id" | "guildId">
 ) {
   return await db.update(commands).set(data).where(eq(commands.id, id));
 }
