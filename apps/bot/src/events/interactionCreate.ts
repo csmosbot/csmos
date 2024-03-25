@@ -1,6 +1,7 @@
 import type { ExtendedInteraction } from "@/structures/command";
 import { event } from "@/structures/event";
 import { config } from "@/utils/config";
+import { replaceVars } from "@/utils/variables";
 import { getCommandByName } from "@csmos/db";
 import { type AutocompleteInteraction, EmbedBuilder } from "discord.js";
 
@@ -21,7 +22,11 @@ export default event("interactionCreate", async (client, interaction) => {
     );
     if (customCommand)
       return interaction.reply({
-        content: customCommand.response,
+        content: replaceVars({
+          message: customCommand.response,
+          user: interaction.user,
+          guild: interaction.guild!,
+        }),
       });
 
     const command = client.commands.get(interaction.commandName);
