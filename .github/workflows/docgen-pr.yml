@@ -14,17 +14,10 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
           token: ${{ secrets.BOT_TOKEN }}
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
+      - name: Setup
+        uses: ./tooling/gh-actions-setup
       - name: Run generation script
-        run: pnpm run docgen:commands
+        run: bun run docgen:commands
       - name: Commit
         uses: EndBug/add-and-commit@v9
         with:
