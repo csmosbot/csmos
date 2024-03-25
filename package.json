@@ -32,5 +32,8 @@
     "@distube/yt-dlp",
     "@nottca/canvacord",
     "es5-ext"
-  ]
+  ],
+  "dependencies": {
+    "sharp": "latest"
+  }
 }
