@@ -2,7 +2,7 @@ import type { ExtendedInteraction } from "@/structures/command";
 import { event } from "@/structures/event";
 import { config } from "@/utils/config";
 import { getCommandByName } from "@csmos/db";
-import { EmbedBuilder } from "discord.js";
+import { AutocompleteInteraction, EmbedBuilder } from "discord.js";
 
 export default event("interactionCreate", async (client, interaction) => {
   if (interaction.isCommand()) {
@@ -40,7 +40,10 @@ export default event("interactionCreate", async (client, interaction) => {
     if (!command) return;
 
     try {
-      await command.autocomplete?.({ client, interaction });
+      await command.autocomplete?.({
+        client,
+        interaction: interaction as AutocompleteInteraction<"cached">,
+      });
     } catch (err) {
       console.error(err);
     }
