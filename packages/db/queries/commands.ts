@@ -31,6 +31,6 @@ export async function updateCommand(
   return await db.update(commands).set(data).where(eq(commands.id, id));
 }
 
-export async function deleteCommand(id) {
+export async function deleteCommand(id: string) {
   return await db.delete(commands).where(eq(commands.id, id));
 }
