@@ -24,7 +24,7 @@ export interface CommandOptions {
     interaction,
   }: {
     client: BotClient<true>;
-    interaction: AutocompleteInteraction;
+    interaction: AutocompleteInteraction<"cached">;
   }) => any;
   run: ({
     client,

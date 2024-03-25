@@ -7,6 +7,7 @@ import { Client, Collection } from "discord.js";
 import fs from "fs";
 import path from "path";
 import type { CommandOptions } from "./command";
+import { getCommands } from "@csmos/db";
 
 export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   commands = new Collection<string, CommandOptions & { category: string }>();
@@ -48,6 +49,14 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
         const guild = this.guilds.cache.get(config.guildID);
         if (!guild)
           throw new SyntaxError(`No guild exists with ID '${config.guildID}'`);
+
+        const customCommands = await getCommands(guild.id);
+        commands.push(
+          ...customCommands.map((command) => ({
+            name: command.name,
+            description: command.description,
+          }))
+        );
 
         await guild.commands.set(commands);
         console.log(`Registered commands in ${guild.name}.`);

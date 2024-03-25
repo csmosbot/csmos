@@ -2,6 +2,7 @@ export * from "./db";
 export * from "./schema";
 
 export * from "./queries/afks";
+export * from "./queries/commands";
 export * from "./queries/guild";
 export * from "./queries/leavers";
 export * from "./queries/users";

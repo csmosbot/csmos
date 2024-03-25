@@ -1,7 +1,8 @@
 import type { ExtendedInteraction } from "@/structures/command";
 import { event } from "@/structures/event";
 import { config } from "@/utils/config";
-import { EmbedBuilder } from "discord.js";
+import { getCommandByName } from "@csmos/db";
+import { type AutocompleteInteraction, EmbedBuilder } from "discord.js";
 
 export default event("interactionCreate", async (client, interaction) => {
   if (interaction.isCommand()) {
@@ -12,6 +13,15 @@ export default event("interactionCreate", async (client, interaction) => {
             .setDescription("My commands can only be used in a server.")
             .setColor(config.colors.danger),
         ],
+      });
+
+    const customCommand = await getCommandByName(
+      interaction.commandName,
+      interaction.guild!.id
+    );
+    if (customCommand)
+      return interaction.reply({
+        content: customCommand.response,
       });
 
     const command = client.commands.get(interaction.commandName);
@@ -30,7 +40,10 @@ export default event("interactionCreate", async (client, interaction) => {
     if (!command) return;
 
     try {
-      await command.autocomplete?.({ client, interaction });
+      await command.autocomplete?.({
+        client,
+        interaction: interaction as AutocompleteInteraction<"cached">,
+      });
     } catch (err) {
       console.error(err);
     }
