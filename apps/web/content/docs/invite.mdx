@@ -3,24 +3,47 @@ title: Inviting csmos
 description: Start using csmos in your Discord server.
 ---
 
-:::caution[Warning]
-csmos is still in heavy development and may not be online when you invite it. We promise that once we fully release v1, csmos will be fully online and ready to meet your server's needs.
-:::
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+
+<Alert className="border-yellow-400/50">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="w-4 h-4 !text-yellow-400"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" x2="12" y1="8" y2="12" />
+    <line x1="12" x2="12.01" y1="16" y2="16" />
+  </svg>
+  <AlertTitle className="text-yellow-400 pb-1">Warning</AlertTitle>
+  <AlertDescription>
+    csmos is still in heavy development and may not be online when you invite
+    it. We promise that once we fully release v1, csmos will be fully online and
+    ready to meet your server's needs.
+  </AlertDescription>
+</Alert>
 
 Let's add csmos to your Discord server! First, go to [csmos.space/invite](/invite). This should lead you to a page like this:
 
-![Select a server](/getting-started/invite-1.png)
+![Select a server](/invite/1.png)
 
 Select the server that you want to add csmos in, then click "Continue". You should then be sent to a page like this:
 
-![Authorize](/getting-started/invite-2.png)
+![Authorize](/invite/2.png)
 
 If you want, you can deselect some of the permissions we have by default, but we recommend leaving it as most of these permissions are required by some features of csmos. Once you're ready, click "Authorize". You should then see a page like this:
 
-![Authorized](/getting-started/invite-3.png)
+![Authorized](/invite/3.png)
 
 This means that csmos has been invited into your server! If you check your server, you should see csmos in your member list like this:
 
-![csmos in the server](/getting-started/invite-4.png)
+![csmos in the server](/invite/4.png)
 
 csmos is now in your server and you can now start building your dream Discord server!

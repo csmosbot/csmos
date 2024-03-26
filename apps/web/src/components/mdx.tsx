@@ -76,6 +76,14 @@ const components = {
       {...props}
     />
   ),
+  img: ({
+    className,
+    alt,
+    ...props
+  }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img className={cn("rounded-md", className)} alt={alt} {...props} />
+  ),
 };
 
 export function Mdx({ code }: { code: string }) {
