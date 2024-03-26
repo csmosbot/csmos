@@ -17,4 +17,4 @@ node_modules/
 
 # nextjs
 .next/
-.contentlayer/generated
+.contentlayer
