@@ -8,7 +8,6 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
-import warn from "../../apps/bot/src/commands/moderation/warn";
 
 export const guilds = pgTable("guilds", {
   id: text("id").primaryKey().notNull(),
