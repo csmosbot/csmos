@@ -1,0 +1,5 @@
+{
+  "extends": "@csmos/tsconfig/base.json",
+  "include": ["index.ts", "db.ts", "schema.ts", "drizzle.config.ts", "queries"],
+  "exclude": ["node_modules"]
+}
