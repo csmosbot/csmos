@@ -5,11 +5,11 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
-    "db:push": "pnpm with-env drizzle-kit push:pg",
-    "db:studio": "pnpm with-env drizzle-kit studio",
-    "with-env": "dotenv -e ../../.env --",
+    "db:push": "bun with-env drizzle-kit push:pg",
+    "db:studio": "bun with-env drizzle-kit studio",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",

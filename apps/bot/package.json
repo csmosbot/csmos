@@ -4,7 +4,7 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "dev": "pnpm with-env nodemon src/index.ts",
+    "dev": "bun with-env nodemon src/index.ts",
     "build": "tsc && tsc-alias",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
