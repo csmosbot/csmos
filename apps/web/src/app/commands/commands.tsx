@@ -117,9 +117,9 @@ function CommandList({
                   <CardTitle>/{command.name}</CardTitle>
                   <CardDescription>{command.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="[&:empty]:hidden">
+                <CardContent className="[&:empty]:hidden flex flex-col gap-6">
                   {"options" in command && (
-                    <>
+                    <div>
                       <p className="font-medium pb-2">Options</p>
                       <ul className="flex flex-col gap-2">
                         {command.options.map((option) => (
@@ -134,10 +134,10 @@ function CommandList({
                           </li>
                         ))}
                       </ul>
-                    </>
+                    </div>
                   )}
                   {"subcommands" in command && (
-                    <>
+                    <div>
                       <p className="font-medium pb-2">Subcommands</p>
                       <ul className="flex flex-col gap-2">
                         {command.subcommands.map((subcommand) => (
@@ -157,14 +157,42 @@ function CommandList({
                                   {subcommand.subcommands.map((subcommand) => (
                                     <li
                                       key={subcommand.name}
-                                      className="text-sm flex items-center gap-1.5 pl-2"
+                                      className="flex flex-col gap-1.5"
                                     >
-                                      <p className="font-medium">
-                                        {subcommand.name}
-                                      </p>
-                                      <p className="text-muted-foreground">
-                                        {subcommand.description}
-                                      </p>
+                                      <div className="text-sm flex items-center gap-1.5 pl-2">
+                                        <p className="font-medium">
+                                          {subcommand.name}
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                          {subcommand.description}
+                                        </p>
+                                      </div>
+                                      {"options" in subcommand &&
+                                        !!(subcommand as SubcommandWithOptions)
+                                          .options.length && (
+                                          <div className="pl-4">
+                                            <p className="font-medium pb-2">
+                                              Options
+                                            </p>
+                                            <ul className="flex flex-col gap-2">
+                                              {(
+                                                subcommand as SubcommandWithOptions
+                                              ).options.map((option) => (
+                                                <li
+                                                  key={option.name}
+                                                  className="text-sm flex items-center gap-1.5"
+                                                >
+                                                  <p className="font-medium">
+                                                    {option.name}
+                                                  </p>
+                                                  <p className="text-muted-foreground">
+                                                    {option.description}
+                                                  </p>
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        )}
                                     </li>
                                   ))}
                                   {"options" in subcommand &&
@@ -219,7 +247,22 @@ function CommandList({
                           </li>
                         ))}
                       </ul>
-                    </>
+                    </div>
+                  )}
+                  {command.permissions && (
+                    <div>
+                      <p className="font-medium pb-2">Permissions</p>
+                      <ul className="flex flex-col gap-2">
+                        {command.permissions.map((permission) => (
+                          <li
+                            key={permission}
+                            className="font-medium text-sm flex items-center gap-1.5"
+                          >
+                            {permission}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </CardContent>
               </Card>

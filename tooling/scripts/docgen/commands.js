@@ -124,7 +124,10 @@ async function main() {
                 subcommands: option.options.map((subcommand) => ({
                   name: subcommand.name,
                   description: subcommand.description,
-                  options: convertOptions(option.options),
+                  options:
+                    subcommand.options &&
+                    !!subcommand.options.length &&
+                    convertOptions(subcommand.options),
                 })),
               };
           });

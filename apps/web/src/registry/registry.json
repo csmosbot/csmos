@@ -572,11 +572,8 @@
                 "options": [
                   {
                     "name": "channel",
-                    "description": "Update the goodbye channel."
-                  },
-                  {
-                    "name": "message",
-                    "description": "Update the goodbye message."
+                    "description": "The new goodbye channel.",
+                    "required": true
                   }
                 ]
               },
@@ -585,12 +582,9 @@
                 "description": "Update the goodbye message.",
                 "options": [
                   {
-                    "name": "channel",
-                    "description": "Update the goodbye channel."
-                  },
-                  {
                     "name": "message",
-                    "description": "Update the goodbye message."
+                    "description": "The new goodbye message.",
+                    "required": true
                   }
                 ]
               }
@@ -639,11 +633,8 @@
                 "options": [
                   {
                     "name": "channel",
-                    "description": "Update the welcome channel."
-                  },
-                  {
-                    "name": "message",
-                    "description": "Update the welcome message."
+                    "description": "The new welcome channel.",
+                    "required": true
                   }
                 ]
               },
@@ -652,12 +643,9 @@
                 "description": "Update the welcome message.",
                 "options": [
                   {
-                    "name": "channel",
-                    "description": "Update the welcome channel."
-                  },
-                  {
                     "name": "message",
-                    "description": "Update the welcome message."
+                    "description": "The new welcome message.",
+                    "required": true
                   }
                 ]
               }

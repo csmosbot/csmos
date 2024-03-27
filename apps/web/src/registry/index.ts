@@ -10,6 +10,7 @@ export interface RegistryEntry {
 export type Command = {
   name: string;
   description: string;
+  permissions?: string[];
 } & ({ options: Option[] } | { subcommands: Subcommand[] });
 
 export interface Option {
