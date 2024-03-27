@@ -1,8 +1,4 @@
-import { getRegistry } from "@/registry";
-
-export default async function Home() {
-  const registry = await getRegistry();
-  console.log(registry);
+export default function Home() {
   return (
     <div className="container py-6">
       <h1>hello world</h1>

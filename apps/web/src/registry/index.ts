@@ -2,26 +2,35 @@ import { readFile } from "fs/promises";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
-interface RegistryEntry {
+export interface RegistryEntry {
   name: string;
   commands: Command[];
 }
 
-type Command = {
+export type Command = {
   name: string;
   description: string;
 } & ({ options: Option[] } | { subcommands: Subcommand[] });
 
-interface Option {
+export interface Option {
   name: string;
   description: string;
   required: boolean;
 }
 
-type Subcommand = {
+export type Subcommand = SubcommandWithOptions | SubcommandWithChildren;
+
+export type SubcommandWithOptions = {
   name: string;
   description: string;
-} & ({ options: Option[] } | { subcommands: Subcommand[] });
+  options: Option[];
+};
+
+export type SubcommandWithChildren = {
+  name: string;
+  description: string;
+  subcommands: Subcommand[];
+};
 
 const readRegistry = () =>
   readFile(

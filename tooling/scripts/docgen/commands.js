@@ -144,7 +144,7 @@ async function main() {
 
     registry.push({
       name: capitalize(category),
-      commands: entries,
+      commands: entries.sort((a, b) => a.name.localeCompare(b.name)),
     });
   }
 
