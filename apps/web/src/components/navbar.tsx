@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { buttonVariants } from "./ui/button";
 import { Plus } from "lucide-react";
+import { MobileDropdown } from "./mobile-nav";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -21,22 +22,24 @@ export function Navbar() {
         >
           <Image src="/csmos.png" alt="csmos Logo" width={40} height={40} />
         </Link>
-        {siteConfig.navbarItems.map((item, index) => (
-          <Link
-            key={index}
-            href={item.href}
-            className={cn(
-              "text-[14.5px] hover:underline transition-colors hover:text-foreground/80",
-              pathname.startsWith(item.href)
-                ? "font-medium"
-                : "text-foreground/60"
-            )}
-          >
-            {item.title}
-          </Link>
-        ))}
+        <div className="hidden md:flex md:items-center md:gap-4">
+          {siteConfig.navbarItems.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className={cn(
+                "text-[14.5px] hover:underline transition-colors hover:text-foreground/80",
+                pathname.startsWith(item.href)
+                  ? "font-medium"
+                  : "text-foreground/60"
+              )}
+            >
+              {item.title}
+            </Link>
+          ))}
+        </div>
       </nav>
-      <div className="flex items-center gap-1">
+      <div className="hidden md:flex md:items-center md:gap-1">
         <a
           href={siteConfig.links.github}
           target="_blank"
@@ -66,6 +69,7 @@ export function Navbar() {
         </a>
         <ThemeToggle />
       </div>
+      <MobileDropdown />
     </header>
   );
 }

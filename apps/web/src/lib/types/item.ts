@@ -7,5 +7,5 @@ export interface ItemWithHref {
 
 export interface ItemWithChildren {
   title: string;
-  items: Item[];
+  items: ItemWithHref[];
 }
