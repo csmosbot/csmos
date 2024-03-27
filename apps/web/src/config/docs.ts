@@ -17,6 +17,10 @@ export const docsConfig: DocsConfig = {
           title: "Inviting csmos to your server",
           href: "/docs/invite",
         },
+        {
+          title: "Commands",
+          href: "/docs/commands",
+        },
       ],
     },
   ],
