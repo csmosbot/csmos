@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import type { TableOfContents } from "@/lib/toc";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { useMounted } from "@/lib/hooks/mounted";
 
 interface TocProps {

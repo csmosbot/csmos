@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ThemeToggle } from "./themes";
 import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { usePathname } from "next/navigation";
 import { buttonVariants } from "./ui/button";
 import { Plus } from "lucide-react";
