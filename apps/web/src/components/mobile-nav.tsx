@@ -41,9 +41,11 @@ export function MobileDropdown() {
         <ScrollArea className="px-8">
           <div className="flex flex-col pb-4">
             {siteConfig.navbarItems.map((item) => (
-              <Link key={item.title} href={item.href} className="py-1">
-                {item.title}
-              </Link>
+              <PopoverClose asChild key={item.title}>
+                <Link href={item.href} className="py-1">
+                  {item.title}
+                </Link>
+              </PopoverClose>
             ))}
           </div>
           {docsConfig.sidebarItems.map((item) => (

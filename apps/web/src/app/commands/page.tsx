@@ -3,6 +3,21 @@ import { AllCommands } from "./commands";
 
 export const dynamic = "force-static";
 
+export const metadata = {
+  title: "Commands",
+  description: "View a list of every single one of csmos' commands.",
+  openGraph: {
+    siteName: "csmos",
+    title: "Commands",
+    description: "View a list of every single one of csmos' commands.",
+    url: "/commands",
+  },
+  twitter: {
+    title: "Commands",
+    description: "View a list of every single one of csmos' commands.",
+  },
+};
+
 export default async function Commands() {
   const registry = await getRegistry();
   return (

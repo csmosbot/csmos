@@ -2,7 +2,9 @@ import { Mdx } from "@/components/mdx";
 import { TableOfContents } from "@/components/toc";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getTableOfContents } from "@/lib/toc";
+import { absoluteUrl } from "@/lib/url";
 import { allDocs } from "contentlayer/generated";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface DocPageProps {
@@ -24,6 +26,29 @@ export const generateStaticParams = async (): Promise<
   allDocs.map((doc) => ({
     slug: doc.slugAsParams.split("/"),
   }));
+
+export async function generateMetadata({
+  params,
+}: DocPageProps): Promise<Metadata> {
+  const doc = getDocFromParams({ params });
+  if (!doc) return {};
+
+  return {
+    title: doc.title,
+    description: doc.description,
+    openGraph: {
+      siteName: "csmos",
+      title: doc.title,
+      description: doc.description,
+      type: "article",
+      url: `/${doc.slug}`,
+    },
+    twitter: {
+      title: doc.title,
+      description: doc.description,
+    },
+  };
+}
 
 export default async function DocPage({ params }: DocPageProps) {
   const doc = getDocFromParams({ params });
