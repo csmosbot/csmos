@@ -1,6 +1,7 @@
 import { Mdx } from "@/components/mdx";
-import { DocsSidebar } from "@/components/sidebar";
+import { TableOfContents } from "@/components/toc";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { getTableOfContents } from "@/lib/toc";
 import { allDocs } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 
@@ -24,18 +25,28 @@ export const generateStaticParams = async (): Promise<
     slug: doc.slugAsParams.split("/"),
   }));
 
-export default function DocPage({ params }: DocPageProps) {
+export default async function DocPage({ params }: DocPageProps) {
   const doc = getDocFromParams({ params });
   if (!doc) return notFound();
+
+  const toc = await getTableOfContents(doc.body.raw);
+
   return (
-    <div className="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]">
-      <div className="mx-auto w-full min-w-0">
+    <div className="relative lg:gap-10 xl:grid xl:grid-cols-[1fr_300px]">
+      <div className="mx-auto w-full min-w-0 pt-6">
         <h1 className="scroll-m-20 text-4xl font-bold tracking-tight">
           {doc.title}
         </h1>
         <article className="pb-12 pt-8">
           <Mdx code={doc.body.code} />
         </article>
+      </div>
+      <div className="hidden text-sm xl:block">
+        <div className="fixed top-14 p-6 border-l h-full">
+          <ScrollArea className="pb-10">
+            <TableOfContents toc={toc} />
+          </ScrollArea>
+        </div>
       </div>
     </div>
   );
