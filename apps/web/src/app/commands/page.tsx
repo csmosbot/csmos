@@ -1,4 +1,8 @@
-import { type Command, getRegistry, SubcommandWithOptions } from "@/registry";
+import {
+  type Command,
+  getRegistry,
+  type SubcommandWithOptions,
+} from "@/registry";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Card,
