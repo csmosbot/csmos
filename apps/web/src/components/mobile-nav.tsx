@@ -105,7 +105,7 @@ export function MobileDropdown() {
             <Plus className="h-5 w-5" />
             <span className="sr-only">Invite</span>
           </a>
-          <ThemeToggle />
+          <ThemeToggle mobile />
         </div>
       </PopoverContent>
     </Popover>

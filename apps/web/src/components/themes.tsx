@@ -17,7 +17,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ mobile }: { mobile?: true }) {
   const { setTheme } = useTheme();
 
   return (
@@ -29,7 +29,7 @@ export function ThemeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" side={mobile ? "top" : undefined}>
         <DropdownMenuItem onClick={() => setTheme("light")}>
           <Sun className="w-5 h-5 mr-1.5" /> Light
         </DropdownMenuItem>
