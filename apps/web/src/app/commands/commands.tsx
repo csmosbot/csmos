@@ -24,19 +24,21 @@ export function AllCommands({ registry }: { registry: RegistryEntry[] }) {
   const [searchValue, setSearchValue] = useState<string>("");
 
   function setValue(value: string) {
-    const currentSearchParams = new URLSearchParams(searchParams.toString());
-    currentSearchParams.set("category", value);
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (value !== "all") newParams.set("category", value);
+    else newParams.delete("category");
+
     setCurrentTab(value);
-    router.replace(createUrl(pathname, currentSearchParams), { scroll: false });
+    router.replace(createUrl(pathname, newParams), { scroll: false });
   }
 
   const onInputChange: ChangeEventHandler<HTMLInputElement> = (ev) => {
-    const currentSearchParams = new URLSearchParams(searchParams.toString());
-    if (ev.target.value.length)
-      currentSearchParams.set("query", ev.target.value);
-    else currentSearchParams.delete("query");
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (ev.target.value.length) newParams.set("query", ev.target.value);
+    else newParams.delete("query");
+
     setSearchValue(ev.target.value);
-    router.replace(createUrl(pathname, currentSearchParams), { scroll: false });
+    router.replace(createUrl(pathname, newParams), { scroll: false });
   };
 
   return (
