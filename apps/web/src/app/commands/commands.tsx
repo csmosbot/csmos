@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type ChangeEventHandler, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export function AllCommands({ registry }: { registry: RegistryEntry[] }) {
   const router = useRouter();
@@ -48,21 +49,24 @@ export function AllCommands({ registry }: { registry: RegistryEntry[] }) {
       value={currentTab}
       onValueChange={setValue}
     >
-      <div className="flex items-center gap-2">
-        <TabsList className="gap-1 mb-1">
-          <TabsTrigger value="all" className="hover:bg-foreground/10">
-            All
-          </TabsTrigger>
-          {registry.map((category) => (
-            <TabsTrigger
-              key={category.name}
-              value={category.name.toLowerCase()}
-              className="hover:bg-foreground/10"
-            >
-              {category.name}
+      <div className="flex flex-col min-[958px]:flex-row items-center gap-1 min-[958px]:gap-2">
+        <ScrollArea className="w-full rounded-lg">
+          <TabsList className="gap-1 mb-1 w-full justify-start">
+            <TabsTrigger value="all" className="hover:bg-foreground/10">
+              All
             </TabsTrigger>
-          ))}
-        </TabsList>
+            {registry.map((category) => (
+              <TabsTrigger
+                key={category.name}
+                value={category.name.toLowerCase()}
+                className="hover:bg-foreground/10"
+              >
+                {category.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
         <Input
           placeholder="Search for a command..."
           value={searchValue}
