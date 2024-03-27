@@ -1,6 +1,8 @@
 import { getRegistry } from "@/registry";
 import { AllCommands } from "./commands";
 
+export const dynamic = "force-static";
+
 export default async function Commands() {
   const registry = await getRegistry();
   return (
