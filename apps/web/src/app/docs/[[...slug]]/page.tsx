@@ -2,9 +2,8 @@ import { Mdx } from "@/components/mdx";
 import { TableOfContents } from "@/components/toc";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getTableOfContents } from "@/lib/toc";
-import { absoluteUrl } from "@/lib/url";
 import { allDocs } from "contentlayer/generated";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface DocPageProps {
