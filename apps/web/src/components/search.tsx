@@ -28,11 +28,10 @@ export default function Search() {
 
   useEffect(() => {
     const onKeyDown = (ev: KeyboardEvent) => {
-      if (
-        ev.key === "/" &&
-        document.activeElement?.tagName.toLowerCase() !== "input"
-      )
+      if (ev.key === "k" && (ev.metaKey || ev.ctrlKey)) {
+        ev.preventDefault();
         setOpen(true);
+      }
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -56,7 +55,9 @@ export default function Search() {
             <SearchIcon className="w-4 h-4" />
             <p>Search</p>
           </div>
-          <div className="border px-1.5 py-0.5 text-xs bg-muted rounded">/</div>
+          <kbd className="border px-1.5 text-xs bg-muted rounded flex items-center gap-1">
+            <span className="text-sm mt-0.5">⌘</span> K
+          </kbd>
         </button>
       </DialogTrigger>
       <DialogContent disableXIcon>
