@@ -70,8 +70,8 @@ function CommandList({
               <CardContent className="[&:empty]:hidden">
                 {"options" in command && (
                   <>
-                    <p className="font-medium pb-1">Options</p>
-                    <ul className="flex flex-col gap-1">
+                    <p className="font-medium pb-2">Options</p>
+                    <ul className="flex flex-col gap-2">
                       {command.options.map((option) => (
                         <li
                           key={option.name}
@@ -88,7 +88,7 @@ function CommandList({
                 )}
                 {"subcommands" in command && (
                   <>
-                    <p className="font-medium pb-1">Subcommands</p>
+                    <p className="font-medium pb-2">Subcommands</p>
                     <ul className="flex flex-col gap-2">
                       {command.subcommands.map((subcommand) => (
                         <li
@@ -121,10 +121,10 @@ function CommandList({
                                   !!(subcommand as SubcommandWithOptions)
                                     .options.length && (
                                     <div className="pl-4">
-                                      <p className="font-medium pb-1">
+                                      <p className="font-medium pb-2">
                                         Options
                                       </p>
-                                      <ul className="flex flex-col gap-1">
+                                      <ul className="flex flex-col gap-2">
                                         {(
                                           subcommand as SubcommandWithOptions
                                         ).options.map((option) => (
@@ -148,8 +148,8 @@ function CommandList({
                           {"options" in subcommand &&
                             !!subcommand.options.length && (
                               <div className="pl-2">
-                                <p className="font-medium pb-1">Options</p>
-                                <ul className="flex flex-col gap-1">
+                                <p className="font-medium pb-2">Options</p>
+                                <ul className="flex flex-col gap-2">
                                   {subcommand.options.map((option) => (
                                     <li
                                       key={option.name}
