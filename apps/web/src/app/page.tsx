@@ -1,5 +1,20 @@
 import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { siteConfig } from "@/config/site";
+import {
+  Command,
+  Gamepad2,
+  Gavel,
+  Hand,
+  LineChart,
+  Music,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -43,6 +58,65 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <section className="relative mx-auto max-w-6xl px-4 pb-16 sm:px-7 sm:pb-32 lg:px-8">
+        <h2 className="mb-10 text-balance text-center text-3xl font-bold tracking-tight lg:text-4xl">
+          What's included
+        </h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
+          <FeatureCard
+            title="Moderation"
+            description="See someone that isn't following the rules? Easily warn, kick, mute, or ban them."
+            icon={Gavel}
+          />
+          <FeatureCard
+            title="Music"
+            description="Listen to your favorite songs with your friends in voice chats."
+            icon={Music}
+          />
+          <FeatureCard
+            title="Games"
+            description="Allow your members to play games when they're bored."
+            icon={Gamepad2}
+          />
+          <FeatureCard
+            title="Leveling"
+            description="The more your members talk in chat, the more XP they gain."
+            icon={LineChart}
+          />
+          <FeatureCard
+            title="Custom commands"
+            description="Create your own commands that respond with their own custom content."
+            icon={Command}
+          />
+          <FeatureCard
+            title="Welcomer & Leaver"
+            description="Welcome or say goodbye to your members whenever they join or leave."
+            icon={Hand}
+          />
+        </div>
+      </section>
     </div>
+  );
+}
+
+function FeatureCard({
+  title,
+  description,
+  icon: Icon,
+}: {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}) {
+  return (
+    <Card>
+      <CardHeader>
+        <div className="mb-2 [&>svg]:mb-2 [&>svg]:size-10">
+          <Icon />
+        </div>
+        <CardTitle className="pb-1">{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+    </Card>
   );
 }
