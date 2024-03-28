@@ -7,7 +7,7 @@ export default function Home() {
     <div className="container py-6">
       <span className="hero-gradient" />
       <section className="py-20 sm:py-28 md:py-32">
-        <h1 className="mx-auto max-w-3xl text-balance text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
+        <h1 className="mx-auto max-w-3xl text-balance text-center text-5xl font-bold tracking-tight lg:text-7xl">
           The{" "}
           <span className="bg-gradient-to-b from-fuchsia-500 to-fuchsia-800 bg-clip-text text-transparent">
             next generation
