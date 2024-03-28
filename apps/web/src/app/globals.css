@@ -34,7 +34,7 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
     --primary: 295 70% 50%;
-    --primary-foreground: 210 20% 98%;
+    --primary-foreground: 240 5.9% 10%;
     --secondary: 215 27.9% 16.9%;
     --secondary-foreground: 210 20% 98%;
     --muted: 240 3.7% 15.9%;
@@ -54,6 +54,14 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .hero-gradient {
+    background: radial-gradient(
+      circle 50vh at 50% 25%,
+      hsl(var(--primary) / 1),
+      hsl(var(--background) / 1) 60%
+    );
+    @apply fixed -top-[5vh] left-[0vw] -z-[1] h-[30vh] w-full opacity-100 blur-[180px];
   }
 }
 
