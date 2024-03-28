@@ -61,7 +61,7 @@
       hsl(var(--primary) / 1),
       hsl(var(--background) / 1) 60%
     );
-    @apply fixed -top-[5vh] left-[0vw] -z-[1] h-[30vh] w-full opacity-100 blur-[180px];
+    @apply absolute -top-[5vh] left-[0vw] -z-[1] h-[30vh] w-full opacity-100 blur-[180px];
   }
 }
 
