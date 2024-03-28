@@ -1,8 +1,17 @@
 {
-  "extends": ["astro/tsconfigs/strict", "@csmos/tsconfig/base.json"],
+  "extends": "@csmos/tsconfig/nextjs.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "lib": ["dom", "dom.iterable"]
-  }
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
+  ]
 }
