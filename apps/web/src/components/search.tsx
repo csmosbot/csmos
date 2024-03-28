@@ -60,15 +60,22 @@ export default function Search() {
           </kbd>
         </button>
       </DialogTrigger>
-      <DialogContent disableXIcon>
-        <Input placeholder="Search docs..." onChange={onChange} />
-        <div className="[&:empty]:hidden flex flex-col gap-3">
+      <DialogContent className="overflow-hidden p-0 shadow-lg gap-0">
+        <div className="flex items-center border-b pl-3">
+          <SearchIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+          <Input
+            className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-0 border-none pl-0 focus-visible:ring-offset-0"
+            placeholder="Search docs..."
+            onChange={onChange}
+          />
+        </div>
+        <div className="[&:empty]:hidden flex flex-col divide-y">
           {results?.map((result) => (
             <DialogClose asChild>
               <Link
                 key={result.slug}
                 href={result.slug}
-                className="flex flex-col gap-2 border p-4 rounded-lg hover:bg-muted transition-colors"
+                className="flex flex-col gap-2 p-4 hover:bg-muted transition-colors"
               >
                 <h1
                   className="text-xl font-bold tracking-tight"
