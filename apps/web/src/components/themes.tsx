@@ -31,13 +31,13 @@ export function ThemeToggle({ mobile }: { mobile?: true }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" side={mobile ? "top" : undefined}>
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="w-5 h-5 mr-1.5" /> Light
+          <Sun className="mr-1.5 h-5 w-5" /> Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="w-5 h-5 mr-1.5" /> Dark
+          <Moon className="mr-1.5 h-5 w-5" /> Dark
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          <Laptop className="w-5 h-5 mr-1.5" /> System
+          <Laptop className="mr-1.5 h-5 w-5" /> System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

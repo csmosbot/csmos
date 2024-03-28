@@ -44,7 +44,7 @@ function DocsSidebarItems({
             "px-2 py-1 hover:underline",
             pathname === item.href
               ? "font-medium text-foreground"
-              : "text-muted-foreground"
+              : "text-muted-foreground",
           )}
         >
           {item.title}

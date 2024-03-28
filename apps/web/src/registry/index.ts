@@ -36,7 +36,7 @@ export type SubcommandWithChildren = {
 const readRegistry = () =>
   readFile(
     join(dirname(fileURLToPath(import.meta.url)), "./registry.json"),
-    "utf8"
+    "utf8",
   ).then((text) => JSON.parse(text));
 
 export async function getRegistry(): Promise<RegistryEntry[]> {

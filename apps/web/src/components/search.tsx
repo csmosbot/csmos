@@ -23,7 +23,7 @@ export default function Search() {
       slug: doc.slug,
       title: doc.title,
       content: doc.body.raw,
-    }))
+    })),
   );
 
   useEffect(() => {
@@ -50,33 +50,33 @@ export default function Search() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="rounded-md border border-input px-3 py-2 h-10 flex items-center justify-between text-sm text-muted-foreground hover:bg-muted transition-colors hover:text-foreground focus-visible:ring-offset-2 focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none ring-offset-background w-48 md:w-64">
+        <button className="flex h-10 w-48 items-center justify-between rounded-md border border-input px-3 py-2 text-sm text-muted-foreground ring-offset-background transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:w-64">
           <div className="flex items-center gap-2">
-            <SearchIcon className="w-4 h-4" />
+            <SearchIcon className="h-4 w-4" />
             <p className="inline md:hidden">Search...</p>
             <p className="hidden md:inline">Search docs...</p>
           </div>
-          <kbd className="border px-1.5 text-xs bg-muted rounded flex items-center gap-1">
-            <span className="text-sm mt-0.5">⌘</span> K
+          <kbd className="flex items-center gap-1 rounded border bg-muted px-1.5 text-xs">
+            <span className="mt-0.5 text-sm">⌘</span> K
           </kbd>
         </button>
       </DialogTrigger>
-      <DialogContent className="overflow-hidden p-0 shadow-lg gap-0">
+      <DialogContent className="gap-0 overflow-hidden p-0 shadow-lg">
         <div className="flex items-center border-b pl-3">
           <SearchIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
           <Input
-            className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 focus-visible:ring-0 border-none pl-0 focus-visible:ring-offset-0"
+            className="flex h-11 w-full rounded-md border-none bg-transparent py-3 pl-0 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50"
             placeholder="Search docs..."
             onChange={onChange}
           />
         </div>
-        <div className="[&:empty]:hidden flex flex-col divide-y">
+        <div className="flex flex-col divide-y [&:empty]:hidden">
           {results?.map((result) => (
             <DialogClose asChild>
               <Link
                 key={result.slug}
                 href={result.slug}
-                className="flex flex-col gap-2 p-4 hover:bg-muted transition-colors"
+                className="flex flex-col gap-2 p-4 transition-colors hover:bg-muted"
               >
                 <h1
                   className="text-xl font-bold tracking-tight"
