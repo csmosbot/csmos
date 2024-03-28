@@ -37,7 +37,7 @@ export function MobileDropdown() {
           <span className="sr-only">Menu</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="z-40 mt-2 h-[calc(100vh-4.0625rem)] w-screen bg-background animate-none rounded-none border-none transition-transform md:hidden px-0">
+      <PopoverContent className="z-40 mt-2 h-[calc(100vh-4.0625rem)] w-screen animate-none rounded-none border-none bg-background px-0 transition-transform md:hidden">
         <ScrollArea className="px-8">
           <div className="flex flex-col pb-4">
             {siteConfig.navbarItems.map((item) => (
@@ -65,7 +65,7 @@ export function MobileDropdown() {
                             "py-1 hover:underline",
                             pathname === item.href
                               ? "font-medium text-foreground"
-                              : "text-muted-foreground"
+                              : "text-muted-foreground",
                           )}
                         >
                           {item.title}
@@ -79,7 +79,7 @@ export function MobileDropdown() {
             </div>
           ))}
         </ScrollArea>
-        <div className="border-t pt-4 flex items-center gap-2 px-8">
+        <div className="flex items-center gap-2 border-t px-8 pt-4">
           <a
             href={siteConfig.links.github}
             target="_blank"
