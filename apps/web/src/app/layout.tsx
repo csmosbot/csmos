@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s — csmos",
   },
   description:
-    "The next generation of Discord bots. Build your dream Discord server with one bot.",
+    "The next generation of Discord bots. Everything you need to build a Discord server at the touch of your hand.",
   openGraph: {
     type: "website",
     url: "/",
