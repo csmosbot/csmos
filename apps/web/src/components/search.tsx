@@ -50,10 +50,11 @@ export default function Search() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="rounded-md border border-input px-3 py-2 h-10 flex items-center justify-between gap-6 text-sm text-muted-foreground hover:bg-muted transition-colors hover:text-foreground focus-visible:ring-offset-2 focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none ring-offset-background">
+        <button className="rounded-md border border-input px-3 py-2 h-10 flex items-center justify-between text-sm text-muted-foreground hover:bg-muted transition-colors hover:text-foreground focus-visible:ring-offset-2 focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none ring-offset-background w-48 md:w-64">
           <div className="flex items-center gap-2">
             <SearchIcon className="w-4 h-4" />
-            <p>Search</p>
+            <p className="inline md:hidden">Search...</p>
+            <p className="hidden md:inline">Search docs...</p>
           </div>
           <kbd className="border px-1.5 text-xs bg-muted rounded flex items-center gap-1">
             <span className="text-sm mt-0.5">⌘</span> K
