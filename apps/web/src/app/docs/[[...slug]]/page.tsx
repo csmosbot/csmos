@@ -66,7 +66,7 @@ export default async function DocPage({ params }: DocPageProps) {
         </article>
       </div>
       <div className="hidden text-sm xl:block">
-        <div className="fixed top-14 p-6 border-l h-full">
+        <div className="fixed top-14 h-full border-l p-6">
           <ScrollArea className="pb-10">
             <TableOfContents toc={toc} />
           </ScrollArea>

@@ -20,10 +20,10 @@ export function AllCommands({ registry }: { registry: RegistryEntry[] }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [currentTab, setCurrentTab] = useState<string | undefined>(
-    searchParams.get("category") ?? undefined
+    searchParams.get("category") ?? undefined,
   );
   const [searchValue, setSearchValue] = useState<string>(
-    searchParams.get("query") ?? ""
+    searchParams.get("query") ?? "",
   );
 
   function setValue(value: string) {
@@ -51,9 +51,9 @@ export function AllCommands({ registry }: { registry: RegistryEntry[] }) {
       value={currentTab}
       onValueChange={setValue}
     >
-      <div className="flex flex-col min-[958px]:flex-row items-center gap-1 min-[958px]:gap-2">
+      <div className="flex flex-col items-center gap-1 min-[958px]:flex-row min-[958px]:gap-2">
         <ScrollArea className="w-full rounded-lg">
-          <TabsList className="gap-1 mb-1 w-full justify-start">
+          <TabsList className="mb-1 w-full justify-start gap-1">
             <TabsTrigger value="all" className="hover:bg-foreground/10">
               All
             </TabsTrigger>
@@ -105,7 +105,7 @@ function CommandList({
   searchValue: string;
 }) {
   const filteredCommands = commands.filter((command) =>
-    command.name.toLowerCase().startsWith(searchValue.toLowerCase())
+    command.name.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   return (
@@ -119,15 +119,15 @@ function CommandList({
                   <CardTitle>/{command.name}</CardTitle>
                   <CardDescription>{command.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="[&:empty]:hidden flex flex-col gap-6">
+                <CardContent className="flex flex-col gap-6 [&:empty]:hidden">
                   {"options" in command && (
                     <div>
-                      <p className="font-medium pb-2">Options</p>
+                      <p className="pb-2 font-medium">Options</p>
                       <ul className="flex flex-col gap-2">
                         {command.options.map((option) => (
                           <li
                             key={option.name}
-                            className="text-sm flex items-center gap-1.5"
+                            className="flex items-center gap-1.5 text-sm"
                           >
                             <p className="font-medium">{option.name}</p>
                             <p className="text-muted-foreground">
@@ -140,14 +140,14 @@ function CommandList({
                   )}
                   {"subcommands" in command && (
                     <div>
-                      <p className="font-medium pb-2">Subcommands</p>
+                      <p className="pb-2 font-medium">Subcommands</p>
                       <ul className="flex flex-col gap-2">
                         {command.subcommands.map((subcommand) => (
                           <li
                             key={subcommand.name}
                             className="flex flex-col gap-1.5"
                           >
-                            <div className="text-sm flex items-center gap-1.5">
+                            <div className="flex items-center gap-1.5 text-sm">
                               <p className="font-medium">{subcommand.name}</p>
                               <p className="text-muted-foreground">
                                 {subcommand.description}
@@ -161,7 +161,7 @@ function CommandList({
                                       key={subcommand.name}
                                       className="flex flex-col gap-1.5"
                                     >
-                                      <div className="text-sm flex items-center gap-1.5 pl-2">
+                                      <div className="flex items-center gap-1.5 pl-2 text-sm">
                                         <p className="font-medium">
                                           {subcommand.name}
                                         </p>
@@ -173,7 +173,7 @@ function CommandList({
                                         !!(subcommand as SubcommandWithOptions)
                                           .options.length && (
                                           <div className="pl-4">
-                                            <p className="font-medium pb-2">
+                                            <p className="pb-2 font-medium">
                                               Options
                                             </p>
                                             <ul className="flex flex-col gap-2">
@@ -182,7 +182,7 @@ function CommandList({
                                               ).options.map((option) => (
                                                 <li
                                                   key={option.name}
-                                                  className="text-sm flex items-center gap-1.5"
+                                                  className="flex items-center gap-1.5 text-sm"
                                                 >
                                                   <p className="font-medium">
                                                     {option.name}
@@ -201,7 +201,7 @@ function CommandList({
                                     !!(subcommand as SubcommandWithOptions)
                                       .options.length && (
                                       <div className="pl-4">
-                                        <p className="font-medium pb-2">
+                                        <p className="pb-2 font-medium">
                                           Options
                                         </p>
                                         <ul className="flex flex-col gap-2">
@@ -210,7 +210,7 @@ function CommandList({
                                           ).options.map((option) => (
                                             <li
                                               key={option.name}
-                                              className="text-sm flex items-center gap-1.5"
+                                              className="flex items-center gap-1.5 text-sm"
                                             >
                                               <p className="font-medium">
                                                 {option.name}
@@ -228,12 +228,12 @@ function CommandList({
                             {"options" in subcommand &&
                               !!subcommand.options.length && (
                                 <div className="pl-2">
-                                  <p className="font-medium pb-2">Options</p>
+                                  <p className="pb-2 font-medium">Options</p>
                                   <ul className="flex flex-col gap-2">
                                     {subcommand.options.map((option) => (
                                       <li
                                         key={option.name}
-                                        className="text-sm flex items-center gap-1.5"
+                                        className="flex items-center gap-1.5 text-sm"
                                       >
                                         <p className="font-medium">
                                           {option.name}
@@ -253,12 +253,12 @@ function CommandList({
                   )}
                   {command.permissions && (
                     <div>
-                      <p className="font-medium pb-2">Permissions</p>
+                      <p className="pb-2 font-medium">Permissions</p>
                       <ul className="flex flex-col gap-2">
                         {command.permissions.map((permission) => (
                           <li
                             key={permission}
-                            className="font-medium text-sm flex items-center gap-1.5"
+                            className="flex items-center gap-1.5 text-sm font-medium"
                           >
                             {permission}
                           </li>
@@ -272,7 +272,7 @@ function CommandList({
           ))}
         </ul>
       ) : (
-        <div className="flex flex-col items-center justify-center text-center gap-0.5">
+        <div className="flex flex-col items-center justify-center gap-0.5 text-center">
           <h1 className="text-3xl font-bold tracking-tight">
             No commands found
           </h1>

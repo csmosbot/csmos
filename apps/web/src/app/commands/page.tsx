@@ -23,7 +23,7 @@ export default async function Commands() {
   return (
     <div className="container py-6">
       <h1 className="text-4xl font-bold tracking-tight">Commands</h1>
-      <p className="text-sm text-muted-foreground pt-1">
+      <p className="pt-1 text-sm text-muted-foreground">
         View a list of every single one of csmos' commands.
       </p>
       <AllCommands registry={registry} />
