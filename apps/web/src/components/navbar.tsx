@@ -40,9 +40,9 @@ export function Navbar() {
           ))}
         </div>
       </nav>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-2">
         <Search />
-        <div className="hidden md:flex md:items-center md:gap-1">
+        <div className="hidden md:flex md:items-center">
           <a
             href={siteConfig.links.github}
             target="_blank"
