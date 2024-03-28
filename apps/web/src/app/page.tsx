@@ -65,7 +65,7 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
           <FeatureCard
             title="Moderation"
-            description="See someone that isn't following the rules? Easily warn, kick, mute, or ban them."
+            description="See someone that isn't following the rules? Easily warn, mute, kick or ban them."
             icon={Gavel}
           />
           <FeatureCard
