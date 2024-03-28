@@ -66,9 +66,11 @@ export default async function DocPage({ params }: DocPageProps) {
         </article>
       </div>
       <div className="hidden text-sm xl:block">
-        <div className="fixed top-14 h-full border-l p-6">
+        <div className="sticky top-14 -mt-2 border-l pl-6 pt-4">
           <ScrollArea className="pb-10">
-            <TableOfContents toc={toc} />
+            <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] py-12">
+              <TableOfContents toc={toc} />
+            </div>
           </ScrollArea>
         </div>
       </div>

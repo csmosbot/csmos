@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="mt-4 border-t border-border text-sm leading-6">
+    <footer className="sticky border-t border-border text-sm leading-6">
       <div className="max-w-8xl container flex h-16 items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-foreground/80 lg:flex-1">
           <a
