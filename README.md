@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  The only Discord bot you need.
+  The next generation of Discord bots.
 </p>
 
 <div align="center">
