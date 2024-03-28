@@ -22,7 +22,9 @@ export function AllCommands({ registry }: { registry: RegistryEntry[] }) {
   const [currentTab, setCurrentTab] = useState<string | undefined>(
     searchParams.get("category") ?? undefined
   );
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>(
+    searchParams.get("query") ?? ""
+  );
 
   function setValue(value: string) {
     const newParams = new URLSearchParams(searchParams.toString());
