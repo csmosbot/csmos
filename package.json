@@ -1,18 +1,12 @@
 {
   "name": "@csmos/root",
   "version": "1.0.0",
-  "author": "Cosmotic Labs",
-  "devDependencies": {
-    "@csmos/eslint-config": "workspace:*",
-    "@csmos/tsconfig": "workspace:*",
-    "turbo": "^1.12.5"
-  },
-  "contributors": [
-    "ToastedToast <realtcatech@gmail.com>"
-  ],
-  "keywords": [],
-  "license": "MIT",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tooling/*"
+  ],
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
@@ -23,14 +17,20 @@
     "db:push": "turbo db:push",
     "docgen:commands": "node ./tooling/scripts/docgen/commands.js"
   },
+  "keywords": [],
+  "author": "Cosmotic Labs",
+  "contributors": [
+    "ToastedToast <realtcatech@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@csmos/eslint-config": "workspace:*",
+    "@csmos/tsconfig": "workspace:*",
+    "turbo": "^1.12.5"
+  },
   "trustedDependencies": [
     "@distube/yt-dlp",
     "@nottca/canvacord",
     "es5-ext"
-  ],
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "tooling/*"
   ]
 }
