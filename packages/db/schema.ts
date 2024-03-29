@@ -120,3 +120,23 @@ export const commands = pgTable(
     ),
   })
 );
+
+export const reactionRoles = pgTable(
+  "reaction_roles",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    guildId: text("guild_id")
+      .notNull()
+      .references(() => guilds.id),
+    messageId: text("message_id").notNull(),
+    emoji: text("emoji").notNull(),
+    roleId: text("role_id").notNull(),
+  },
+  (table) => ({
+    uniqueEmojiForRoleInMessage: uniqueIndex(
+      "unique_emoji_role_id_message_id_idx"
+    ).on(table.messageId, table.emoji, table.roleId),
+  })
+);
