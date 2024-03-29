@@ -4,6 +4,7 @@ import {
   createLevelRoleReward,
   createUser,
   deleteLevelRoleReward,
+  featureIsDisabled,
   getLevelRoleRewardByRoleId,
   updateUser,
 } from "@csmos/db";
@@ -103,6 +104,16 @@ export default new Command({
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "leveling"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The leveling system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const subcommand = interaction.options.getSubcommand();
     const group = interaction.options.getSubcommandGroup();
     if (group === "update") {

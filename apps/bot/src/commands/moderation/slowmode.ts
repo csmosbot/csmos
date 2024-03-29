@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import {
   ChannelType,
   PermissionFlagsBits,
@@ -35,7 +36,17 @@ export default new Command({
         .setRequired(false)
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
-  run: ({ interaction }) => {
+  run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "moderation"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The moderation system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const length = interaction.options.getString("length", true);
     if (ms(length) > ms("6h"))
       return interaction.reply({

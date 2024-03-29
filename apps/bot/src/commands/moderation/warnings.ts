@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
-import { getWarnings } from "@csmos/db";
+import { featureIsDisabled, getWarnings } from "@csmos/db";
 import { SlashCommandBuilder, time } from "discord.js";
 
 export default new Command({
@@ -11,6 +11,16 @@ export default new Command({
       option.setName("user").setDescription("The user to view the warnings of.")
     ),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "moderation"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The moderation system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const member = interaction.options.getMember("user") || interaction.member;
     if (
       member.id !== interaction.member.id &&

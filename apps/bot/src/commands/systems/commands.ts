@@ -3,6 +3,7 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import {
   createCommand,
   deleteCommand,
+  featureIsDisabled,
   getCommandByName,
   getCommands,
   updateCommand,
@@ -85,6 +86,16 @@ export default new Command({
     );
   },
   run: async ({ client, interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "custom_commands"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The custom commands system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const subcommand = interaction.options.getSubcommand();
     switch (subcommand) {
       case "create":

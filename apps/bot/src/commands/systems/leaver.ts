@@ -5,6 +5,7 @@ import {
   createGuild,
   createLeaver,
   deleteLeaver,
+  featureIsDisabled,
   getGuild,
   getLeaver,
   updateLeaver,
@@ -75,6 +76,16 @@ export default new Command({
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "leaver"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The leaver system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const group = interaction.options.getSubcommandGroup();
     const subcommand = interaction.options.getSubcommand();
     const leaver = await getLeaver(interaction.guild.id);

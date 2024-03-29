@@ -1,7 +1,7 @@
 import { Command } from "@/structures/command";
-import { Embed } from "@/utils/embed";
+import { DangerEmbed, Embed } from "@/utils/embed";
 import { calculateLevelXp } from "@/utils/leveling";
-import { getUsers } from "@csmos/db";
+import { getUsers, featureIsDisabled } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 const types = {
@@ -29,6 +29,34 @@ export default new Command({
     ),
   run: async ({ client, interaction }) => {
     const subcommand = interaction.options.getSubcommand();
+    switch (subcommand) {
+      case "xp":
+        {
+          if (await featureIsDisabled(interaction.guild.id, "leveling"))
+            return interaction.reply({
+              embeds: [
+                new DangerEmbed().setDescription(
+                  "The leveling system is disabled in this server."
+                ),
+              ],
+              ephemeral: true,
+            });
+        }
+        break;
+      case "messages":
+        {
+          if (await featureIsDisabled(interaction.guild.id, "message_tracking"))
+            return interaction.reply({
+              embeds: [
+                new DangerEmbed().setDescription(
+                  "The message tracking system is disabled in this server."
+                ),
+              ],
+              ephemeral: true,
+            });
+        }
+        break;
+    }
 
     interaction.reply({
       embeds: [

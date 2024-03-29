@@ -1,6 +1,7 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, Embed } from "@/utils/embed";
 import { createBar } from "@/utils/player";
+import { featureIsDisabled } from "@csmos/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -12,7 +13,17 @@ export default new Command({
   data: new SlashCommandBuilder()
     .setName("nowplaying")
     .setDescription("View the currently playing song in this server."),
-  run: ({ client, interaction }) => {
+  run: async ({ client, interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "music"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The music system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 

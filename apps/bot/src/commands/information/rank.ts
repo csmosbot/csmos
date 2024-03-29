@@ -1,7 +1,8 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
+import { DangerEmbed } from "@/utils/embed";
 import { calculateLevelXp } from "@/utils/leveling";
-import { getUser, getUsers } from "@csmos/db";
+import { getUser, getUsers, featureIsDisabled } from "@csmos/db";
 import { Rank } from "@nottca/canvacord";
 import { AttachmentBuilder, SlashCommandBuilder } from "discord.js";
 import { readFileSync } from "fs";
@@ -26,6 +27,16 @@ export default new Command({
         .setRequired(false)
     ),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "leveling"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The leveling system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const member = interaction.options.getMember("user") ?? interaction.member!;
 
     const data = await getUser(member.id, interaction.guild.id);

@@ -2,6 +2,7 @@ import { createId } from "@paralleldrive/cuid2";
 import { relations } from "drizzle-orm";
 import {
   integer,
+  pgEnum,
   pgTable,
   text,
   timestamp,
@@ -159,5 +160,36 @@ export const levelRoleRewards = pgTable(
       table.roleId,
       table.level
     ),
+  })
+);
+
+export const featuresEnum = pgEnum("features", [
+  "afk",
+  "custom_commands",
+  "games",
+  "leaver",
+  "leveling",
+  "message_tracking",
+  "moderation",
+  "music",
+  "reaction_roles",
+  "welcomer",
+]);
+
+export const disabledFeatures = pgTable(
+  "disabled_features",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    guildId: text("guild_id")
+      .notNull()
+      .references(() => guilds.id),
+    disabledFeature: featuresEnum("disabled_feature").notNull(),
+  },
+  (table) => ({
+    uniqueDisabledFeatureForGuild: uniqueIndex(
+      "unique_guild_id_disabled_feature"
+    ).on(table.guildId, table.disabledFeature),
   })
 );

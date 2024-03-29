@@ -5,6 +5,7 @@ import {
   createGuild,
   createWelcomer,
   deleteWelcomer,
+  featureIsDisabled,
   getGuild,
   getWelcomer,
   updateWelcomer,
@@ -77,6 +78,16 @@ export default new Command({
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "welcomer"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The welcomer system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const group = interaction.options.getSubcommandGroup();
     const subcommand = interaction.options.getSubcommand();
     const welcomer = await getWelcomer(interaction.guild.id);

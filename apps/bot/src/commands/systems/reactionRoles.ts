@@ -3,6 +3,7 @@ import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import {
   createReactionRole,
   deleteReactionRole,
+  featureIsDisabled,
   getReactionRole,
   getReactionRoles,
 } from "@csmos/db";
@@ -63,6 +64,16 @@ export default new Command({
     );
   },
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "reaction_roles"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The reaction roles system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const subcommand = interaction.options.getSubcommand();
     switch (subcommand) {
       case "create":

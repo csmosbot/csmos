@@ -1,5 +1,7 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
+import { DangerEmbed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import { TicTacToe } from "discord-gamecord";
 import { SlashCommandBuilder } from "discord.js";
 
@@ -13,7 +15,17 @@ export default new Command({
         .setDescription("The user to play TicTacToe against.")
         .setRequired(true)
     ),
-  run: ({ interaction }) => {
+  run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "games"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "Games are disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const member = interaction.options.getUser("user");
 
     const Game = new TicTacToe({

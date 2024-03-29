@@ -1,6 +1,7 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
 import { DangerEmbed, Embed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import type { ButtonInteraction, EmbedBuilder } from "discord.js";
 import {
   ActionRowBuilder,
@@ -15,6 +16,16 @@ export default new Command({
     .setName("queue")
     .setDescription("View the queue for this server."),
   run: async ({ client, interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "music"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The music system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 

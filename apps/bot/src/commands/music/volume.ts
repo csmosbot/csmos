@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -19,7 +20,17 @@ export default new Command({
         .setMaxValue(150)
         .setRequired(true)
     ),
-  run: ({ client, interaction }) => {
+  run: async ({ client, interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "music"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The music system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 

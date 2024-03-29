@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { createAfk, deleteAfk, getAfk } from "@csmos/db";
+import { createAfk, deleteAfk, featureIsDisabled, getAfk } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
@@ -22,6 +22,16 @@ export default new Command({
       subcommand.setName("remove").setDescription("Remove your AFK status.")
     ),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "afk"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The AFK system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const subcommand = interaction.options.getSubcommand();
     const data = await getAfk(interaction.user.id, interaction.guild.id);
 
