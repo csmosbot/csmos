@@ -32,7 +32,7 @@ export default new Command({
                         .split("_")
                         .map((x) => capitalize(x))
                         .join(" "),
-                value: enumValue as string,
+                value: enumValue,
               }))
             )
             .setRequired(true)
