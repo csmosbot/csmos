@@ -1,7 +1,7 @@
 import type { BotClient } from "@/structures/client";
 import { config } from "@/utils/config";
 import { calculateLevelXp } from "@/utils/leveling";
-import { getUser, updateUser } from "@csmos/db";
+import { getLevelRoleRewardsByLevel, getUser, updateUser } from "@csmos/db";
 import { EmbedBuilder } from "discord.js";
 
 const xpCooldowns = new Set<string>();
@@ -34,10 +34,19 @@ export default (client: BotClient<true>) => {
     );
 
     if (xp > calculateLevelXp(user.level || 0)) {
+      const newLevel = user.level + 1;
+
       await updateUser(message.author.id, message.guild.id, {
         xp: 0,
-        level: user.level + 1,
+        level: newLevel,
       });
+
+      const levelRoleRewards = await getLevelRoleRewardsByLevel(newLevel);
+      if (levelRoleRewards?.length) {
+        for (const { roleId } of levelRoleRewards) {
+          await message.member!.roles.add(roleId);
+        }
+      }
 
       message.reply({
         embeds: [

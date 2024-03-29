@@ -650,6 +650,39 @@
                 "options": false
               }
             ]
+          },
+          {
+            "name": "roles",
+            "description": "Add and remove leveling role rewards.",
+            "subcommands": [
+              {
+                "name": "add",
+                "description": "Add a leveling role reward.",
+                "options": [
+                  {
+                    "name": "level",
+                    "description": "The level that is required to get this role reward.",
+                    "required": true
+                  },
+                  {
+                    "name": "role",
+                    "description": "The role to add to the user when they reach the required level.",
+                    "required": true
+                  }
+                ]
+              },
+              {
+                "name": "remove",
+                "description": "Remove a leveling reward.",
+                "options": [
+                  {
+                    "name": "role",
+                    "description": "The role to remove as a leveling reward.",
+                    "required": true
+                  }
+                ]
+              }
+            ]
           }
         ],
         "permissions": ["Manage Server"]

@@ -141,3 +141,23 @@ export const reactionRoles = pgTable(
     ).on(table.messageId, table.emoji, table.roleId),
   })
 );
+
+export const levelRoleRewards = pgTable(
+  "level_role_rewards",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => createId()),
+    guildId: text("guild_id")
+      .notNull()
+      .references(() => guilds.id),
+    level: integer("level").notNull(),
+    roleId: text("role_id").notNull(),
+  },
+  (table) => ({
+    uniqueRoleForLevel: uniqueIndex("unique_role_id_level_idx").on(
+      table.roleId,
+      table.level
+    ),
+  })
+);
