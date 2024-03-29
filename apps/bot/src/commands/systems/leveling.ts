@@ -1,5 +1,5 @@
 import { Command } from "@/structures/command";
-import { DangerEmbed, Embed, SuccessEmbed } from "@/utils/embed";
+import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { createUser, updateUser } from "@csmos/db";
 import { SlashCommandBuilder } from "discord.js";
 import Mee6LevelsApi from "mee6-levels-api";
