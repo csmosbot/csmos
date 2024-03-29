@@ -28,6 +28,10 @@ export const getUsers = (guildId: string) =>
     where: eq(users.guildId, guildId),
   });
 
+export async function createUser(data: typeof users.$inferInsert) {
+  return await db.insert(users).values(data);
+}
+
 export async function updateUser(
   userId: string,
   guildId: string,
