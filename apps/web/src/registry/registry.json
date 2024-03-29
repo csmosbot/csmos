@@ -622,6 +622,17 @@
                 "required": true
               }
             ]
+          },
+          {
+            "name": "delete",
+            "description": "Delete a reaction role.",
+            "options": [
+              {
+                "name": "reaction_role",
+                "description": "The reaction role to delete.",
+                "required": true
+              }
+            ]
           }
         ]
       },
