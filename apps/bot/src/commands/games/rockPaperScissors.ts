@@ -5,7 +5,7 @@ import { SlashCommandBuilder } from "discord.js";
 
 export default new Command({
   data: new SlashCommandBuilder()
-    .setName("rockpaperscissors")
+    .setName("rps")
     .setDescription("Play a game of Rock Paper Scissors against someone.")
     .addUserOption((option) =>
       option

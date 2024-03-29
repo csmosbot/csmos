@@ -84,7 +84,7 @@
       },
       { "name": "matchpairs", "description": "Play a game of Match Pairs." },
       {
-        "name": "rockpaperscissors",
+        "name": "rps",
         "description": "Play a game of Rock Paper Scissors against someone.",
         "options": [
           {
