@@ -13,7 +13,14 @@ export default new Command({
         .setRequired(true)
     ),
   run: async ({ interaction }) => {
-    const text = interaction.options.getString("text");
-    interaction.reply(await Emojify(text));
+    const text = interaction.options.getString("text", true);
+    interaction.reply(
+      await Promise.all(
+        text
+          .replaceAll(":", "")
+          .split(" ")
+          .map(async (text) => await Emojify(text))
+      ).then((texts) => texts.join(" "))
+    );
   },
 });
