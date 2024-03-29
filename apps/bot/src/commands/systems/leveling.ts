@@ -1,7 +1,7 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
 import { createUser, updateUser } from "@csmos/db";
-import { SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import Mee6LevelsApi from "mee6-levels-api";
 
 export default new Command({
@@ -56,7 +56,8 @@ export default new Command({
             .setName("mee6")
             .setDescription("Sync your levels from MEE6.")
         )
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild),
   run: async ({ interaction }) => {
     const subcommand = interaction.options.getSubcommand();
     const group = interaction.options.getSubcommandGroup();

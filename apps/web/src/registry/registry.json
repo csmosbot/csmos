@@ -651,7 +651,8 @@
               }
             ]
           }
-        ]
+        ],
+        "permissions": ["Manage Server"]
       },
       {
         "name": "reaction-roles",
