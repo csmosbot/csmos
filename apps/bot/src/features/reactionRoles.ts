@@ -5,7 +5,7 @@ export default (client: BotClient<true>) => {
   client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.partial) await reaction.fetch();
     if (reaction.message.partial) await reaction.message.fetch();
-    if (!reaction.message.guild) return;
+    if (!reaction.message.guild || !user.bot) return;
 
     const role = await getReactionRoleByEmojiAndMessageId(
       reaction.emoji.name ?? reaction.emoji.id!,
@@ -23,7 +23,7 @@ export default (client: BotClient<true>) => {
   client.on("messageReactionRemove", async (reaction, user) => {
     if (reaction.partial) await reaction.fetch();
     if (reaction.message.partial) await reaction.message.fetch();
-    if (!reaction.message.guild) return;
+    if (!reaction.message.guild || !user.bot) return;
 
     const role = await getReactionRoleByEmojiAndMessageId(
       reaction.emoji.name ?? reaction.emoji.id!,
