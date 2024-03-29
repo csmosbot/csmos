@@ -599,6 +599,33 @@
         "permissions": ["Manage Server"]
       },
       {
+        "name": "reaction-roles",
+        "description": "Create, update, and delete reaction roles.",
+        "subcommands": [
+          {
+            "name": "create",
+            "description": "Create a reaction role.",
+            "options": [
+              {
+                "name": "message_link",
+                "description": "A link to the message to react to.",
+                "required": true
+              },
+              {
+                "name": "emoji",
+                "description": "The emoji to react with.",
+                "required": true
+              },
+              {
+                "name": "role",
+                "description": "The role to give when someone reacts.",
+                "required": true
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "welcomer",
         "description": "Configure the welcomer system.",
         "subcommands": [
