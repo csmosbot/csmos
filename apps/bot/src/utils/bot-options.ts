@@ -1,5 +1,5 @@
 import type { ClientOptions } from "discord.js";
-import { ActivityType, GatewayIntentBits } from "discord.js";
+import { ActivityType, GatewayIntentBits, Partials } from "discord.js";
 
 export const botOptions: ClientOptions = {
   intents: [
@@ -10,6 +10,16 @@ export const botOptions: ClientOptions = {
     GatewayIntentBits.GuildPresences,
     GatewayIntentBits.GuildModeration,
     GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessageReactions,
+  ],
+  partials: [
+    Partials.Channel,
+    Partials.User,
+    Partials.Message,
+    Partials.Reaction,
+    Partials.GuildMember,
+    Partials.ThreadMember,
+    Partials.GuildScheduledEvent,
   ],
   presence: {
     activities: [

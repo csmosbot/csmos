@@ -5,6 +5,7 @@ export * from "./queries/afks";
 export * from "./queries/commands";
 export * from "./queries/guild";
 export * from "./queries/leavers";
+export * from "./queries/reactionRoles";
 export * from "./queries/users";
 export * from "./queries/warnings";
 export * from "./queries/welcomers";
