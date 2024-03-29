@@ -130,6 +130,7 @@ export const reactionRoles = pgTable(
     guildId: text("guild_id")
       .notNull()
       .references(() => guilds.id),
+    channelId: text("channel_id").notNull(),
     messageId: text("message_id").notNull(),
     emoji: text("emoji").notNull(),
     roleId: text("role_id").notNull(),

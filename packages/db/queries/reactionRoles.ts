@@ -2,6 +2,12 @@ import { and, eq } from "drizzle-orm";
 import { db } from "../db";
 import { reactionRoles } from "../schema";
 
+export async function getReactionRoles(guildId: string) {
+  return await db.query.reactionRoles.findMany({
+    where: eq(reactionRoles.guildId, guildId),
+  });
+}
+
 export async function getReactionRole(id: string) {
   return await db.query.reactionRoles.findFirst({
     where: eq(reactionRoles.id, id),
