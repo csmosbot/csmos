@@ -258,7 +258,7 @@ function CommandList({
                         {command.permissions.map((permission) => (
                           <li
                             key={permission}
-                            className="flex items-center gap-1.5 text-sm font-medium"
+                            className="flex items-center gap-1.5 text-sm"
                           >
                             {permission}
                           </li>
