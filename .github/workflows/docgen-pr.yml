@@ -28,6 +28,7 @@ jobs:
       - name: Commit
         uses: EndBug/add-and-commit@v9
         with:
+          add: "apps/web/src/registry"
           author_name: CosmoticRovee
           author_email: cosmoticrovee@users.noreply.github.com
           message: "ci: update command docs"
