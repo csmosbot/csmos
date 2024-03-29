@@ -599,6 +599,61 @@
         "permissions": ["Manage Server"]
       },
       {
+        "name": "leveling",
+        "description": "Configure the leveling system.",
+        "subcommands": [
+          {
+            "name": "update",
+            "description": "Update the leveling system.",
+            "subcommands": [
+              {
+                "name": "xp",
+                "description": "Update the XP of a member.",
+                "options": [
+                  {
+                    "name": "member",
+                    "description": "The member to update the XP of.",
+                    "required": true
+                  },
+                  {
+                    "name": "xp",
+                    "description": "The new XP value.",
+                    "required": true
+                  }
+                ]
+              },
+              {
+                "name": "level",
+                "description": "Update the level of a member.",
+                "options": [
+                  {
+                    "name": "member",
+                    "description": "The member to update the level of.",
+                    "required": true
+                  },
+                  {
+                    "name": "level",
+                    "description": "The new level.",
+                    "required": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "sync",
+            "description": "Sync your levels from another bot.",
+            "subcommands": [
+              {
+                "name": "mee6",
+                "description": "Sync your levels from MEE6.",
+                "options": false
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "reaction-roles",
         "description": "Create, update, and delete reaction roles.",
         "subcommands": [
