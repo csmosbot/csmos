@@ -74,33 +74,17 @@ const convertOptions = (options) =>
 async function main() {
   let registry = [];
 
-  const categories = fs.readdirSync("./apps/bot/src/commands");
+  const categories = fs.readdirSync("./apps/bot/dist/commands");
   for (const category of categories) {
     const entries = [];
     const commandFiles = fs
-      .readdirSync(`./apps/bot/src/commands/${category}`)
+      .readdirSync(`./apps/bot/dist/commands/${category}`)
       .filter((file) => file.endsWith("js") || file.endsWith("ts"));
     for (const file of commandFiles) {
-      const command = fs.readFileSync(
-        `./apps/bot/src/commands/${category}/${file}`,
-        "utf8"
+      const rawData = await import(
+        `../../../apps/bot/dist/commands/${category}/${file}`
       );
-      const [rawCode] = command.match(/(?<=(new Command\()){[\s\S]*}/g);
-      const code = rawCode
-        .replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2":')
-        .split("\n");
-      const runIndex = code.findIndex((str) => str.includes("run"));
-      const data = eval(
-        // injected modules
-        `${SlashCommandBuilder}\n` +
-          `const PermissionFlagsBits = ${superjson.stringify(PermissionFlagsBits)}.json\n` +
-          `const ChannelType = ${superjson.stringify(ChannelType)}.json\n` +
-          `const RepeatMode = ${superjson.stringify(RepeatMode)}.json\n` +
-          "var data = " +
-          code.slice(0, runIndex).join("\n").replace(/,\s*$/, "") +
-          "\n}" +
-          "\ndata.data.toJSON();"
-      );
+      const data = rawData.default.default.data.toJSON();
 
       const entry = {
         name: data.name,
