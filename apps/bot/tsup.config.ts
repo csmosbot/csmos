@@ -1,4 +1,3 @@
-import "./src/utils/env";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
