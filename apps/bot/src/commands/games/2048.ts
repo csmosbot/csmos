@@ -1,5 +1,7 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
+import { DangerEmbed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import { TwoZeroFourEight } from "discord-gamecord";
 import { SlashCommandBuilder } from "discord.js";
 
@@ -7,7 +9,17 @@ export default new Command({
   data: new SlashCommandBuilder()
     .setName("2048")
     .setDescription("Play a game of 2048."),
-  run: ({ interaction }) => {
+  run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "games"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "Games are disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const game = new TwoZeroFourEight({
       message: interaction,
       isSlashGame: true,

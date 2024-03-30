@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
-import { getGuild, updateGuild } from "@csmos/db";
+import { featureIsDisabled, getGuild, updateGuild } from "@csmos/db";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -13,6 +13,16 @@ export default new Command({
     .setName("stop")
     .setDescription("Stop the queue in this server."),
   run: async ({ client, interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "music"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The music system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const { channel } = interaction.member.voice;
     const me = interaction.guild.members.me!;
 

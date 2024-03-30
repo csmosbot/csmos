@@ -1,5 +1,6 @@
 import { Command } from "@/structures/command";
 import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new Command({
@@ -42,6 +43,16 @@ export default new Command({
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
   run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "moderation"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "The moderation system is disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const subcommand = interaction.options.getSubcommand();
 
     const role = interaction.options.getRole("role", true);

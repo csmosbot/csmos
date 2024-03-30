@@ -1,5 +1,7 @@
 import { Command } from "@/structures/command";
 import { config } from "@/utils/config";
+import { DangerEmbed } from "@/utils/embed";
+import { featureIsDisabled } from "@csmos/db";
 import { MatchPairs } from "discord-gamecord";
 import { SlashCommandBuilder } from "discord.js";
 
@@ -7,7 +9,17 @@ export default new Command({
   data: new SlashCommandBuilder()
     .setName("matchpairs")
     .setDescription("Play a game of Match Pairs."),
-  run: ({ interaction }) => {
+  run: async ({ interaction }) => {
+    if (await featureIsDisabled(interaction.guild.id, "games"))
+      return interaction.reply({
+        embeds: [
+          new DangerEmbed().setDescription(
+            "Games are disabled in this server."
+          ),
+        ],
+        ephemeral: true,
+      });
+
     const game = new MatchPairs({
       message: interaction,
       isSlashGame: true,

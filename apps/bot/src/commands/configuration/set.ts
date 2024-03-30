@@ -1,6 +1,6 @@
 import { Command } from "@/structures/command";
-import { SuccessEmbed } from "@/utils/embed";
-import { updateGuild } from "@csmos/db";
+import { DangerEmbed, SuccessEmbed } from "@/utils/embed";
+import { featureIsDisabled, updateGuild } from "@csmos/db";
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default new Command({
@@ -29,6 +29,16 @@ export default new Command({
     switch (subcommand) {
       case "default-volume":
         {
+          if (await featureIsDisabled(interaction.guild.id, "music"))
+            return interaction.reply({
+              embeds: [
+                new DangerEmbed().setDescription(
+                  "The music system is disabled in this server."
+                ),
+              ],
+              ephemeral: true,
+            });
+
           const volume = interaction.options.getNumber("volume", true);
 
           await updateGuild(interaction.guild.id, {

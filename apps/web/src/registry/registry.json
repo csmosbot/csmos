@@ -538,6 +538,34 @@
         "permissions": ["Manage Server"]
       },
       {
+        "name": "features",
+        "description": "Enable or disable features of csmos.",
+        "subcommands": [
+          {
+            "name": "enable",
+            "description": "Enable a feature of csmos.",
+            "options": [
+              {
+                "name": "feature",
+                "description": "The feature to enable.",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "disable",
+            "description": "Disable a feature of csmos.",
+            "options": [
+              {
+                "name": "feature",
+                "description": "The feature to disable.",
+                "required": true
+              }
+            ]
+          }
+        ]
+      },
+      {
         "name": "leaver",
         "description": "Configure the leaver system.",
         "subcommands": [
