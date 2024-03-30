@@ -1,8 +1,6 @@
 import type { ColorResolvable, PresenceStatus } from "discord.js";
 import { existsSync, readFileSync } from "fs";
 import { parse } from "yaml";
-import { ROOT_DIR } from "./root";
-import { join } from "path";
 
 interface Config {
   guildID: string | false;
@@ -47,10 +45,10 @@ interface Config {
 const loadConfig = (): Config => {
   let config: string;
 
-  if (existsSync(join(ROOT_DIR, "config.yml")))
-    config = readFileSync(join(ROOT_DIR, "config.yml"), "utf8");
-  else if (existsSync(join(ROOT_DIR, "config.yaml")))
-    config = readFileSync(join(ROOT_DIR, "config.yaml"), "utf8");
+  if (existsSync("../../config.yml"))
+    config = readFileSync("../../config.yml", "utf8");
+  else if (existsSync("../../config.yaml"))
+    config = readFileSync("../../config.yaml", "utf8");
   else throw new SyntaxError("No configuration file found");
 
   return parse(config) as Config;
