@@ -45,12 +45,7 @@ interface Config {
 
 const loadConfig = (): Config => {
   let config: string;
-  const join = (...paths: string[]) =>
-    path.join(
-      __dirname,
-      __dirname.includes("commands") ? "../" : ".",
-      ...paths
-    );
+  const join = (...paths: string[]) => path.join(process.cwd(), ...paths);
 
   if (existsSync(join("../../../../config.yml")))
     config = readFileSync(join("../../../../config.yml"), "utf8");
