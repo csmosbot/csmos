@@ -23,7 +23,12 @@ export class BotClient<Ready extends boolean = boolean> extends Client<Ready> {
   }
 
   register() {
-    const join = (...paths: string[]) => path.join(__dirname, ...paths);
+    const join = (...paths: string[]) =>
+      path.join(
+        __dirname,
+        __dirname.endsWith("structures") ? "." : "./structures",
+        ...paths
+      );
 
     // commands
     const commands: ApplicationCommandDataResolvable[] = [];
