@@ -96,6 +96,7 @@ async function main() {
           `const PermissionFlagsBits = ${superjson.stringify(PermissionFlagsBits)}.json\n` +
           `const ChannelType = ${superjson.stringify(ChannelType)}.json\n` +
           `const RepeatMode = ${superjson.stringify(RepeatMode)}.json\n` +
+          'const featuresEnum = { enumName: "featuresEnum", enumValues: [] }\n' +
           "var data = " +
           code.slice(0, runIndex).join("\n").replace(/,\s*$/, "") +
           "\n}" +
