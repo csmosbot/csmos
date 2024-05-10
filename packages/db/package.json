@@ -5,7 +5,7 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
-    "db:push": "bun with-env drizzle-kit push:pg",
+    "db:push": "bun with-env drizzle-kit push",
     "db:studio": "bun with-env drizzle-kit studio",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -22,7 +22,7 @@
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "dotenv-cli": "^7.3.0",
-    "drizzle-kit": "^0.20.14",
+    "drizzle-kit": "^0.21.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
