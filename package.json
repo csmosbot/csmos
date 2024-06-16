@@ -26,7 +26,7 @@
   "devDependencies": {
     "@csmos/eslint-config": "workspace:*",
     "@csmos/tsconfig": "workspace:*",
-    "turbo": "^1.12.5"
+    "turbo": "^2.0.0"
   },
   "trustedDependencies": [
     "@distube/yt-dlp",
